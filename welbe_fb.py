@@ -50,7 +50,7 @@ def main():
 
     st.write(points+line)
 
-    df_emotion=pd.read_excel('welbe_emotion.xlsx')
+    df_emotion=pd.read_excel('data/welbe_emotion.xlsx')
     #df_emotion=pd.melt(df_emotion,id_vars=df_emotion.columns.values[:1],var_name="emotion",value_name="score")
     #df_emotion=pd.to_datetime(df_emotion['date'],format='%m月%d日')
 
@@ -88,7 +88,7 @@ def main():
     st.write(line_bad + line_good + line_surprise)
 
 
-    df_gch=pd.read_excel('welbe_gch.xlsx')
+    df_gch=pd.read_excel('data/welbe_gch.xlsx')
 
     st.subheader('週間 愚痴スコア')
     line_gch = alt.Chart(df_gch).mark_line(

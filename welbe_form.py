@@ -42,7 +42,8 @@ def main():
         )
     location_other = st.text_input('E：Dでその他を選択した方は，差し支えない範囲で場所をご記入ください')
 
-    st.write(st.secrets['users'])
+    st.write(st.secrets['names'])
+    st.write(type(st.secrets['names']))
     
     if st.button('登録') == True:
         data_post = {

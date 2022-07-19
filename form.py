@@ -74,7 +74,11 @@ def main():
         df_fb_self=df_fb[df_fb['user']==name]
 
         st.subheader('週間Well-beingスコア')
-        st.caption('濃い青線：チームの平均スコア\n濃い青丸：あなたのスコア\nうすい青丸：チームの個別スコア')
+        st.caption(
+            '''濃い青線：チームの平均スコア
+            濃い青丸：あなたのスコア
+            うすい青丸：チームの個別スコア'''
+        )
         line = alt.Chart(df_fb).mark_line(
             color='blue'
         ).encode(

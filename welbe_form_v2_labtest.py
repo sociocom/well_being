@@ -71,6 +71,7 @@ def main():
         r_fb = requests.get(url + '/get_fb_labtest', params={'user':name})
         r_fb_DB = r_fb.json()
         df_fb=pd.DataFrame.from_dict(r_fb_DB,orient='index').T
+        df_fb_self=df_fb[df_fb['user']==name]
 
         st.subheader('週間Well-beingスコア')
         line = alt.Chart(df_fb).mark_line(
@@ -93,8 +94,19 @@ def main():
             width=650,
             height=400
             )
+        
+        points_self = alt.Chart(df_fb_self).mark_circle(
+            color='darkblue'
+        ).encode(
+            x=alt.X('date:T'),
+            y=alt.Y('my_happy:Q'),
+            size = 'count()'
+        ).properties(
+            width=650,
+            height=400
+            )
 
-        st.write(points+line)
+        st.write(points_self+points+line)
 
         
 # ユーザ情報。引数

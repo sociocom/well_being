@@ -71,6 +71,7 @@ def main():
         r_fb = requests.get(url + '/get_fb', params={'user':name})
         r_fb_DB = r_fb.json()
         df_fb=pd.DataFrame.from_dict(r_fb_DB,orient='index').T
+        df_fb_self=df_fb[df_fb['user']==name]
 
         st.subheader('週間Well-beingスコア')
         line = alt.Chart(df_fb).mark_line(

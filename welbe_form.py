@@ -41,9 +41,6 @@ def main():
         options=('選択して下さい','関西支社','自宅','得意先','協力会社（制作会社など）','媒体社','出張先（撮影現場、編集スタジオ等）', 'その他')
         )
     location_other = st.text_input('E：Dでその他を選択した方は，差し支えない範囲で場所をご記入ください')
-
-    st.write(st.secrets['names'])
-    st.write(type(st.secrets['names']))
     
     if st.button('登録') == True:
         data_post = {
@@ -101,9 +98,9 @@ def main():
 
         
 # ユーザ情報。引数
-names = ['admin','001','002','003','004','005'] 
-usernames = ['admin','001','002','003','004','005']  # 入力フォームに入力された値と合致するか確認される
-passwords = ['admin','001','002','003','004','005']  # 入力フォームに入力された値と合致するか確認される
+names = st.secrets['names']
+usernames = st.secrets['usernames']
+passwords = st.secrets['passwords']
 
 # パスワードをハッシュ化。 リスト等、イテラブルなオブジェクトである必要がある
 hashed_passwords = stauth.Hasher(passwords).generate()

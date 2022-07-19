@@ -96,7 +96,7 @@ def main():
             )
         
         points_self = alt.Chart(df_fb_self).mark_circle(
-            color='darkblue'
+            color='green'
         ).encode(
             x=alt.X('date:T'),
             y=alt.Y('my_happy:Q'),

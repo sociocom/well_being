@@ -106,7 +106,7 @@ def main():
             height=400
             )
 
-        st.write(points_self+points+line)
+        st.write(points+points_self+line)
 
         
 # ユーザ情報。引数

@@ -74,6 +74,9 @@ def main():
         df_fb_self=df_fb[df_fb['user']==name]
 
         st.subheader('週間Well-beingスコア')
+        st.write('濃い青線：チームの平均スコア')
+        st.write('濃い青丸：あなたのスコア')
+        st.write('うすい青丸：チームの個別スコア')
         line = alt.Chart(df_fb).mark_line(
             color='blue'
         ).encode(
@@ -96,7 +99,7 @@ def main():
             )
         
         points_self = alt.Chart(df_fb_self).mark_circle(
-            color='lightgreen'
+            color='blue'
         ).encode(
             x=alt.X('date:T'),
             y=alt.Y('my_happy:Q'),

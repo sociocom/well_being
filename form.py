@@ -93,8 +93,19 @@ def main():
             width=650,
             height=400
             )
+        
+        points_self = alt.Chart(df_fb_self).mark_circle(
+            color='darkblue'
+        ).encode(
+            x=alt.X('date:T'),
+            y=alt.Y('my_happy:Q'),
+            size = 'count()'
+        ).properties(
+            width=650,
+            height=400
+            )
 
-        st.write(points+line)
+        st.write(points_self+points+line)
 
         
 # ユーザ情報。引数

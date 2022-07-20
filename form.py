@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 
-#from asyncio.windows_events import NULL
-#from turtle import width
 import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objs as go
 import altair as alt
 import datetime
-import copy
 import plotly.figure_factory as ff
 import plotly.express as px
 import requests
@@ -112,16 +109,16 @@ def main():
         st.write(points+points_self+line)
 
         
-# ユーザ情報。引数
+# ユーザ情報
 names = st.secrets['names']
 usernames = st.secrets['usernames']
 passwords = st.secrets['passwords']
 
-# パスワードをハッシュ化。 リスト等、イテラブルなオブジェクトである必要がある
+# パスワードをハッシュ化（リスト等、イテラブルなオブジェクトである必要がある）
 hashed_passwords = stauth.Hasher(passwords).generate()
 
 # cookie_expiry_daysでクッキーの有効期限を設定可能。
-#認証情報の保持期間を設定でき値を0とするとアクセス毎に認証を要求する
+# 認証情報の保持期間を設定でき値を0とするとアクセス毎に認証を要求する
 authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
     'some_cookie_name', 'some_signature_key', cookie_expiry_days=1)
 

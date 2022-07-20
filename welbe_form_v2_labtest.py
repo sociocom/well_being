@@ -55,7 +55,7 @@ def main():
                     'timestamp':str(datetime.datetime.now())}
                     }
     
-        url = 'http://aoi.naist.jp/wellbeing'
+        url = 'http://aoi.naist.jp/wellbeing_test'
         requests.post(url + '/post_labtest',json=data_post)
         st.write('入力完了しました！')
 

@@ -77,8 +77,6 @@ def main():
         ).encode(
             x=alt.X('date:T',axis=alt.Axis(format="%m月%d日",labelFontSize=14, ticks=False, titleFontSize=18,title='日付')),
             y=alt.Y('mean(my_happy):Q',axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'))
-        ).configure_axis(
-            grid=False
         ).properties(
             width=650,
             height=400,
@@ -90,8 +88,6 @@ def main():
             x=alt.X('date:T'),
             y=alt.Y('my_happy:Q'),
             size = 'count()'
-        ).configure_axis(
-            grid=False
         ).properties(
             width=650,
             height=400
@@ -103,8 +99,6 @@ def main():
             x=alt.X('date:T'),
             y=alt.Y('my_happy:Q'),
             size = 'count()'
-        ).configure_axis(
-            grid=False
         ).properties(
             width=650,
             height=400

@@ -40,36 +40,41 @@ def main():
     location_other = st.text_input('E：Dでその他を選択した方は，差し支えない範囲で場所をご記入ください')
     
     if st.button('登録') == True:
-        data_post = {
-                    'user':name,
-                    'contents':{
-                    'day':str(day),
-                    'diary':diary,
-                    'my_happy':my_happy,
-                    'group_happy':group_happy,
-                    'location':location,
-                    'location_other':location_other,
-                    'timestamp':str(datetime.datetime.now())}
-                    }
-    
-        url = st.secrets['URL']
-        requests.post(url + '/post',json=data_post)
-        st.write('入力完了しました！')
+        if name != 'demo':
+            data_post = {
+                        'user':name,
+                        'contents':{
+                        'day':str(day),
+                        'diary':diary,
+                        'my_happy':my_happy,
+                        'group_happy':group_happy,
+                        'location':location,
+                        'location_other':location_other,
+                        'timestamp':str(datetime.datetime.now())}
+                        }
 
-        #r_diary = requests.get(url + '/get_diary', params={'user':name})
-        #r_diary_DB = r_diary.json()
-        #df_diary=pd.DataFrame.from_dict(r_diary_DB,orient='index')
-        #df_diary.columns=['日記テキスト']
-        #df_diary = df_diary.sort_index(ascending=False)
+            url = st.secrets['URL']
+            requests.post(url + '/post',json=data_post)
+            st.write('入力完了しました！')
 
-        #with st.expander("クリックであなたの過去の日記を表示します"):
-            #st.table(data=df_diary)
+            #r_diary = requests.get(url + '/get_diary', params={'user':name})
+            #r_diary_DB = r_diary.json()
+            #df_diary=pd.DataFrame.from_dict(r_diary_DB,orient='index')
+            #df_diary.columns=['日記テキスト']
+            #df_diary = df_diary.sort_index(ascending=False)
 
-        r_fb = requests.get(url + '/get_fb', params={'user':name})
-        r_fb_DB = r_fb.json()
-        df_fb=pd.DataFrame.from_dict(r_fb_DB,orient='index').T
-        df_fb_self=df_fb[df_fb['user']==name]
+            #with st.expander("クリックであなたの過去の日記を表示します"):
+                #st.table(data=df_diary)
 
+            r_fb = requests.get(url + '/get_fb', params={'user':name})
+            r_fb_DB = r_fb.json()
+            df_fb=pd.DataFrame.from_dict(r_fb_DB,orient='index').T
+            df_fb_self=df_fb[df_fb['user']==name]
+        else:
+            df_fb=pd.read_excel('DB_demo.xlsx')
+            df_fb_self=df_fb[df_fb['user']==name]
+
+            
         st.subheader('週間Well-beingスコア')
         st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア／青色の丸：あなたのスコア')
         line = alt.Chart(df_fb).mark_line(

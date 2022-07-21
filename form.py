@@ -109,8 +109,13 @@ def main():
             width=650,
             height=400
             )
+        
+        layer = alt.layer(points,points_self,line
+        ).configure_axis(
+            grid=False
+        )
 
-        st.write(points+points_self+line)
+        st.write(layer)
 
         
 # ユーザ情報

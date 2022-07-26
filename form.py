@@ -11,14 +11,28 @@ import plotly.express as px
 import requests
 import json
 import streamlit_authenticator as stauth
+import bcrypt
 
 
 happy_score = ['選択して下さい（0〜10点）',0,1,2,3,4,5,6,7,8,9,10]
 today = datetime.date.today()
 day_list=[]
 diary_list=[]
+url = st.secrets['URL']
 
 def main():
+    with st.expander('パスワード変更はこちら'):
+        new_pass = st.text_input(label='↓新しいパスワードをご入力下さい')
+        new_pass_hash = bcrypt.hashpw(new_pass.encode(),bcrypt.gensalt()).decode()
+        if st.button('パスワード変更') ==True:
+            requests.post(
+                url + '/chenge_pass',
+                params={
+                    'name':name,
+                    'pass':new_pass_hash
+                    })
+            st.write('パスワードを変更しました！')
+            
     day = st.date_input('対象の日付を入力して下さい',today)
     diary = st.text_area(label='A：3行程度で日記をご記入ください（仕事に無関係でも構いません）',height=12)
     with st.expander("クリックで日記の入力例を表示します"):
@@ -53,7 +67,6 @@ def main():
                         'timestamp':str(datetime.datetime.now())}
                         }
 
-            url = st.secrets['URL']
             requests.post(url + '/post',json=data_post)
             st.write('入力完了しました！')
 
@@ -118,12 +131,13 @@ def main():
 
         
 # ユーザ情報
-names = st.secrets['names']
-usernames = st.secrets['usernames']
-passwords = st.secrets['passwords']
+login_info = requests.get(url + '/check_login').json()
+names = login_info['user']
+usernames = login_info['username']
+hashed_passwords = login_info['password']
 
 # パスワードをハッシュ化（リスト等、イテラブルなオブジェクトである必要がある）
-hashed_passwords = stauth.Hasher(passwords).generate()
+#hashed_passwords = stauth.Hasher(passwords).generate()
 
 # cookie_expiry_daysでクッキーの有効期限を設定可能。
 # 認証情報の保持期間を設定でき値を0とするとアクセス毎に認証を要求する

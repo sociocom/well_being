@@ -114,7 +114,7 @@ def main():
         ).encode(
             x=alt.X('date:T'),
             y=alt.Y('my_happy:Q'),
-            size = 'count'
+            size = 'count():Q'
         ).properties(
             width=650,
             height=400
@@ -125,7 +125,7 @@ def main():
         ).encode(
             x=alt.X('date:T'),
             y=alt.Y('my_happy:Q'),
-            size = 'count'
+            size = 'count():Q'
         ).properties(
             width=650,
             height=400

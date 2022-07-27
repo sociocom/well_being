@@ -12,6 +12,7 @@ import requests
 import json
 import streamlit_authenticator as stauth
 import bcrypt
+import mojimoji
 
 
 happy_score = ['選択して下さい（0〜10点）',0,1,2,3,4,5,6,7,8,9,10]
@@ -158,6 +159,6 @@ if authentication_status:
     st.write('Welcome *%s*' % (name))
     main()
 elif authentication_status == False:
-    st.error('Username/password is incorrect')
+    st.error('UsernameまたはPasswordが間違っています（英数字・記号は半角にして下さい）')
 elif authentication_status == None:
-    st.warning('Please enter your username and password')
+    st.warning('UsernameとPasswordをご入力下さい')

@@ -99,6 +99,7 @@ def main():
             
         st.subheader('週間Well-beingスコア')
         st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア／青色の丸：あなたのスコア')
+        st.caption('※水色の丸の大きさはスコアごとの人数を表しています')
         line = alt.Chart(df_fb).mark_line(
             color='lightskyblue'
         ).encode(
@@ -114,7 +115,7 @@ def main():
         ).encode(
             x=alt.X('date:T'),
             y=alt.Y('my_happy:Q'),
-            size = 'sum(count)'
+            size = 'count()'
         ).properties(
             width=650,
             height=400
@@ -125,7 +126,7 @@ def main():
         ).encode(
             x=alt.X('date:T'),
             y=alt.Y('my_happy:Q'),
-            size = 'sum(count)'
+            size = 'count()'
         ).properties(
             width=650,
             height=400

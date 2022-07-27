@@ -59,6 +59,7 @@ def main():
     
     if st.button('登録') == True:
         if name != 'demo':
+            st.write(len(my_happy))
             if len(my_happy) > 3:
                 my_happy == ''
             if len(group_happy) > 3:

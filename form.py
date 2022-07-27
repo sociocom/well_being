@@ -59,9 +59,9 @@ def main():
     
     if st.button('登録') == True:
         if name != 'demo':
-            if len(my_happy) > 3:
+            if len(str(my_happy)) > 3:
                 my_happy = ''
-            if len(group_happy) > 3:
+            if len(str(group_happy)) > 3:
                 group_happy = ''
             
             data_post = {

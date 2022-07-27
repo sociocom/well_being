@@ -92,6 +92,7 @@ def main():
             r_fb_DB = r_fb.json()
             df_fb=pd.DataFrame.from_dict(r_fb_DB,orient='index').T
             df_fb_self=df_fb[df_fb['user']==name]
+            st.table(df_fb)
         else:
             df_fb=pd.read_excel('DB_demo.xlsx')
             df_fb_self=df_fb[df_fb['user']==name]

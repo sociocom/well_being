@@ -5,3 +5,4 @@ streamlit
 altair
 openpyxl
 streamlit_authenticator == 0.1.5
+

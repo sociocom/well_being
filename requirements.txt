@@ -6,3 +6,4 @@ altair
 openpyxl
 streamlit_authenticator == 0.1.5
 mojimoji
+pytz

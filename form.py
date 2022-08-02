@@ -98,6 +98,8 @@ def main():
 
         st.table(df_fb)
         
+        st.write(df_fb['date'][1])
+        
         st.subheader('週間Well-beingスコア')                
         ty = today.year
         tm = today.month

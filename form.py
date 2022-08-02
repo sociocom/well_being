@@ -104,9 +104,9 @@ def main():
         td = today.day
         
         past_day= today-datetime.timedelta(days=6)
-        past_y = pday.year
-        past_m = pday.month
-        past_d = pday.day
+        past_y = past_day.year
+        past_m = past_day.month
+        past_d = past_day.day
         
         st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア／青色の丸：あなたのスコア')
         st.caption('※水色の丸の大きさはスコアごとの人数を表しています')

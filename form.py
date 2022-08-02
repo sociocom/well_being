@@ -98,7 +98,7 @@ def main():
 
         st.table(df_fb)
         
-        st.write(df_fb['date'][1])
+        st.write(df_fb['date'][1].time())
         
         st.subheader('週間Well-beingスコア')                
         ty = today.year

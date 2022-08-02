@@ -165,36 +165,32 @@ def main():
         
         st.experimental_singleton.clear()        
 
-if log == 1:
+# ユーザ情報
+login_info = requests.get(url + '/check_login').json()
+names = login_info['user']
+usernames = login_info['username']
+hashed_passwords = login_info['password']
+
+# パスワードをハッシュ化（リスト等、イテラブルなオブジェクトである必要がある）
+#hashed_passwords = stauth.Hasher(passwords).generate()
+
+# cookie_expiry_daysでクッキーの有効期限を設定可能。
+# 認証情報の保持期間を設定でき値を0とするとアクセス毎に認証を要求する
+authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
+    'some_cookie_name', 'some_signature_key', cookie_expiry_days=1)
+
+# ログインメソッドで入力フォームを配置
+st.title('個と場のWell-being日記')
+name, authentication_status, username = authenticator.login('Login', 'main')
+
+# 返り値、authenticaton_statusの状態で処理を場合分け
+if authentication_status:
+    log = 1
+    # logoutメソッドでauthenticationの値をNoneにする
+    authenticator.logout('Logout', 'main')
     st.write('Welcome *%s*' % (name))
     main()
-else:
-    # ユーザ情報
-    login_info = requests.get(url + '/check_login').json()
-    names = login_info['user']
-    usernames = login_info['username']
-    hashed_passwords = login_info['password']
-
-    # パスワードをハッシュ化（リスト等、イテラブルなオブジェクトである必要がある）
-    #hashed_passwords = stauth.Hasher(passwords).generate()
-
-    # cookie_expiry_daysでクッキーの有効期限を設定可能。
-    # 認証情報の保持期間を設定でき値を0とするとアクセス毎に認証を要求する
-    authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
-        'some_cookie_name', 'some_signature_key', cookie_expiry_days=1)
-
-    # ログインメソッドで入力フォームを配置
-    st.title('個と場のWell-being日記')
-    name, authentication_status, username = authenticator.login('Login', 'main')
-
-    # 返り値、authenticaton_statusの状態で処理を場合分け
-    if authentication_status:
-        log = 1
-        # logoutメソッドでauthenticationの値をNoneにする
-        authenticator.logout('Logout', 'main')
-        st.write('Welcome *%s*' % (name))
-        main()
-    elif authentication_status == False:
-        st.error('UsernameまたはPasswordが間違っています（英数字・記号は半角にして下さい）')
-    elif authentication_status == None:
-        st.warning('UsernameとPasswordをご入力下さい')
+elif authentication_status == False:
+    st.error('UsernameまたはPasswordが間違っています（英数字・記号は半角にして下さい）')
+elif authentication_status == None:
+    st.warning('UsernameとPasswordをご入力下さい')

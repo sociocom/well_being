@@ -96,6 +96,7 @@ def main():
             df_fb=pd.read_excel('DB_demo.xlsx')
             df_fb_self=df_fb[df_fb['user']==name]
 
+        st.table(df_fb)
             
         st.subheader('週間Well-beingスコア')
         st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア／青色の丸：あなたのスコア')

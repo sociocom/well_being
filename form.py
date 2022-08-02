@@ -21,14 +21,13 @@ today = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
 day_list=[]
 diary_list=[]
 url = st.secrets['URL']
-team_url='A'
-
 query_params = st.experimental_get_query_params()
+team_url=query_params['team']
 
 #st.experimental_set_query_params(selected=["a", "b",'c'])
 
 def main():
-    st.write(query_params)
+    st.write(query_params['team'])
     with st.expander('パスワード変更はこちら'):
         new_pass = st.text_input(label='↓新しいパスワードをご入力下さい')
         new_pass_hash = bcrypt.hashpw(new_pass.encode(),bcrypt.gensalt()).decode()

@@ -185,7 +185,6 @@ name, authentication_status, username = authenticator.login('Login', 'main')
 
 # 返り値、authenticaton_statusの状態で処理を場合分け
 if authentication_status:
-    log = 1
     # logoutメソッドでauthenticationの値をNoneにする
     authenticator.logout('Logout', 'main')
     st.write('Welcome *%s*' % (name))

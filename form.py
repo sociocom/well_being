@@ -27,7 +27,7 @@ team_url=query_params['team'][0]
 #st.experimental_set_query_params(selected=["a", "b",'c'])
 
 def main():
-    st.write(team_url)
+    st.write('チーム「' + team_url + '」の入力画面です')
     with st.expander('パスワード変更はこちら'):
         new_pass = st.text_input(label='↓新しいパスワードをご入力下さい')
         new_pass_hash = bcrypt.hashpw(new_pass.encode(),bcrypt.gensalt()).decode()

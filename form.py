@@ -103,8 +103,6 @@ def main():
         else:
             df_fb=pd.read_excel('DB_demo.xlsx')
             df_fb_self=df_fb[df_fb['user']==name]
-
-        st.table(df_fb)
         
         st.subheader('週間Well-beingスコア')                
         ty = today.year
@@ -153,9 +151,6 @@ def main():
             width=650,
             height=400
             )
-        
-        st.write(line)
-        
         
         layer = alt.layer(line,points,points_self
         ).configure_axis(

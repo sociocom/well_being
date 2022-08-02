@@ -147,7 +147,7 @@ def main():
             x=alt.X('date:T',
                     axis=alt.Axis(format="%m月%d日",labelFontSize=14, ticks=False, titleFontSize=18,title='日付'),
                    scale=alt.Scale(domainMax={"year": 2022, "month": "aug", "date": 1},domainMin={"year": 2022, "month": "jul", "date": 28})),
-            y=alt.Y('mean(my_happy):Q',axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'))
+            y=alt.Y('mean(my_happy):Q',axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'),scale=alt.Scale(domainMax={"year": 2022, "month": "aug", "date": 1},domainMin={"year": 2022, "month": "jul", "date": 28}))
         ).properties(
             width=650,
             height=400,

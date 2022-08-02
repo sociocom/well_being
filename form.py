@@ -165,7 +165,7 @@ def main():
         
         st.experimental_singleton.clear()        
 
-if log = 1:
+if log == 1:
     st.write('Welcome *%s*' % (name))
     main()
 else:

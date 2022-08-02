@@ -96,7 +96,7 @@ def main():
             
             day_list=[]
             for days in df_fb['date']:
-                day_list.append(days + datetime.timedelta(hours=9))
+                day_list.append(days + datetime.timedelta(hours=-9))
             
             df_fb['date'] = day_list
             df_fb_self=df_fb[df_fb['user']==name]

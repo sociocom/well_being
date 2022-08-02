@@ -124,7 +124,9 @@ def main():
                     scale=alt.Scale(domainMax={"year": ty, "month": tm, "date": td},
                                     domainMin={"year": past_y, "month": past_m, "date": past_d})
                     ),
-            y=alt.Y('mean(my_happy):Q',axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'))
+            y=alt.Y('mean(my_happy):Q',
+                    axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'),
+                    scale=alt.Scale(domainMax=10,domainMin=0)
         ).properties(
             width=650,
             height=400

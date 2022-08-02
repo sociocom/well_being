@@ -40,7 +40,8 @@ def main():
             
     day = st.date_input('対象の日付を入力して下さい',today)
     diary = st.text_area(label='A：3行程度で日記をご記入ください（仕事に無関係でも構いません）',height=12)
-    diary
+    if st.button('test')==True:
+        st.experimental_rerun()
     with st.expander("クリックで日記の入力例を表示します"):
         st.caption('入力例1：今日仕事忙しすぎて朝しか食べてなくてさっき帰ってきたけど、こんな時間だし食べなくていっか。食べて太るよりは我慢して痩せた方が絶対いいし。いい方法ではないかもしれないけど痩せたい！')
         st.caption('入力例2：珍しく上司から褒められた。あんまり褒めるところ見たことがない上司だから嬉しいけどヘンな感じ（笑）。たまにこういうことがあると頑張ろうって気になります。')
@@ -60,6 +61,7 @@ def main():
     location_other = st.text_input('E：Dでその他を選択した方は，差し支えない範囲で場所をご記入ください')
     
     if st.button('登録') == True:
+        st.balloons()
         if name != 'demo':
             if len(str(my_happy)) > 3:
                 my_happy = ''
@@ -79,7 +81,7 @@ def main():
                         }
 
             requests.post(url + '/post',json=data_post)
-            st.write('入力完了しました！')
+            st.success('入力完了しました！')
 
             #r_diary = requests.get(url + '/get_diary', params={'user':name})
             #r_diary_DB = r_diary.json()

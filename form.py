@@ -22,12 +22,12 @@ day_list=[]
 diary_list=[]
 url = st.secrets['URL']
 query_params = st.experimental_get_query_params()
-#team_url=query_params['team']
+team_url=query_params['team'][0]
 
 #st.experimental_set_query_params(selected=["a", "b",'c'])
 
 def main():
-    st.write(query_params['team'][0])
+    st.write(team_url)
     with st.expander('パスワード変更はこちら'):
         new_pass = st.text_input(label='↓新しいパスワードをご入力下さい')
         new_pass_hash = bcrypt.hashpw(new_pass.encode(),bcrypt.gensalt()).decode()

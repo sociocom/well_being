@@ -22,6 +22,7 @@ day_list=[]
 diary_list=[]
 url = st.secrets['URL']
 team_url='A'
+st.experimental_get_query_params({"team": ['A','B','C']})
 
 def main():
     with st.expander('パスワード変更はこちら'):

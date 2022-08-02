@@ -97,8 +97,17 @@ def main():
             df_fb_self=df_fb[df_fb['user']==name]
 
         st.table(df_fb)
-            
-        st.subheader('週間Well-beingスコア')
+        
+        st.subheader('週間Well-beingスコア')                
+        ty = today.year
+        tm = today.month
+        td = today.day
+        
+        pday= today-datetime.timedelta(days=6)
+        py = pday.year
+        pm = pday.month
+        pd = pday.day
+        
         st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア／青色の丸：あなたのスコア')
         st.caption('※水色の丸の大きさはスコアごとの人数を表しています')
         line = alt.Chart(df_fb).mark_line(
@@ -147,7 +156,7 @@ def main():
         ).encode(
             x=alt.X('date:T',
                     axis=alt.Axis(format="%m月%d日",labelFontSize=14, ticks=False, titleFontSize=18,title='日付'),
-                   scale=alt.Scale(domainMax={"year": 2022, "month": "8", "date": 2},domainMin={"year": 2022, "month": "7", "date": 27})),
+                   scale=alt.Scale(domainMax={"year": ty, "month": tm, "date": td},domainMin={"year": py, "month": pm, "date": pd})),
             y=alt.Y('mean(my_happy):Q',axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'))
         ).properties(
             width=650,

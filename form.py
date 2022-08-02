@@ -146,7 +146,7 @@ def main():
         ).encode(
             x=alt.X('date:T',
                     axis=alt.Axis(format="%m月%d日",labelFontSize=14, ticks=False, titleFontSize=18,title='日付'),
-                   scale=alt.Scale(domain=('2022-08-01'))),
+                   scale=alt.Scale(domainMax=today,domainMin=today)),
             y=alt.Y('mean(my_happy):Q',axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'))
         ).properties(
             width=650,

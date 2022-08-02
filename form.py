@@ -120,7 +120,7 @@ def main():
                     ),
             y=alt.Y('mean(my_happy):Q',axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'))
         ).properties(
-            width=700,
+            width=650,
             height=400
             )
 
@@ -149,7 +149,7 @@ def main():
         st.write(line)
         
         
-        layer = alt.layer(line
+        layer = alt.layer(line,points,points_self
         ).configure_axis(
             grid=False
         )

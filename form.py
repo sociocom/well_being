@@ -103,10 +103,10 @@ def main():
         tm = today.month
         td = today.day
         
-        pday= today-datetime.timedelta(days=6)
-        py = pday.year
-        pm = pday.month
-        pd = pday.day
+        past_day= today-datetime.timedelta(days=6)
+        past_y = pday.year
+        past_m = pday.month
+        past_d = pday.day
         
         st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア／青色の丸：あなたのスコア')
         st.caption('※水色の丸の大きさはスコアごとの人数を表しています')

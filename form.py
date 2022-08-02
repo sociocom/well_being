@@ -22,7 +22,7 @@ day_list=[]
 diary_list=[]
 url = st.secrets['URL']
 query_params = st.experimental_get_query_params()
-team_url=query_params['team']
+#team_url=query_params['team']
 
 #st.experimental_set_query_params(selected=["a", "b",'c'])
 

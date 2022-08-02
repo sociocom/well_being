@@ -119,10 +119,7 @@ def main():
                                     domainMin={"year": past_y, "month": past_m, "date": past_d})
                     ),
             y=alt.Y('mean(my_happy):Q',axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'))
-        ).properties(
-            width=650,
-            height=400,
-            )
+        )
 
         points = alt.Chart(df_fb).mark_circle(
             color='lightskyblue'

@@ -16,7 +16,7 @@ import mojimoji
 
 
 happy_score = ['選択して下さい（0〜10点）',0,1,2,3,4,5,6,7,8,9,10]
-today = datetime.date.today()
+today = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
 day_list=[]
 diary_list=[]
 url = st.secrets['URL']

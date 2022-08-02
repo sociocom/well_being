@@ -98,8 +98,6 @@ def main():
 
         st.table(df_fb)
         
-        st.write(df_fb['date'][1].time())
-        
         st.subheader('週間Well-beingスコア')                
         ty = today.year
         tm = today.month
@@ -115,7 +113,7 @@ def main():
         line = alt.Chart(df_fb).mark_line(
             color='lightskyblue'
         ).encode(
-            x=alt.X('date:T',
+            x=alt.X('date:O',
                     axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付'),
                     scale=alt.Scale(domainMax={"year": ty, "month": tm, "date": td},
                                     domainMin={"year": past_y, "month": past_m, "date": past_d})

@@ -23,22 +23,21 @@ diary_list=[]
 url = st.secrets['URL']
 
 def main():
+    with st.expander('パスワード変更はこちら'):
+        new_pass = st.text_input(label='↓新しいパスワードをご入力下さい')
+        new_pass_hash = bcrypt.hashpw(new_pass.encode(),bcrypt.gensalt()).decode()
+        if st.button('パスワード変更') ==True:
+            if name == 'demo':
+                st.write('demoはパスワード変更できません…')
+            else:
+                requests.post(
+                    url + '/chenge_pass',
+                    params={
+                        'name':name,
+                        'pass':new_pass_hash
+                        })
+                st.write('パスワードを変更しました！')
     with st.form('my_form'):
-        with st.expander('パスワード変更はこちら'):
-            new_pass = st.text_input(label='↓新しいパスワードをご入力下さい')
-            new_pass_hash = bcrypt.hashpw(new_pass.encode(),bcrypt.gensalt()).decode()
-            if st.button('パスワード変更') ==True:
-                if name == 'demo':
-                    st.write('demoはパスワード変更できません…')
-                else:
-                    requests.post(
-                        url + '/chenge_pass',
-                        params={
-                            'name':name,
-                            'pass':new_pass_hash
-                            })
-                    st.write('パスワードを変更しました！')
-
         day = st.date_input('対象の日付を入力して下さい',today)
         diary = st.text_area(label='A：3行程度で日記をご記入ください（仕事に無関係でも構いません）',height=12)
         with st.expander("クリックで日記の入力例を表示します"):

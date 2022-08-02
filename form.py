@@ -146,6 +146,9 @@ def main():
             height=400
             )
         
+        st.write(line)
+        
+        
         layer = alt.layer(line
         ).configure_axis(
             grid=False

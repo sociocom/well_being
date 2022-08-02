@@ -93,7 +93,7 @@ def main():
                 #with st.expander("クリックであなたの過去の日記を表示します"):
                     #st.table(data=df_diary)
 
-                r_fb = requests.get(url + '/get_fb', params={'user':name})
+                r_fb = requests.get(url + '/get_fb', params={'user':name, 'team_url':team_url})
                 r_fb_DB = r_fb.json()
                 df_fb=pd.DataFrame.from_dict(r_fb_DB,orient='index').T
                 df_fb['date']=pd.to_datetime(df_fb['date'])

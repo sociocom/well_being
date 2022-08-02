@@ -21,7 +21,7 @@ today = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
 day_list=[]
 diary_list=[]
 url = st.secrets['URL']
-team_url='A'
+team_url='Z'
 
 def main():
     with st.expander('パスワード変更はこちら'):

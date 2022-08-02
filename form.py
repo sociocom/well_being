@@ -144,7 +144,7 @@ def main():
         line_test = alt.Chart(df_fb).mark_line(
             color='lightskyblue'
         ).encode(
-            x=alt.X(['2022-07-28','2022-07-29','2022-08-02'],axis=alt.Axis(format="%m月%d日",labelFontSize=14, ticks=False, titleFontSize=18,title='日付')),
+            x=alt.X([today],axis=alt.Axis(format="%m月%d日",labelFontSize=14, ticks=False, titleFontSize=18,title='日付')),
             y=alt.Y('mean(my_happy):Q',axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'))
         ).properties(
             width=650,

@@ -21,7 +21,7 @@ today = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
 day_list=[]
 diary_list=[]
 url = st.secrets['URL']
-team='A'
+team_url='A'
 
 def main():
     with st.expander('パスワード変更はこちら'):
@@ -77,7 +77,8 @@ def main():
                             'group_happy':group_happy,
                             'location':location,
                             'location_other':location_other,
-                            'timestamp':str(datetime.datetime.now())}
+                            'timestamp':str(datetime.datetime.now())},
+                            'team_url':team_url
                             }
 
                 requests.post(url + '/post',json=data_post)

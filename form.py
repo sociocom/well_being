@@ -146,7 +146,7 @@ def main():
             height=400
             )
         
-        layer = alt.layer(points,points_self,line
+        layer = alt.layer(points
         ).configure_axis(
             grid=False
         )

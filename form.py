@@ -94,6 +94,11 @@ def main():
             df_fb=pd.DataFrame.from_dict(r_fb_DB,orient='index').T
             df_fb['date']=pd.to_datetime(df_fb['date'])
             
+            day_list=[]
+            for days in df_fb['date']:
+                day_list.append(days + datetime.timedelta(hours=DIFF_JST_FROM_UTC))
+            
+            df_fb['date'] = day_list
             df_fb_self=df_fb[df_fb['user']==name]
         else:
             df_fb=pd.read_excel('DB_demo.xlsx')

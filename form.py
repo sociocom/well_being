@@ -23,10 +23,9 @@ diary_list=[]
 url = st.secrets['URL']
 team_url='A'
 
-radio_list = ['Eat', 'Sleep', 'Both']
 query_params = st.experimental_get_query_params()
 
-st.experimental_set_query_params(selected=["a", "b",'c'])
+#st.experimental_set_query_params(selected=["a", "b",'c'])
 
 def main():
     with st.expander('パスワード変更はこちら'):

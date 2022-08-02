@@ -91,6 +91,8 @@ def main():
             r_fb = requests.get(url + '/get_fb', params={'user':name})
             r_fb_DB = r_fb.json()
             df_fb=pd.DataFrame.from_dict(r_fb_DB,orient='index').T
+            df_fb=pd.to_datetime(df_fb['date'])
+            
             df_fb_self=df_fb[df_fb['user']==name]
         else:
             df_fb=pd.read_excel('DB_demo.xlsx')
@@ -113,7 +115,7 @@ def main():
         line = alt.Chart(df_fb).mark_line(
             color='lightskyblue'
         ).encode(
-            x=alt.X('date:O',
+            x=alt.X('date:T',
                     axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付'),
                     scale=alt.Scale(domainMax={"year": ty, "month": tm, "date": td},
                                     domainMin={"year": past_y, "month": past_m, "date": past_d})

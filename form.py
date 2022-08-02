@@ -141,12 +141,13 @@ def main():
         st.write(layer)
         
         
+        date_today = datetime.datetime.now()
         line_test = alt.Chart(df_fb).mark_line(
             color='lightskyblue'
         ).encode(
             x=alt.X('date:T',
                     axis=alt.Axis(format="%m月%d日",labelFontSize=14, ticks=False, titleFontSize=18,title='日付'),
-                   scale=alt.Scale(domainMax={"year": 2022, "month": "aug", "date": 1},domainMin={"year": 2022, "month": "jul", "date": 29})),
+                   scale=alt.Scale(domainMax=date_today,domainMin=date_today)),
             y=alt.Y('mean(my_happy):Q',axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'))
         ).properties(
             width=650,
@@ -154,7 +155,6 @@ def main():
             )
             
         st.write(line_test)
-        
 
         
 # ユーザ情報

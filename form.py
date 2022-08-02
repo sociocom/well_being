@@ -114,7 +114,7 @@ def main():
             color='lightskyblue'
         ).encode(
             x=alt.X('date:T',
-                    axis=alt.Axis(format="%m/%d",labelFontSize=14, ticks=False, titleFontSize=18,title='日付'),
+                    axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付'),
                     scale=alt.Scale(domainMax={"year": ty, "month": tm, "date": td},
                                     domainMin={"year": past_y, "month": past_m, "date": past_d})
                     ),

@@ -162,6 +162,7 @@ def main():
 
         st.write(layer)
         
+        st.experimental_singleton.clear()        
         
 # ユーザ情報
 login_info = requests.get(url + '/check_login').json()

@@ -23,7 +23,7 @@ diary_list=[]
 url = st.secrets['URL']
 
 def main():
-    with st.form('formです')
+    with st.form('formです'):
         with st.expander('パスワード変更はこちら'):
             new_pass = st.text_input(label='↓新しいパスワードをご入力下さい')
             new_pass_hash = bcrypt.hashpw(new_pass.encode(),bcrypt.gensalt()).decode()

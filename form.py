@@ -113,7 +113,10 @@ def main():
         line = alt.Chart(df_fb).mark_line(
             color='lightskyblue'
         ).encode(
-            x=alt.X('date:T',axis=alt.Axis(format="%m月%d日",labelFontSize=14, ticks=False, titleFontSize=18,title='日付')),
+            x=alt.X('date:T',
+                    axis=alt.Axis(format="%m月%d日",labelFontSize=14, ticks=False, titleFontSize=18,title='日付'),
+                    scale=alt.Scale(domainMax={"year": ty, "month": tm, "date": td},
+                                    domainMin={"year": past_y, "month": past_m, "date": past_d})),
             y=alt.Y('mean(my_happy):Q',axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'))
         ).properties(
             width=650,

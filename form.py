@@ -169,6 +169,8 @@ def main():
             )
 
             st.write(layer)
+            
+            st.write('https://bit.ly/3zwaT3k')
               
 
 # ユーザ情報

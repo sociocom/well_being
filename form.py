@@ -251,7 +251,7 @@ st.title('個と場のWell-being日記')
 name, authentication_status, username = authenticator.login('Login', 'main')
 
 message='''
-IDが正しいのにログインできない場合は、登録されていない可能性があるので
+※IDが正しいのにログインできない場合は、登録されていない可能性があるので
 こちらから登録してください。登録には数日かかる場合があります。
 
 https://survey.kokoro.kyoto-u.ac.jp/kigyo/478.html'''
@@ -262,6 +262,7 @@ st.write(message)
 # 返り値、authenticaton_statusの状態で処理を場合分け
 if authentication_status:
     # logoutメソッドでauthenticationの値をNoneにする
+    message=''
     authenticator.logout('Logout', 'main')
     st.write('Welcome *%s*' % (name))
     main()

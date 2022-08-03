@@ -170,8 +170,8 @@ def main():
 
             st.write(layer)
             
-            st.write('↓アプリ改善のため、ご意見・ご感想をお聞かせ下さい')
-            st.write('https://bit.ly/3zwaT3k')
+            st.write('アプリ改善のため、下記のリンクよりご意見・ご感想をお聞かせ下さい- /nhttps://bit.ly/3zwaT3k')
+            st.write()
               
 
 # ユーザ情報

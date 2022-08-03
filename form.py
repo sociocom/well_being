@@ -110,6 +110,10 @@ def main():
                 df_fb_self=df_fb[df_fb['user']==name]
             else:
                 df_fb=pd.read_excel('DB_demo.xlsx')
+                day_list=[]
+                for days in df_fb['date']:
+                    day_list.append(days + datetime.timedelta(hours=-9))
+                df_fb['date'] = day_list
                 df_fb_self=df_fb[df_fb['user']==name]
 
             st.subheader('週間Well-beingスコア')                

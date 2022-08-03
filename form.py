@@ -170,7 +170,7 @@ def main():
 
             st.write(layer)
             
-            st.write('アプリ改善のため、下記のリンクよりご意見・ご感想をお聞かせ下さい \n https://bit.ly/3zwaT3k')
+            st.markdown('アプリ改善のため、下記のリンクよりご意見・ご感想をお聞かせ下さい \n https://bit.ly/3zwaT3k')
             st.write("line 1 \n line 2 \n line 3")
               
 

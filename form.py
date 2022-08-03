@@ -110,6 +110,7 @@ def main():
                 df_fb_self=df_fb[df_fb['user']==name]
             else:
                 df_fb=pd.read_excel('DB_demo.xlsx')
+                df_fb['date']=pd.to_datetime(df_fb['date'])
                 day_list=[]
                 for days in df_fb['date']:
                     day_list.append(days + datetime.timedelta(hours=-9))
@@ -202,6 +203,7 @@ name, authentication_status, username = authenticator.login('Login', 'main')
 message='''
 IDが正しいのにログインできない場合は、登録されていない可能性があるので
 こちらから登録してください。登録には数日かかる場合があります。
+
 https://survey.kokoro.kyoto-u.ac.jp/kigyo/478.html'''
 
 st.write(message)

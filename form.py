@@ -251,8 +251,7 @@ st.title('個と場のWell-being日記')
 name, authentication_status, username = authenticator.login('Login', 'main')
 
 message='''
-※IDが正しいのにログインできない場合は、登録されていない可能性があるので
-こちら（下記URL）から登録してください。登録には数日かかる場合があります。
+※IDが正しいのにログインできない場合は、登録されていない可能性があるのでこちら（下記URL）から登録してください。登録には数日かかる場合があります。
 
 https://survey.kokoro.kyoto-u.ac.jp/kigyo/478.html'''
 

@@ -266,7 +266,7 @@ if authentication_status:
     main()
 elif authentication_status == False:
     st.error('UsernameまたはPasswordが間違っています（英数字・記号は半角にして下さい）')
-    st.write(message)
+    st.info(message)
 elif authentication_status == None:
     st.warning('UsernameとPasswordをご入力下さい')
-    st.write(message)
+    st.info(message)

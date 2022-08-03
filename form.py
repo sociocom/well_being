@@ -191,7 +191,7 @@ def main():
                     x=alt.X('date:T',
                             axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付'),
                             scale=alt.Scale(domainMax={"year": 2022, "month": 7, "date": 20},
-                                            domainMin={"year": 2022, "month": 7, "date": 15})
+                                            domainMin={"year": 2022, "month": 7, "date": 14})
                             ),
                     y=alt.Y('mean(my_happy):Q',
                             axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'),

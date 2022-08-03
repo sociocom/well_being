@@ -256,8 +256,6 @@ message='''
 
 https://survey.kokoro.kyoto-u.ac.jp/kigyo/478.html'''
 
-st.write(message)
-
 
 # 返り値、authenticaton_statusの状態で処理を場合分け
 if authentication_status:
@@ -268,5 +266,7 @@ if authentication_status:
     main()
 elif authentication_status == False:
     st.error('UsernameまたはPasswordが間違っています（英数字・記号は半角にして下さい）')
+    st.write(message)
 elif authentication_status == None:
     st.warning('UsernameとPasswordをご入力下さい')
+    st.write(message)

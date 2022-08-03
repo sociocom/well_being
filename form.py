@@ -190,9 +190,12 @@ def main():
                 ).encode(
                     x=alt.X('date:T',
                             axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付'),
+                            scale=alt.Scale(domainMax={"year": 2022, "month": 7, "date": 20},
+                                            domainMin={"year": 2022, "month": 7, "date": 15})
                             ),
                     y=alt.Y('mean(my_happy):Q',
-                            axis=alt.Axis(titleFontSize=18, title='Well-beingスコア')
+                            axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'),
+                            scale=alt.Scale(domainMax=10,domainMin=0)
                            )
                 ).properties(
                     width=650,

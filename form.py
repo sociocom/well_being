@@ -172,7 +172,6 @@ def main():
             
             feed = '''
             アプリ改善のため、下記のリンクよりご意見・ご感想をお聞かせ下さい
-            
             https://bit.ly/3zwaT3k'''
             st.write(feed)
               

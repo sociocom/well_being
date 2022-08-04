@@ -138,7 +138,7 @@ authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
     'some_cookie_name', 'some_signature_key', cookie_expiry_days=1)
 
 # ログインメソッドで入力フォームを配置
-st.title('【デモ画面】個と場のWell-being日記')
+st.title('【デモ】個と場のWell-being日記')
 name, authentication_status, username = authenticator.login('Login', 'main')
 
 message='''

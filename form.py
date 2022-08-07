@@ -230,6 +230,12 @@ def main():
                 )
 
                 st.write(layer)
+                
+                feed = '''
+                **▼アプリ改善のため、下記のリンクよりご意見・ご感想をお聞かせ下さい** 
+
+                https://docs.google.com/forms/d/e/1FAIpQLSeOHYmBTqdoHfnHc1EeLGd4G96DiyKERHByqti307Sa3njaAA/viewform'''
+                st.markdown(feed)
               
 
 # ユーザ情報

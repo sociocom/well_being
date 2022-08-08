@@ -7,7 +7,3 @@ openpyxl
 streamlit_authenticator == 0.1.5
 mojimoji
 pytz
-datetime
-date
-time
-timedelta

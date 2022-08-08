@@ -19,22 +19,46 @@ happy_score = ['選択して下さい（0〜10点）',0,1,2,3,4,5,6,7,8,9,10]
 today = datetime.date.today()
 day_list=[]
 diary_list=[]
-url = st.secrets['URL']
+url = 'http://aoi.naist.jp/wellbeing'
 
 def main():
-    r_fb = requests.get(url + '/get_fb', params={'user':name})
+    r_fb = requests.get(url + '/get_fb_all')
     r_fb_DB = r_fb.json()
     df_fb=pd.DataFrame.from_dict(r_fb_DB,orient='index').T
+    df_fb['date']=pd.to_datetime(df_fb['date'])
 
-    st.subheader('週間 Well-beingスコア')
+    day_list=[]
+    for days in df_fb['date']:
+        day_list.append(days + datetime.timedelta(hours=-9))
+    df_fb['date'] = day_list
+
+    st.subheader('2週間 Well-beingスコア')                
+    ty = today.year
+    tm = today.month
+    td = today.day
+
+    past_day= today-datetime.timedelta(days=13)
+    past_y = past_day.year
+    past_m = past_day.month
+    past_d = past_day.day
+
+    st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア')
+    st.caption('※水色の丸の大きさはスコアごとの人数を表しています')
     line = alt.Chart(df_fb).mark_line(
-        color='blue'
+        color='lightskyblue'
     ).encode(
-        x=alt.X('date:T',axis=alt.Axis(format="%m月%d日",labelFontSize=14, ticks=False, titleFontSize=18,title='日付')),
-        y=alt.Y('mean(my_happy):Q',axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'))
+        x=alt.X('date:T',
+                axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付'),
+                scale=alt.Scale(domainMax={"year": ty, "month": tm, "date": td},
+                                domainMin={"year": past_y, "month": past_m, "date": past_d})
+                ),
+        y=alt.Y('mean(my_happy):Q',
+                axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'),
+                scale=alt.Scale(domainMax=10,domainMin=0)
+                )
     ).properties(
         width=650,
-        height=400,
+        height=400
         )
 
     points = alt.Chart(df_fb).mark_circle(
@@ -48,58 +72,64 @@ def main():
         height=400
         )
 
-    st.write(points+line)
+    layer = alt.layer(line,points
+    ).configure_axis(
+        grid=False
+    )
+
+    st.write(layer)
 
 
     r_emo = requests.get(url + '/get_emo')
     r_emo_DB = r_emo.json()
     df_emo=pd.DataFrame.from_dict(r_emo_DB,orient='index').T
-    st.table(df_emo)
+    
+    df_emo['date']=pd.to_datetime(df_emo['date'])
+    day_list=[]
+    for days in df_emo['date']:
+        day_list.append(days + datetime.timedelta(hours=-9))
+    df_emo['date'] = day_list
+
+    df_emo=pd.melt(
+        df_emo,
+        id_vars=['date'],
+        value_vars=['anger','anxiety','dislike','fan','sad','surprise','trust'],
+        var_name='emotion',
+        value_name='score')    
+
+    st.subheader('2週間 感情スコア')
+    line_emo = alt.Chart(df_emo).mark_line(
+    ).encode(
+        x=alt.X('date:T',
+                axis=alt.Axis(format="%m月%d日",labelFontSize=14, titleFontSize=18,title='日付'),
+                scale=alt.Scale(domainMax={"year": ty, "month": tm, "date": td},
+                                domainMin={"year": past_y, "month": past_m, "date": past_d})
+                ),
+        y=alt.Y('mean(score):Q',axis=alt.Axis(titleFontSize=18)),
+        color='emotion:N'
+    ).properties(
+        width=650,
+        height=400,
+        )
+
+    st.write(alt.layer(line_emo).configure_axis(grid=False))
+
 
     r_gch = requests.get(url + '/get_gch')
     r_gch_DB = r_gch.json()
     df_gch=pd.DataFrame.from_dict(r_gch_DB,orient='index').T
-    st.table(df_gch)
+    #st.table(df_gch)
 
-    st.subheader('週間 感情スコア')
-    line_bad = alt.Chart(df_emo).mark_line(
-        color='purple'
-    ).encode(
-        x=alt.X('date:T',axis=alt.Axis(format="%m月%d日",labelFontSize=14, ticks=False, titleFontSize=18,title='日付')),
-        y=alt.Y('sum(Bad):Q',axis=alt.Axis(titleFontSize=18))
-    ).properties(
-        width=650,
-        height=400,
-        )
-
-    line_good = alt.Chart(df_emotion).mark_line(
-        color='red'
-    ).encode(
-        x=alt.X('date:T',axis=alt.Axis(format="%m月%d日",labelFontSize=14, ticks=False, titleFontSize=18,title='日付')),
-        y=alt.Y('sum(Good):Q',axis=alt.Axis(titleFontSize=18, title='感情スコア'))
-    ).properties(
-        width=650,
-        height=400,
-        )
-
-    line_surprise = alt.Chart(df_emotion).mark_line(
-        color='green'
-    ).encode(
-        x=alt.X('date:T',axis=alt.Axis(format="%m月%d日",labelFontSize=14, ticks=False, titleFontSize=18,title='日付')),
-        y=alt.Y('sum(Surprise):Q',axis=alt.Axis(titleFontSize=18))
-    ).properties(
-        width=650,
-        height=400,
-        )
-
-    st.write(line_bad + line_good + line_surprise)
-
-    st.subheader('週間 愚痴スコア')
+    st.subheader('2週間 愚痴スコア')
     line_gch = alt.Chart(df_gch).mark_line(
         color='olive'
     ).encode(
-        x=alt.X('date:T',axis=alt.Axis(format="%m月%d日",labelFontSize=14, ticks=False, titleFontSize=18,title='日付')),
-        y=alt.Y('mean(愚痴スコア):Q',axis=alt.Axis(titleFontSize=18, title='愚痴スコア'))
+        x=alt.X('date:T',
+                axis=alt.Axis(format="%m月%d日",labelFontSize=14, titleFontSize=18,title='日付'),
+                scale=alt.Scale(domainMax={"year": ty, "month": tm, "date": td},
+                                domainMin={"year": past_y, "month": past_m, "date": past_d})
+                ),
+        y=alt.Y('mean(pred):Q',axis=alt.Axis(titleFontSize=18))
     ).properties(
         width=650,
         height=400,
@@ -109,14 +139,105 @@ def main():
         color='lightgreen'
     ).encode(
         x=alt.X('date:T'),
-        y=alt.Y('愚痴スコア:Q'),
+        y=alt.Y('pred:Q'),
         size = 'count()'
     ).properties(
         width=650,
         height=400
         )
 
-    st.write(points_gch+line_gch)
+    st.write(alt.layer(line_gch,points_gch).configure_axis(grid=False))
+
+
+    r_lang = requests.get(url + '/get_lang')
+    r_lang_DB = r_lang.json()
+    df_lang=pd.DataFrame.from_dict(r_lang_DB,orient='index').T
+
+    df_lang['date']=pd.to_datetime(df_lang['date'])
+    day_list=[]
+    for days in df_lang['date']:
+        day_list.append(days + datetime.timedelta(hours=-9))
+    df_lang['date'] = day_list
+    
+    #write(df_lang)
+
+    st.subheader('2週間 日記文字数')
+    line_lang = alt.Chart(df_lang).mark_line(
+        color='olive'
+    ).encode(
+        x=alt.X('date:T',
+                axis=alt.Axis(format="%m月%d日",labelFontSize=14, titleFontSize=18,title='日付'),
+                scale=alt.Scale(domainMax={"year": ty, "month": tm, "date": td},
+                                domainMin={"year": past_y, "month": past_m, "date": past_d})
+                ),
+        y=alt.Y('mean(len):Q',axis=alt.Axis(titleFontSize=18))
+    ).properties(
+        width=650,
+        height=400,
+        )
+
+    st.write(alt.layer(line_lang).configure_axis(grid=False))
+
+    st.subheader('2週間 日記語彙数')
+    line_lang = alt.Chart(df_lang).mark_line(
+        color='olive'
+    ).encode(
+        x=alt.X('date:T',
+                axis=alt.Axis(format="%m月%d日",labelFontSize=14, titleFontSize=18,title='日付'),
+                scale=alt.Scale(domainMax={"year": ty, "month": tm, "date": td},
+                                domainMin={"year": past_y, "month": past_m, "date": past_d})
+                ),
+        y=alt.Y('mean(voc_count):Q',axis=alt.Axis(titleFontSize=18))
+    ).properties(
+        width=650,
+        height=400,
+        )
+
+    st.write(alt.layer(line_lang).configure_axis(grid=False))
+
+
+    r_pos = requests.get(url + '/get_pos')
+    r_pos_DB = r_pos.json()
+    df_pos=pd.DataFrame.from_dict(r_pos_DB,orient='index').T
+    #st.write(df_pos)
+
+    #品詞数
+    df_pos['date']=pd.to_datetime(df_pos['date'])
+    day_list=[]
+    for days in df_pos['date']:
+        day_list.append(days + datetime.timedelta(hours=-9))
+    df_pos['date'] = day_list
+
+    df_pos=pd.melt(
+        df_pos,
+        id_vars=['date'],
+        value_vars=['noun','verb','adjective'],
+        var_name='品詞',
+        value_name='出現数')    
+
+    st.subheader('2週間 品詞出現数')
+    line_pos = alt.Chart(df_pos).mark_line(
+    ).encode(
+        x=alt.X('date:T',
+                axis=alt.Axis(format="%m月%d日",labelFontSize=14, titleFontSize=18,title='日付'),
+                scale=alt.Scale(domainMax={"year": ty, "month": tm, "date": td},
+                                domainMin={"year": past_y, "month": past_m, "date": past_d})
+                ),
+        y=alt.Y('mean(出現数):Q',axis=alt.Axis(titleFontSize=18)),
+        color='品詞:N'
+    ).properties(
+        width=650,
+        height=400,
+        )
+
+    st.write(alt.layer(line_pos).configure_axis(grid=False))
+
+
+
+#感情のばらつきスコア（各emotionごとの分散の平均？）
+#主体性スコア（動詞の能動表現数/受動表現数）
+#時制スコア（過去形・現在形・未来形の割合）
+#（固有名詞を除いたワードクラウド？）
 
 
 # ユーザ情報。引数

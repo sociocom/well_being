@@ -170,7 +170,7 @@ def main():
 
     #emotion
 
-    r_emo = requests.get(url + '/get_emo')
+    r_emo,time_emo = requests.get(url + '/get_emo')
     r_emo_DB = r_emo.json()
     df_emo=pd.DataFrame.from_dict(r_emo_DB,orient='index').T
 
@@ -192,6 +192,7 @@ def main():
         value_name='score')    
 
     st.subheader('日記の感情スコア')
+    st.text('データ更新日時　'+ time_emo.strftime('%Y年%m月%d日'))
     line_emo = alt.Chart(df_emo).mark_line(
     ).encode(
         x=alt.X('date:T',
@@ -211,7 +212,7 @@ def main():
 
     #愚痴スコア
 
-    r_gch = requests.get(url + '/get_gch')
+    r_gch,time_gch = requests.get(url + '/get_gch')
     r_gch_DB = r_gch.json()
     df_gch=pd.DataFrame.from_dict(r_gch_DB,orient='index').T
 
@@ -228,6 +229,7 @@ def main():
     st.subheader('日記の「愚痴っぽさ」スコア')
     st.caption('緑色の線：チームの平均スコア／緑色の丸：チームの個別スコア')
     st.caption('※緑色の丸の大きさはスコアごとの人数を表しています')
+    st.text('データ更新日時　'+ time_gch.strftime('%Y年%m月%d日'))
     line_gch = alt.Chart(df_gch).mark_line(
         color='olive'
     ).encode(
@@ -384,4 +386,3 @@ elif authentication_status == False:
     st.error('Username/password is incorrect')
 elif authentication_status == None:
     st.warning('Please enter your username and password')
-

@@ -74,6 +74,8 @@ def main():
         for days in df_fb['date']:
             day_list.append(days + timedelta(hours=-9))
         df_fb['date'] = day_list
+        
+        df_fb = df_fb.dropna(subset=['my_happy'])
 
         if selected_team != '全てのチーム':
             df_fb = df_fb[df_fb['team_url']==selected_team]
@@ -126,6 +128,8 @@ def main():
         for days in df_group['date']:
             day_list.append(days + timedelta(hours=-9))
         df_group['date'] = day_list
+        
+        df_group = df_group.dropna(subset=['group_happy'])
 
         st.subheader('「チームとしては幸せだったと思いますか？」への回答スコア')                
         st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア')

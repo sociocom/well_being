@@ -176,6 +176,10 @@ def main():
 
 
         #emotion
+        
+        r_time_emo = requests.get(url + '/get_emo_time')
+        time_emo_dic = r_time_emo.json()
+        time_emo = time_emo_dic['update']
 
         r_emo = requests.get(url + '/get_emo')
         r_emo_DB = r_emo.json()
@@ -198,10 +202,6 @@ def main():
             var_name='emotion',
             value_name='score')
 
-        r_time_emo = requests.get(url + '/get_emo_time')
-        time_emo_dic = r_time_emo.json()
-        time_emo = time_emo_dic['update']
-
         st.subheader('日記の感情スコア')
         st.text('データ更新日時　＞＞　'+ time_emo)
         line_emo = alt.Chart(df_emo).mark_line(
@@ -222,6 +222,8 @@ def main():
 
 
         #愚痴スコア
+        r_time_gch = requests.get(url + '/get_gch_time')
+        time_gch = r_time_gch.json()['update']
 
         r_gch = requests.get(url + '/get_gch')
         r_gch_DB = r_gch.json()
@@ -236,9 +238,6 @@ def main():
         if selected_team != '全てのチーム':
             df_gch = df_gch[df_gch['team_url']==selected_team]
         df_gch = df_gch[(df_gch['date'] >= from_day) & (df_gch['date'] <= to_day)]
-
-        r_time_gch = requests.get(url + '/get_gch_time')
-        time_gch = r_time_gch.json()['update']
 
         st.subheader('日記の「愚痴っぽさ」スコア')
         st.caption('緑色の線：チームの平均スコア／緑色の丸：チームの個別スコア')

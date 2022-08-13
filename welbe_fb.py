@@ -75,6 +75,8 @@ def main():
         for days in df_acnt['date']:
             day_list.append(days + timedelta(hours=-9))
         df_acnt['date'] = day_list
+        
+        df_acnt = df_acnt[(df_acnt['date'] >= from_day) & (df_acnt['date'] <= to_day)]
 
         df_acnt=pd.melt(
             df_acnt,

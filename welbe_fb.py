@@ -60,6 +60,44 @@ def main():
 
 
     if run:
+        #Answers
+
+        st.subheader('チームごとの回答数（1ユーザー1カウントで集計）')                
+        st.caption('※指定した期間内の合計をカウント')
+
+        acnt_fb = requests.get(url + '/get_anscnt')
+        acnt_fb_DB = acnt_fb.json()
+        df_acnt=pd.DataFrame.from_dict(acnt_fb_DB,orient='index')
+        df_acnt['date'] = df_acnt.index
+
+        df_acnt['date']=pd.to_datetime(df_acnt['date'])
+        day_list=[]
+        for days in df_acnt['date']:
+            day_list.append(days + timedelta(hours=-9))
+        df_acnt['date'] = day_list
+
+        df_acnt=pd.melt(
+            df_acnt,
+            id_vars=['date'],
+            value_vars=df_acnt.columns.values.tolist()[:-1],
+            var_name='Team',
+            value_name='Count')
+
+        answers = alt.Chart(df_acnt).mark_bar(
+            color = 'orange',size = 12
+        ).encode(
+            x=alt.X('Team:O',
+                    axis=alt.Axis(labelFontSize=14, titleFontSize=18,title='チーム名')),
+            y=alt.Y('sum(Count):Q',
+                    axis=alt.Axis(titleFontSize=18, title='回答数'))
+        ).properties(
+            width=650,
+            height=300
+            )
+
+        st.write(answers)
+
+
         #my_happy
 
         st.subheader('「あなたは一日幸せでしたか？」への回答スコア')                
@@ -176,10 +214,6 @@ def main():
 
 
         #emotion
-        
-        r_time_emo = requests.get(url + '/get_emo_time')
-        time_emo_dic = r_time_emo.json()
-        time_emo = time_emo_dic['update']
 
         r_emo = requests.get(url + '/get_emo')
         r_emo_DB = r_emo.json()
@@ -202,6 +236,10 @@ def main():
             var_name='emotion',
             value_name='score')
 
+        r_time_emo = requests.get(url + '/get_emo_time')
+        time_emo_dic = r_time_emo.json()
+        time_emo = time_emo_dic['update']
+
         st.subheader('日記の感情スコア')
         st.text('データ更新日時　＞＞　'+ time_emo)
         line_emo = alt.Chart(df_emo).mark_line(
@@ -222,8 +260,6 @@ def main():
 
 
         #愚痴スコア
-        r_time_gch = requests.get(url + '/get_gch_time')
-        time_gch = r_time_gch.json()['update']
 
         r_gch = requests.get(url + '/get_gch')
         r_gch_DB = r_gch.json()
@@ -238,6 +274,9 @@ def main():
         if selected_team != '全てのチーム':
             df_gch = df_gch[df_gch['team_url']==selected_team]
         df_gch = df_gch[(df_gch['date'] >= from_day) & (df_gch['date'] <= to_day)]
+
+        r_time_gch = requests.get(url + '/get_gch_time')
+        time_gch = r_time_gch.json()['update']
 
         st.subheader('日記の「愚痴っぽさ」スコア')
         st.caption('緑色の線：チームの平均スコア／緑色の丸：チームの個別スコア')

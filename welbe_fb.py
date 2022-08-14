@@ -86,19 +86,17 @@ def main():
             value_name='Count')
         df_acnt = df_acnt.astype({'Count': int})
 
-        answers = alt.Chart(df_acnt).mark_bar(
-            color = 'orange',size = 12
+        text_ans = alt.Chart(df_acnt).mark_text(
+            dy=-10, color='black'
         ).encode(
             x=alt.X('Team:O',
                     axis=alt.Axis(labelFontSize=14, titleFontSize=18,title='チーム名')),
             y=alt.Y('sum(Count):Q',
-                    axis=alt.Axis(titleFontSize=18, title='回答数'))
-        ).properties(
-            width=650,
-            height=300
-            )
+                    axis=alt.Axis(titleFontSize=18, title='回答数')),
+            text=alt.Text('sum(Count):Q')
+        )
 
-        st.write(answers)
+        st.write(answers+ text_ans)
 
 
         #my_happy

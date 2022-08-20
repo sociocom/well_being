@@ -20,11 +20,9 @@ happy_score = ['選択して下さい（0〜10点）',0,1,2,3,4,5,6,7,8,9,10]
 today = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
 day_list=[]
 diary_list=[]
-url = st.secrets['URL']
+url = 'http://aoi.naist.jp/wellbeing'
 query_params = st.experimental_get_query_params()
 team_url=query_params['team'][0]
-
-#st.experimental_set_query_params(selected=["a", "b",'c'])
 
 def main():
     st.write('チーム「' + team_url + '」の入力画面です')
@@ -247,31 +245,102 @@ hashed_passwords = login_info['password']
 # パスワードをハッシュ化（リスト等、イテラブルなオブジェクトである必要がある）
 #hashed_passwords = stauth.Hasher(passwords).generate()
 
+message='''
+    ※IDが正しいのにログインできない場合は、登録されていない可能性があるのでこちら（下記URL）から登録してください。登録には数日かかる場合があります。
+
+    https://survey.kokoro.kyoto-u.ac.jp/kigyo/478.html'''
+
 # cookie_expiry_daysでクッキーの有効期限を設定可能。
 # 認証情報の保持期間を設定でき値を0とするとアクセス毎に認証を要求する
 authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
     'some_cookie_name', 'some_signature_key', cookie_expiry_days=1)
 
+def login_section(authentication_status):
+    # 返り値、authenticaton_statusの状態で処理を場合分け
+    if authentication_status:
+        # logoutメソッドでauthenticationの値をNoneにする
+        message=''
+        authenticator.logout('Logout', 'main')
+        st.write('Welcome *%s*' % (name))
+        main()
+    elif authentication_status == False:
+        st.error('UsernameまたはPasswordが間違っています（英数字・記号は半角にして下さい）')
+        st.info(message)
+    elif authentication_status == None:
+        st.warning('UsernameとPasswordをご入力下さい')
+        st.info(message)
+
 # ログインメソッドで入力フォームを配置
 st.title('個と場のWell-being日記')
 name, authentication_status, username = authenticator.login('Login', 'main')
 
-message='''
-※IDが正しいのにログインできない場合は、登録されていない可能性があるのでこちら（下記URL）から登録してください。登録には数日かかる場合があります。
+detail_paper = '''
+    **参加者の権利**\n
+    &emsp;この研究への同意は、回答者の自由意思で決められるべきものです。調査は 回答者の同意が得られない限り行われることはありません。この調査を受けることに同意しなくても、なんら不利益を被ることはありません。また、調査終了後においても測定結果の破棄をご希望された場合には、ただちに破棄します(ただし、研究成果の公表後は破棄できません)。また、調査中において気分が悪くなった場合や中断したい場合には、ご自分の意志で測定の中断を希望することができます。その場合には、ただちに測定を中止します。\n
 
-https://survey.kokoro.kyoto-u.ac.jp/kigyo/478.html'''
+    **研究の目的**\n
+    &emsp;本研究の目的は、職場における幸福感、やりがい、生きがいを支える組織の社会・文化的基盤を検証することです。その際、特に職場における動機づけ（個人達成志向と関係志向）が幸福感や生産性に与える影響についてのメカニズムを心理学の知見から解明し、実社会にフィードバックすることを目的とします。\n
+    
+    **研究の流れと所要時間、調査参加者が行うことについて**\n
+    &emsp;今回設定された一定期間、一日の出来事を想起し、日記をご記入いただきます。また、ご自身やチーム全体が幸福を感じている度合いについて、感じたままに回答していただきます。\n
+    
+    &emsp;- 調査の回答はあなた自身の個別的・直接的な評価や能力査定に関わるものではありませんので、感じておられる通りのことを率直にお答えください。\n
+    &emsp;- 本研究への参加は完全に個人の自由に基づくものです。参加しても、しなくても、なんら不利益を被ることはありません。また、参加していただける場合も、質問にはなるべくすべてご回答いただきたいとは思いますが、答えにくい質問や、答えたくない質問があれば飛ばしてもらってもかまいません。\n
+    &emsp;- 回答時間は人により異なりますが、１日約５分程度かかります。
+    
+    **データの紐づけについて**\n
+    &emsp;今回ご回答頂いたデータは、別機会にお答え頂いている「企業・組織風土と幸福度に関する調査」のアンケート調査データと統合して分析を致します。このことに同意されず、研究参加を途中撤回されても、研究参加者が不利益を被ることはありません。\n
+    
+    **プライバシーの保護について**\n
+    &emsp;あなたのプライバシーは厳重に守られ、調査に関することであなたの名前が公表されることは決してありませんし、あなたの所属する会社や部署も個人のデータをお渡しすることは一切ありません。あなたの個人情報および測定結果は、京都大学人と社会の未来研究院内の、施錠された保管庫にて管理されます。また、調査後のデータ処理はセキュリティーを保ったコンピュータ環境の中で実施されます。\n
+    &emsp;調査で取得した同意書・アンケート・データは採取したデータに関わる論文の公表後最低 10年間保管されます。10年を過ぎたものについては完全消去可能なソフトウェアを用いて消去するとともに、紙や DVDなどの媒体についてはシュレッダー処理などの物理的破壊によりデータの完全消去を行います。\n
+    
+    **参加御礼としての会社へのフィードバック**\n
+    &emsp;ご参加人数が統計的に一定水準以上に達した場合には、ご協力会社様へのフィードバックを行います。その際には個人が特定されるような情報は廃され、会社全体の傾向から読み取れること、これからの職場環境のより一層の向上や強みに関するデータを提供いたします。\n
+    
 
+    **本研究に関する連絡先**\n
+    ご質問や連絡事項、何らかのご意見がある場合は、下記にご連絡ください。\n
+    
+    研究責任者:
+    内田&emsp;由紀子 (うちだ&emsp;ゆきこ)
+    京都大学 人と社会の未来研究院・教授
+    TEL: 075-753-9679
+    E-mail: uchida.yukiko.6m@kyoto-u.ac.jp
+    '''
 
-# 返り値、authenticaton_statusの状態で処理を場合分け
-if authentication_status:
-    # logoutメソッドでauthenticationの値をNoneにする
-    message=''
-    authenticator.logout('Logout', 'main')
-    st.write('Welcome *%s*' % (name))
-    main()
-elif authentication_status == False:
-    st.error('UsernameまたはPasswordが間違っています（英数字・記号は半角にして下さい）')
-    st.info(message)
-elif authentication_status == None:
-    st.warning('UsernameとPasswordをご入力下さい')
-    st.info(message)
+if username != '':
+    check_cons = requests.get(url + '/check_cons',params={'name':username}).json()
+    if check_cons['consent']==1:
+        login_section(authentication_status)
+    else:
+        st.info('初回ログインの前に、下記内容をご確認下さい')
+        st.subheader('調査参加への同意について')
+        st.markdown('私は、「企業・組織風土と幸福度に関する調査」について、' +
+                    '下記事項を確認の上、調査に参加することに同意します。' +
+                    '同意した場合に、調査の回答を実施します。'+
+                    '(この文章は同意後は表示されません)')
+
+        with st.expander('こちらをクリックすると調査説明書が表示されます'):
+            st.subheader('企業・組織風土と幸福度に関する調査へのご参加について')
+            st.markdown(detail_paper)
+
+        cons1 = st.checkbox('調査の目的、期間、方法等の内容。')
+        st.markdown('''
+            &emsp;&emsp;- 調査目的: 従業員の幸福感やモチベーション、メンタルヘルスや組織のパフォーマンスの向上\n
+            &emsp;&emsp;- 期間: 2022年6月～2023年3月\n
+            &emsp;&emsp;- 方法: WEB上の日記記入ページにアクセスして回答\n
+            ''')
+        cons2 = st.checkbox('この調査から得られた測定結果が当該学術研究の目的に利用されること。')
+        cons3 = st.checkbox('参加者自らの自由意志により自発的に調査に参加すること。')
+        cons4 = st.checkbox('今回回答する日記データは、既に回答した「企業・組織風土と幸福度に関する調査」のアンケートデータが統合されて分析されること。')
+        cons5 = st.checkbox('参加者は、調査への参加に同意した場合でも、いつでも調査への参加を取り止めることができ、それにより何ら不利益を被らないこと。')
+        cons6 = st.checkbox('回答データはすべて匿名化され、個人を特定できる状態で会社に結果がフィードバックされることはないこと。')
+
+        if st.button('同意します'):
+            if cons1 and cons2 and cons3 and cons4 and cons5 and cons6:
+                requests.post(url + '/post_cons',params={'name':username})
+                st.info('同意を確認しました')
+                login_section(authentication_status)
+            else:
+                st.error('全てのチェックボックスをチェック後、ボタンを押して下さい')

@@ -338,9 +338,9 @@ if authentication_status:
             else:
                 st.error('全てのチェックボックスをチェック後、ボタンを押して下さい')
 
-    elif authentication_status == False:
-        st.error('UsernameまたはPasswordが間違っています（英数字・記号は半角にして下さい）')
-        st.info(message)
-    elif authentication_status == None:
-        st.warning('UsernameとPasswordをご入力下さい')
-        st.info(message)
+elif authentication_status == False:
+    st.error('UsernameまたはPasswordが間違っています（英数字・記号は半角にして下さい）')
+    st.info(message)
+elif authentication_status == None:
+    st.warning('UsernameとPasswordをご入力下さい')
+    st.info(message)

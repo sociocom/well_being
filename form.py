@@ -256,19 +256,6 @@ message='''
 authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
     'some_cookie_name', 'some_signature_key', cookie_expiry_days=1)
 
-def login_section(authentication_status,message):
-    # 返り値、authenticaton_statusの状態で処理を場合分け
-    if authentication_status:
-        authenticator.logout('Logout', 'main')
-        st.write('Welcome *%s*' % (name))
-        main()
-    elif authentication_status == False:
-        st.error('UsernameまたはPasswordが間違っています（英数字・記号は半角にして下さい）')
-        st.info(message)
-    elif authentication_status == None:
-        st.warning('UsernameとPasswordをご入力下さい')
-        st.info(message)
-
 # ログインメソッドで入力フォームを配置
 st.title('個と場のWell-being日記')
 name, authentication_status, username = authenticator.login('Login', 'main')
@@ -308,10 +295,15 @@ detail_paper = '''
     E-mail: uchida.yukiko.6m@kyoto-u.ac.jp
     '''
 
-if username != '':
+
+
+# 返り値、authenticaton_statusの状態で処理を場合分け
+if authentication_status:
+    authenticator.logout('Logout', 'main')
+    st.write('Welcome *%s*' % (name))
     check_cons = requests.get(url + '/check_cons',params={'name':username}).json()
     if check_cons['consent']==1:
-        login_section(authentication_status,message)
+        main()
     else:
         authenticator.logout('Logout', 'main')
         st.info('初回ログインの前に、下記内容をご確認下さい')
@@ -342,6 +334,13 @@ if username != '':
             if cons1 and cons2 and cons3 and cons4 and cons5 and cons6:
                 requests.post(url + '/post_cons',params={'name':username})
                 st.info('同意を確認しました')
-                login_section(authentication_status,message)
+                main()
             else:
                 st.error('全てのチェックボックスをチェック後、ボタンを押して下さい')
+
+    elif authentication_status == False:
+        st.error('UsernameまたはPasswordが間違っています（英数字・記号は半角にして下さい）')
+        st.info(message)
+    elif authentication_status == None:
+        st.warning('UsernameとPasswordをご入力下さい')
+        st.info(message)

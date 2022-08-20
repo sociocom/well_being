@@ -24,6 +24,7 @@ url = 'http://aoi.naist.jp/wellbeing'
 query_params = st.experimental_get_query_params()
 team_url=query_params['team'][0]
 
+
 def main():
     st.write('チーム「' + team_url + '」の入力画面です')
     with st.expander('パスワード変更はこちら'):
@@ -62,7 +63,7 @@ def main():
         location_other = st.text_input('E：Dでその他を選択した方は，差し支えない範囲で場所をご記入ください')
 
         submitted=st.form_submit_button('登録')
-        if submitted:
+        if submitted == True:
             st.balloons()
             if name != 'demo':
                 if len(str(my_happy)) > 3:
@@ -230,7 +231,7 @@ def main():
                 st.write(layer)
                 
                 feed = '''
-                **▼アプリ改善のため、下記のリンクよりご意見・ご感想をお聞かせ下さい**:speech_balloon:
+                **▼アプリ改善のため、下記のリンクよりご意見・ご感想をお聞かせ下さい** 
 
                 https://docs.google.com/forms/d/e/1FAIpQLSeOHYmBTqdoHfnHc1EeLGd4G96DiyKERHByqti307Sa3njaAA/viewform'''
                 st.markdown(feed)
@@ -255,11 +256,9 @@ message='''
 authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
     'some_cookie_name', 'some_signature_key', cookie_expiry_days=1)
 
-def login_section(authentication_status):
+def login_section(authentication_status,message):
     # 返り値、authenticaton_statusの状態で処理を場合分け
     if authentication_status:
-        # logoutメソッドでauthenticationの値をNoneにする
-        message=''
         authenticator.logout('Logout', 'main')
         st.write('Welcome *%s*' % (name))
         main()
@@ -312,7 +311,7 @@ detail_paper = '''
 if username != '':
     check_cons = requests.get(url + '/check_cons',params={'name':username}).json()
     if check_cons['consent']==1:
-        login_section(authentication_status)
+        login_section(authentication_status,message)
     else:
         authenticator.logout('Logout', 'main')
         st.info('初回ログインの前に、下記内容をご確認下さい')
@@ -338,10 +337,11 @@ if username != '':
         cons5 = st.checkbox('参加者は、調査への参加に同意した場合でも、いつでも調査への参加を取り止めることができ、それにより何ら不利益を被らないこと。')
         cons6 = st.checkbox('回答データはすべて匿名化され、個人を特定できる状態で会社に結果がフィードバックされることはないこと。')
 
-        if st.button('同意します'):
+        consent = st.button('同意します')
+        if consent == True:
             if cons1 and cons2 and cons3 and cons4 and cons5 and cons6:
                 requests.post(url + '/post_cons',params={'name':username})
                 st.info('同意を確認しました')
-                login_section(authentication_status)
+                login_section(authentication_status,message)
             else:
                 st.error('全てのチェックボックスをチェック後、ボタンを押して下さい')

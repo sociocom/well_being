@@ -314,6 +314,7 @@ if username != '':
     if check_cons['consent']==1:
         login_section(authentication_status)
     else:
+        authenticator.logout('Logout', 'main')
         st.info('初回ログインの前に、下記内容をご確認下さい')
         st.subheader('調査参加への同意について')
         st.markdown('私は、「企業・組織風土と幸福度に関する調査」について、' +

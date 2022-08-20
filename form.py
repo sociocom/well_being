@@ -316,19 +316,20 @@ if authentication_status:
             st.subheader('企業・組織風土と幸福度に関する調査へのご参加について')
             st.markdown(detail_paper)
 
-        cons1 = st.checkbox('調査の目的、期間、方法等の内容。')
-        st.markdown('''
-            &emsp;&emsp;- 調査目的: 従業員の幸福感やモチベーション、メンタルヘルスや組織のパフォーマンスの向上\n
-            &emsp;&emsp;- 期間: 2022年6月～2023年3月\n
-            &emsp;&emsp;- 方法: WEB上の日記記入ページにアクセスして回答\n
-            ''')
-        cons2 = st.checkbox('この調査から得られた測定結果が当該学術研究の目的に利用されること。')
-        cons3 = st.checkbox('参加者自らの自由意志により自発的に調査に参加すること。')
-        cons4 = st.checkbox('今回回答する日記データは、既に回答した「企業・組織風土と幸福度に関する調査」のアンケートデータが統合されて分析されること。')
-        cons5 = st.checkbox('参加者は、調査への参加に同意した場合でも、いつでも調査への参加を取り止めることができ、それにより何ら不利益を被らないこと。')
-        cons6 = st.checkbox('回答データはすべて匿名化され、個人を特定できる状態で会社に結果がフィードバックされることはないこと。')
+        with st.form('cons_form'):
+            cons1 = st.checkbox('調査の目的、期間、方法等の内容。')
+            st.markdown('''
+                &emsp;&emsp;- 調査目的: 従業員の幸福感やモチベーション、メンタルヘルスや組織のパフォーマンスの向上\n
+                &emsp;&emsp;- 期間: 2022年6月～2023年3月\n
+                &emsp;&emsp;- 方法: WEB上の日記記入ページにアクセスして回答\n
+                ''')
+            cons2 = st.checkbox('この調査から得られた測定結果が当該学術研究の目的に利用されること。')
+            cons3 = st.checkbox('参加者自らの自由意志により自発的に調査に参加すること。')
+            cons4 = st.checkbox('今回回答する日記データは、既に回答した「企業・組織風土と幸福度に関する調査」のアンケートデータが統合されて分析されること。')
+            cons5 = st.checkbox('参加者は、調査への参加に同意した場合でも、いつでも調査への参加を取り止めることができ、それにより何ら不利益を被らないこと。')
+            cons6 = st.checkbox('回答データはすべて匿名化され、個人を特定できる状態で会社に結果がフィードバックされることはないこと。')
 
-        consent = st.button('同意します')
+            consent = st.form_submit_button('同意します')
         if consent == True:
             if cons1 and cons2 and cons3 and cons4 and cons5 and cons6:
                 requests.post(url + '/post_cons',params={'name':username})

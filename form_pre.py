@@ -287,12 +287,12 @@ detail_paper = '''
 
     **本研究に関する連絡先**\n
     ご質問や連絡事項、何らかのご意見がある場合は、下記にご連絡ください。\n
-    
-    研究責任者:
-    内田&emsp;由紀子 (うちだ&emsp;ゆきこ)
-    京都大学 人と社会の未来研究院・教授
-    TEL: 075-753-9679
-    E-mail: uchida.yukiko.6m@kyoto-u.ac.jp
+    \n
+    研究責任者:\n
+    内田&emsp;由紀子 (うちだ&emsp;ゆきこ)\n
+    京都大学 人と社会の未来研究院・教授\n
+    TEL: 075-753-9679\n
+    E-mail: uchida.yukiko.6m[at]kyoto-u.ac.jp\n
     '''
 
 

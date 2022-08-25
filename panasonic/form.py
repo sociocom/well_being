@@ -21,8 +21,6 @@ today = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
 day_list=[]
 diary_list=[]
 url = 'http://aoi.naist.jp/wellbeing'
-query_params = st.experimental_get_query_params()
-#team_url=query_params['team'][0]
 team_url='Z'
 
 
@@ -59,7 +57,7 @@ def main():
         group_happy = st.selectbox('C：チーム全体としては，一日幸せだったと思いますか？（0点: とても不幸／10点: とても幸せ）',options=happy_score)
         location = st.selectbox(
             'D：業務中，主に滞在した場所をお選び下さい',
-            options=('選択して下さい','関西支社','自宅','得意先','協力会社（制作会社など）','媒体社','出張先（撮影現場、編集スタジオ等）', 'その他')
+            options=('選択して下さい','社内の自フロア','自宅','得意先', 'その他')
             )
         location_other = st.text_input('E：Dでその他を選択した方は，差し支えない範囲で場所をご記入ください')
 
@@ -244,13 +242,6 @@ names = login_info['user']
 usernames = login_info['username']
 hashed_passwords = login_info['password']
 
-# パスワードをハッシュ化（リスト等、イテラブルなオブジェクトである必要がある）
-#hashed_passwords = stauth.Hasher(passwords).generate()
-
-message='''
-    ※IDが正しいのにログインできない場合は、登録されていない可能性があるのでこちら（下記URL）から登録してください。登録には数日かかる場合があります。
-
-    https://survey.kokoro.kyoto-u.ac.jp/kigyo/478.html'''
 
 # cookie_expiry_daysでクッキーの有効期限を設定可能。
 # 認証情報の保持期間を設定でき値を0とするとアクセス毎に認証を要求する
@@ -268,7 +259,5 @@ if authentication_status:
     main()
 elif authentication_status == False:
     st.error('UsernameまたはPasswordが間違っています（英数字・記号は半角にして下さい）')
-    st.info(message)
 elif authentication_status == None:
     st.warning('UsernameとPasswordをご入力下さい')
-    st.info(message)

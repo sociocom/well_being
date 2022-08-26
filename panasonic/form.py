@@ -25,7 +25,6 @@ team_url='Z'
 
 
 def main():
-    st.write('チーム「' + team_url + '」の入力画面です')
     with st.expander('パスワード変更はこちら'):
         new_pass = st.text_input(label='↓新しいパスワードをご入力下さい')
         new_pass_hash = bcrypt.hashpw(new_pass.encode(),bcrypt.gensalt()).decode()

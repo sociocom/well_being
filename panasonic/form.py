@@ -164,7 +164,9 @@ def main():
                     grid=False
                 )
                 
+                st.write(line)
                 st.write(points)
+                st.write(points_self)
 
                 st.write(layer)
 

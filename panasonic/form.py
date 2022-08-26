@@ -231,7 +231,7 @@ def main():
                 feed = '''
                 **▼アプリ改善のため、下記のリンクよりご意見・ご感想をお聞かせ下さい** 
 
-                https://docs.google.com/forms/d/e/1FAIpQLSeOHYmBTqdoHfnHc1EeLGd4G96DiyKERHByqti307Sa3njaAA/viewform'''
+                https://docs.google.com/forms/d/e/1FAIpQLSfO-uUWqOevTgbAL88vVM1tRgZIG_4Kb_nG8MrQoK_G0W10qg/viewform'''
                 st.markdown(feed)
               
 

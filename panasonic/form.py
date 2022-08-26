@@ -163,6 +163,8 @@ def main():
                 ).configure_axis(
                     grid=False
                 )
+                
+                st.write(points)
 
                 st.write(layer)
 

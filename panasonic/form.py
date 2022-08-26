@@ -115,8 +115,6 @@ def main():
                 past_y = past_day.year
                 past_m = past_day.month
                 past_d = past_day.day
-                
-                st.table(df_fb)
 
                 st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア／青色の丸：あなたのスコア')
                 st.caption('※水色の丸の大きさはスコアごとの人数を表しています')
@@ -163,10 +161,6 @@ def main():
                 ).configure_axis(
                     grid=False
                 )
-                
-                st.write(line)
-                st.write(points)
-                st.write(points_self)
 
                 st.write(layer)
 

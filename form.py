@@ -261,6 +261,7 @@ authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
 # ログインメソッドで入力フォームを配置
 st.title(':sparkles:個と場のWell-being日記')
 name, authentication_status, username = authenticator.login('Login', 'main')
+st.caption("不具合等はこちらまでお願いします→sociocom-exp-contact[at]is.naist.jp")
 
 
 # 返り値、authenticaton_statusの状態で処理を場合分け

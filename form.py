@@ -22,7 +22,7 @@ group_happy_score = ['選択して下さい（0〜10点）',0,1,2,3,4,5,6,7,8,9,
 today = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
 day_list=[]
 diary_list=[]
-url = st.secret['URL']
+url = st.secrets['URL']
 query_params = st.experimental_get_query_params()
 team_url=query_params['team'][0]
 

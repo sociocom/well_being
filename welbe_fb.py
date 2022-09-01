@@ -52,10 +52,10 @@ def main():
         run = st.button('集計実行')
         
     from_native = datetime.combine(from_day, time())
-    from_day = pytz.timezone('Asia/Tokyo').localize(from_native)
+    from_day = pytz.timezone('America/New_York').localize(from_native)
     from_day = datetime.fromordinal(from_day.toordinal())
     to_native = datetime.combine(to_day, time())
-    to_day = pytz.timezone('America/New_York').localize(to_native)
+    to_day = pytz.timezone('Pacific/Auckland').localize(to_native)
     to_day = datetime.fromordinal(to_day.toordinal())
 
 

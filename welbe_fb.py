@@ -55,7 +55,7 @@ def main():
     from_day = pytz.timezone('Asia/Tokyo').localize(from_native)
     from_day = datetime.fromordinal(from_day.toordinal())
     to_native = datetime.combine(to_day, time())
-    to_day = pytz.timezone('Asia/Tokyo').localize(to_native)
+    to_day = pytz.timezone('Europe/London').localize(to_native)
     to_day = datetime.fromordinal(to_day.toordinal())
 
 

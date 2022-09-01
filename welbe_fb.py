@@ -56,7 +56,7 @@ def main():
     from_day = datetime.fromordinal(from_day.toordinal())
     to_native = datetime.combine(to_day, time())
     to_day = pytz.timezone('Pacific/Auckland').localize(to_native)
-    #to_day = datetime.fromordinal(to_day.toordinal())
+    to_day = datetime.fromordinal(to_day.toordinal())
 
 
     if run:
@@ -76,6 +76,7 @@ def main():
             day_list.append(days + timedelta(hours=-9))
         df_acnt['date'] = day_list
         
+        st.write(day_list)
         from_day
         to_day
         df_acnt = df_acnt[(df_acnt['date'] >= from_day) & (df_acnt['date'] <= to_day)]

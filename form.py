@@ -65,6 +65,7 @@ def main():
         location_other = st.text_input('E：Dでその他を選択した方は，差し支えない範囲で場所をご記入ください')
 
         submitted=st.form_submit_button('登録')
+        st.text('一度「登録」を押しても反応がない場合，再度クリックをお試し下さい')
         if submitted == True:
             st.balloons()
             if name != 'demo':
@@ -341,6 +342,7 @@ if authentication_status:
 
 elif authentication_status == False:
     st.error('UsernameまたはPasswordが間違っています（英数字・記号は半角にして下さい）')
+    st.error('※初期パスワードはUsername（ID）と同様です')
     st.info(message)
 elif authentication_status == None:
     st.warning('UsernameとPasswordをご入力下さい')

@@ -387,7 +387,7 @@ def main():
         for days in df_pos['date']:
             day_list.append(days + timedelta(hours=-9))
         df_pos['date'] = day_list
-        st.write(day_list)
+        #st.write(day_list)
 
         if selected_team != '全てのチーム':
             df_pos = df_pos[df_pos['team_url']==selected_team]

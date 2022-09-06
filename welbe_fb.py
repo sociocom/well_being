@@ -225,7 +225,7 @@ def main():
 
         st.write(layer_group)
 
-'''
+        '''
         #emotion
 
         r_emo = requests.get(url + '/get_emo')
@@ -321,7 +321,7 @@ def main():
             )
 
         st.write(alt.layer(line_gch,points_gch).configure_axis(grid=False))
-'''
+        '''
 
         #文字数・語彙数
 

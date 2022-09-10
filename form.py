@@ -66,178 +66,179 @@ def main():
 
         submitted=st.form_submit_button('登録')
         st.text('一度「登録」を押しても反応がない場合，再度クリックをお試し下さい')
-        if submitted == True:
-            st.balloons()
-            if name != 'demo':
-                if len(str(my_happy)) > 3:
-                    my_happy = ''
-                if len(str(group_happy)) > 3:
-                    group_happy = ''
+        
+    if submitted == True:
+        st.balloons()
+        if name != 'demo':
+            if len(str(my_happy)) > 3:
+                my_happy = ''
+            if len(str(group_happy)) > 3:
+                group_happy = ''
 
-                data_post = {
-                            'user':name,
-                            'contents':{
-                            'day':str(day),
-                            'diary':diary,
-                            'my_happy':my_happy,
-                            'group_happy':group_happy,
-                            'location':location,
-                            'location_other':location_other,
-                            'timestamp':str(datetime.datetime.now()),
-                            'team_url':team_url}
-                            }
+            data_post = {
+                        'user':name,
+                        'contents':{
+                        'day':str(day),
+                        'diary':diary,
+                        'my_happy':my_happy,
+                        'group_happy':group_happy,
+                        'location':location,
+                        'location_other':location_other,
+                        'timestamp':str(datetime.datetime.now()),
+                        'team_url':team_url}
+                        }
 
-                requests.post(url + '/post',json=data_post)
-                st.success('入力完了しました！')
+            requests.post(url + '/post',json=data_post)
+            st.success('入力完了しました！')
 
-                #r_diary = requests.get(url + '/get_diary', params={'user':name})
-                #r_diary_DB = r_diary.json()
-                #df_diary=pd.DataFrame.from_dict(r_diary_DB,orient='index')
-                #df_diary.columns=['日記テキスト']
-                #df_diary = df_diary.sort_index(ascending=False)
+            #r_diary = requests.get(url + '/get_diary', params={'user':name})
+            #r_diary_DB = r_diary.json()
+            #df_diary=pd.DataFrame.from_dict(r_diary_DB,orient='index')
+            #df_diary.columns=['日記テキスト']
+            #df_diary = df_diary.sort_index(ascending=False)
 
-                #with st.expander("クリックであなたの過去の日記を表示します"):
-                    #st.table(data=df_diary)
+            #with st.expander("クリックであなたの過去の日記を表示します"):
+                #st.table(data=df_diary)
 
-                r_fb = requests.get(url + '/get_fb', params={'user':name, 'team_url':team_url})
-                r_fb_DB = r_fb.json()
-                df_fb=pd.DataFrame.from_dict(r_fb_DB,orient='index').T
-                df_fb['date']=pd.to_datetime(df_fb['date'])
+            r_fb = requests.get(url + '/get_fb', params={'user':name, 'team_url':team_url})
+            r_fb_DB = r_fb.json()
+            df_fb=pd.DataFrame.from_dict(r_fb_DB,orient='index').T
+            df_fb['date']=pd.to_datetime(df_fb['date'])
 
-                day_list=[]
-                for days in df_fb['date']:
-                    day_list.append(days + datetime.timedelta(hours=-9))
+            day_list=[]
+            for days in df_fb['date']:
+                day_list.append(days + datetime.timedelta(hours=-9))
 
-                df_fb['date'] = day_list
-                df_fb_self=df_fb[df_fb['user']==name]
+            df_fb['date'] = day_list
+            df_fb_self=df_fb[df_fb['user']==name]
 
-                st.subheader('週間Well-beingスコア')                
-                ty = today.year
-                tm = today.month
-                td = today.day
+            st.subheader('週間Well-beingスコア')                
+            ty = today.year
+            tm = today.month
+            td = today.day
 
-                past_day= today-datetime.timedelta(days=6)
-                past_y = past_day.year
-                past_m = past_day.month
-                past_d = past_day.day
+            past_day= today-datetime.timedelta(days=6)
+            past_y = past_day.year
+            past_m = past_day.month
+            past_d = past_day.day
 
-                st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア／青色の丸：あなたのスコア')
-                st.caption('※水色の丸の大きさはスコアごとの人数を表しています')
-                line = alt.Chart(df_fb).mark_line(
-                    color='lightskyblue'
-                ).encode(
-                    x=alt.X('date:T',
-                            axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付'),
-                            scale=alt.Scale(domainMax={"year": ty, "month": tm, "date": td},
-                                            domainMin={"year": past_y, "month": past_m, "date": past_d})
-                            ),
-                    y=alt.Y('mean(my_happy):Q',
-                            axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'),
-                            scale=alt.Scale(domainMax=10,domainMin=0)
-                           )
-                ).properties(
-                    width=650,
-                    height=400
-                    )
-
-                points = alt.Chart(df_fb).mark_circle(
-                    color='lightskyblue'
-                ).encode(
-                    x=alt.X('date:T'),
-                    y=alt.Y('my_happy:Q'),
-                    size = 'count()'
-                ).properties(
-                    width=650,
-                    height=400
-                    )
-
-                points_self = alt.Chart(df_fb_self).mark_circle(
-                    color='blue'
-                ).encode(
-                    x=alt.X('date:T'),
-                    y=alt.Y('my_happy:Q'),
-                    size = 'count()'
-                ).properties(
-                    width=650,
-                    height=400
-                    )
-
-                layer = alt.layer(line,points,points_self
-                ).configure_axis(
-                    grid=False
+            st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア／青色の丸：あなたのスコア')
+            st.caption('※水色の丸の大きさはスコアごとの人数を表しています')
+            line = alt.Chart(df_fb).mark_line(
+                color='lightskyblue'
+            ).encode(
+                x=alt.X('date:T',
+                        axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付'),
+                        scale=alt.Scale(domainMax={"year": ty, "month": tm, "date": td},
+                                        domainMin={"year": past_y, "month": past_m, "date": past_d})
+                        ),
+                y=alt.Y('mean(my_happy):Q',
+                        axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'),
+                        scale=alt.Scale(domainMax=10,domainMin=0)
+                       )
+            ).properties(
+                width=650,
+                height=400
                 )
 
-                st.write(layer)
-
-                feed = '''
-                **▼アプリ改善のため、下記のリンクよりご意見・ご感想をお聞かせ下さい** 
-
-                https://docs.google.com/forms/d/e/1FAIpQLSeOHYmBTqdoHfnHc1EeLGd4G96DiyKERHByqti307Sa3njaAA/viewform'''
-                st.markdown(feed)
-                
-            else:
-                df_fb=pd.read_excel('DB_demo.xlsx')
-                df_fb['date']=pd.to_datetime(df_fb['date'])
-                day_list=[]
-                for days in df_fb['date']:
-                    day_list.append(days + datetime.timedelta(hours=-9))
-                df_fb['date'] = day_list
-                df_fb_self=df_fb[df_fb['user']==name]
-
-                st.subheader('週間Well-beingスコア')                
-                st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア／青色の丸：あなたのスコア')
-                st.caption('※水色の丸の大きさはスコアごとの人数を表しています')
-                line = alt.Chart(df_fb).mark_line(
-                    color='lightskyblue'
-                ).encode(
-                    x=alt.X('date:T',
-                            axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付'),
-                            scale=alt.Scale(domainMax={"year": 2022, "month": 7, "date": 20},
-                                            domainMin={"year": 2022, "month": 7, "date": 14})
-                            ),
-                    y=alt.Y('mean(my_happy):Q',
-                            axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'),
-                            scale=alt.Scale(domainMax=10,domainMin=0)
-                           )
-                ).properties(
-                    width=650,
-                    height=400
-                    )
-
-                points = alt.Chart(df_fb).mark_circle(
-                    color='lightskyblue'
-                ).encode(
-                    x=alt.X('date:T'),
-                    y=alt.Y('my_happy:Q'),
-                    size = 'count()'
-                ).properties(
-                    width=650,
-                    height=400
-                    )
-
-                points_self = alt.Chart(df_fb_self).mark_circle(
-                    color='blue'
-                ).encode(
-                    x=alt.X('date:T'),
-                    y=alt.Y('my_happy:Q'),
-                    size = 'count()'
-                ).properties(
-                    width=650,
-                    height=400
-                    )
-
-                layer = alt.layer(line,points,points_self
-                ).configure_axis(
-                    grid=False
+            points = alt.Chart(df_fb).mark_circle(
+                color='lightskyblue'
+            ).encode(
+                x=alt.X('date:T'),
+                y=alt.Y('my_happy:Q'),
+                size = 'count()'
+            ).properties(
+                width=650,
+                height=400
                 )
 
-                st.write(layer)
-                
-                feed = '''
-                **▼アプリ改善のため、下記のリンクよりご意見・ご感想をお聞かせ下さい** 
+            points_self = alt.Chart(df_fb_self).mark_circle(
+                color='blue'
+            ).encode(
+                x=alt.X('date:T'),
+                y=alt.Y('my_happy:Q'),
+                size = 'count()'
+            ).properties(
+                width=650,
+                height=400
+                )
 
-                https://docs.google.com/forms/d/e/1FAIpQLSeOHYmBTqdoHfnHc1EeLGd4G96DiyKERHByqti307Sa3njaAA/viewform'''
-                st.markdown(feed)
+            layer = alt.layer(line,points,points_self
+            ).configure_axis(
+                grid=False
+            )
+
+            st.write(layer)
+
+            feed = '''
+            **▼アプリ改善のため、下記のリンクよりご意見・ご感想をお聞かせ下さい** 
+
+            https://docs.google.com/forms/d/e/1FAIpQLSeOHYmBTqdoHfnHc1EeLGd4G96DiyKERHByqti307Sa3njaAA/viewform'''
+            st.markdown(feed)
+
+        else:
+            df_fb=pd.read_excel('DB_demo.xlsx')
+            df_fb['date']=pd.to_datetime(df_fb['date'])
+            day_list=[]
+            for days in df_fb['date']:
+                day_list.append(days + datetime.timedelta(hours=-9))
+            df_fb['date'] = day_list
+            df_fb_self=df_fb[df_fb['user']==name]
+
+            st.subheader('週間Well-beingスコア')                
+            st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア／青色の丸：あなたのスコア')
+            st.caption('※水色の丸の大きさはスコアごとの人数を表しています')
+            line = alt.Chart(df_fb).mark_line(
+                color='lightskyblue'
+            ).encode(
+                x=alt.X('date:T',
+                        axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付'),
+                        scale=alt.Scale(domainMax={"year": 2022, "month": 7, "date": 20},
+                                        domainMin={"year": 2022, "month": 7, "date": 14})
+                        ),
+                y=alt.Y('mean(my_happy):Q',
+                        axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'),
+                        scale=alt.Scale(domainMax=10,domainMin=0)
+                       )
+            ).properties(
+                width=650,
+                height=400
+                )
+
+            points = alt.Chart(df_fb).mark_circle(
+                color='lightskyblue'
+            ).encode(
+                x=alt.X('date:T'),
+                y=alt.Y('my_happy:Q'),
+                size = 'count()'
+            ).properties(
+                width=650,
+                height=400
+                )
+
+            points_self = alt.Chart(df_fb_self).mark_circle(
+                color='blue'
+            ).encode(
+                x=alt.X('date:T'),
+                y=alt.Y('my_happy:Q'),
+                size = 'count()'
+            ).properties(
+                width=650,
+                height=400
+                )
+
+            layer = alt.layer(line,points,points_self
+            ).configure_axis(
+                grid=False
+            )
+
+            st.write(layer)
+
+            feed = '''
+            **▼アプリ改善のため、下記のリンクよりご意見・ご感想をお聞かせ下さい** 
+
+            https://docs.google.com/forms/d/e/1FAIpQLSeOHYmBTqdoHfnHc1EeLGd4G96DiyKERHByqti307Sa3njaAA/viewform'''
+            st.markdown(feed)
               
 
 # ユーザ情報

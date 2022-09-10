@@ -65,7 +65,6 @@ def main():
         location_other = st.text_input('E：Dでその他を選択した方は，差し支えない範囲で場所をご記入ください')
 
         submitted=st.form_submit_button('登録')
-        submitted=False
         st.text('一度「登録」を押しても反応がない場合，再度クリックをお試し下さい')
         if submitted == True:
             st.balloons()

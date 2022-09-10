@@ -53,7 +53,7 @@ def main():
         df_diary.columns=['日記の入力状況']
         df_diary = df_diary.sort_index(ascending=False)
 
-        with st.expander("クリックであなたの日記の入力状況を表示します"):
+        with st.expander("クリックで過去のあなたの日記入力状況を表示します"):
             st.table(data=df_diary)
             
         with st.expander("クリックで日記の入力例を表示します"):

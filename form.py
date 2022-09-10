@@ -347,8 +347,8 @@ elif authentication_status == False:
     st.error('UsernameまたはPasswordが間違っています（英数字・記号は半角にして下さい）')
     st.error('※初期パスワードはUsername（ID）と同様です')
     st.info(message)
-    st.info('（2022/9/5）パスワード変更が反映されない不具合が確認されましたので、修正を行いました。')
+    st.info('（2022/9/12）過去の自分の日記の入力状況が見られる機能を追加しました')
 elif authentication_status == None:
     st.warning('UsernameとPasswordをご入力下さい')
     st.info(message)
-    st.info('（2022/9/5）パスワード変更が反映されない不具合が確認されましたので、修正を行いました。')
+    st.info('（2022/9/12）過去の自分の日記の入力状況が見られる機能を追加しました')

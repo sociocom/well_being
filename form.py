@@ -91,14 +91,14 @@ def main():
             requests.post(url + '/post',json=data_post)
             st.success('入力完了しました！')
 
-            #r_diary = requests.get(url + '/get_diary', params={'user':name})
-            #r_diary_DB = r_diary.json()
-            #df_diary=pd.DataFrame.from_dict(r_diary_DB,orient='index')
-            #df_diary.columns=['日記テキスト']
-            #df_diary = df_diary.sort_index(ascending=False)
+            r_diary = requests.get(url + '/get_diary', params={'user':name})
+            r_diary_DB = r_diary.json()
+            df_diary=pd.DataFrame.from_dict(r_diary_DB,orient='index')
+            df_diary.columns=['日記の入力状況']
+            df_diary = df_diary.sort_index(ascending=False)
 
-            #with st.expander("クリックであなたの過去の日記を表示します"):
-                #st.table(data=df_diary)
+            with st.expander("クリックであなたの日記の入力状況を表示します"):
+                st.table(data=df_diary)
 
             r_fb = requests.get(url + '/get_fb', params={'user':name, 'team_url':team_url})
             r_fb_DB = r_fb.json()

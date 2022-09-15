@@ -76,7 +76,7 @@ def main():
 
         submitted=st.form_submit_button('登録')
         st.text('一度「登録」を押しても反応がない場合、再度クリックをお試し下さい。')
-        st.text('登録が問題なく行われた場合、ボタン押下後に画面に風船が出てきた後、下部にグラフが表示されます。')
+        st.text('登録が問題なく行われた場合、ボタン押下後に風船が出てきた後、下部にグラフが表示されます。')
         
     if submitted == True:
         st.balloons()

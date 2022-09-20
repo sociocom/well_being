@@ -352,4 +352,4 @@ elif authentication_status == False:
 elif authentication_status == None:
     st.warning('UsernameとPasswordをご入力下さい')
     st.info(message)
-    st.info('（2022/9/12）過去の自分の日記の入力状況が見られる機能を追加しました')
+    st.info('（2022/9/20）過去の日記入力状況を確認時、次の日以降の項目を非表示にしました')

@@ -105,7 +105,7 @@ def main():
                 st.balloons()
                 st.success('入力完了しました！')
             else:
-                st.error('データ登録中にエラーが発生しました。お問合せのメールアドレス宛にお声がけ頂けますと幸いです。')
+                st.error('データ登録中にエラーが発生しました…。お問合せのメールアドレス宛にお声がけ頂けますと幸いです。')
 
             r_fb = requests.get(url + '/get_fb', params={'user':name, 'team_url':team_url})
             r_fb_DB = r_fb.json()

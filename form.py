@@ -79,7 +79,6 @@ def main():
         st.text('登録が問題なく行われた場合、ボタン押下後に風船が出てきた後、下部にグラフが表示されます。')
         
     if submitted == True:
-        st.balloons()
         if name != 'demo':
             if len(str(my_happy)) > 3:
                 my_happy = ''
@@ -100,6 +99,7 @@ def main():
                         }
 
             requests.post(url + '/post',json=data_post)
+            st.balloons()
             st.success('入力完了しました！')
             
 
@@ -180,6 +180,7 @@ def main():
             st.markdown(feed)
 
         else:
+            st.balloons()
             df_fb=pd.read_excel('DB_demo.xlsx')
             df_fb['date']=pd.to_datetime(df_fb['date'])
             day_list=[]

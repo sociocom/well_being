@@ -101,7 +101,7 @@ def main():
             post_result_return = requests.post(url + '/post',json=data_post)
             post_result = post_result_return.json()['response']
             
-            if post_result = 'success':
+            if post_result == 'success':
                 st.balloons()
                 st.success('入力完了しました！')
             else:

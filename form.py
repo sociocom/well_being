@@ -78,7 +78,7 @@ def main():
         st.text('一度「登録」を押しても反応がない場合、再度クリックをお試し下さい。')
         st.text('登録が問題なく行われた場合、ボタン押下後に風船が出てきた後、下部にグラフが表示されます。')
         
-    if submitted == True:
+    if submitted:
         if name != 'demo':
             if len(str(my_happy)) > 3:
                 my_happy = ''

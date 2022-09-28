@@ -434,7 +434,7 @@ authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
     'some_cookie_name', 'some_signature_key', cookie_expiry_days=1)
 
 # ログインメソッドで入力フォームを配置
-st.title('チームのWell-being（計測ダッシュボード）')
+st.title(':tulip:チームのWell-being（計測ダッシュボード）')
 name, authentication_status, username = authenticator.login('Login', 'main')
 
 # 返り値、authenticaton_statusの状態で処理を場合分け

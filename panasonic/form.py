@@ -250,6 +250,7 @@ authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
 
 # ログインメソッドで入力フォームを配置
 st.title(':tulip:個と場のWell-being日記')
+st.info('【システム一時停止のお知らせ】10/14(金)13:00〜10/17(月)午前中の期間、サーバーメンテナンスにより当日報アプリへのアクセスができない状況となります。ご不便をおかけし大変恐れ入りますが、該当期間中の日報に関しては復旧後にご入力頂けますと幸いです。')
 name, authentication_status, username = authenticator.login('Login', 'main')
 
 # 返り値、authenticaton_statusの状態で処理を場合分け

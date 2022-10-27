@@ -193,7 +193,7 @@ def main():
             df_fb['date'] = day_list
             df_fb_self=df_fb[df_fb['user']==name]
 
-            st.subheader('週間Well-beingスコア')                
+            st.subheader('週間幸せスコア')                
             st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア／青色の丸：あなたのスコア')
             st.caption('※水色の丸の大きさはスコアごとの人数を表しています')
             line = alt.Chart(df_fb).mark_line(

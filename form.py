@@ -205,7 +205,7 @@ def main():
                                         domainMin={"year": 2022, "month": 7, "date": 14})
                         ),
                 y=alt.Y('mean(my_happy):Q',
-                        axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'),
+                        axis=alt.Axis(titleFontSize=18, title='幸せスコア'),
                         scale=alt.Scale(domainMax=10,domainMin=0)
                        )
             ).properties(

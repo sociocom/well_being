@@ -243,6 +243,7 @@ authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
 # ログインメソッドで入力フォームを配置
 st.title(':pill:個と場のWell-being日記')
 name, authentication_status, username = authenticator.login('Login', 'main')
+st.info('いずれも「demo」を入力するとデモ用アカウントでログインできます')
 
 # 返り値、authenticaton_statusの状態で処理を場合分け
 if authentication_status:

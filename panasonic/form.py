@@ -55,11 +55,15 @@ def main():
         #my_happy = st.radio("B：あなたは今日一日幸せでしたか？（0点:とても不幸／10点：とても幸せ）",options=happy_score,horizontal=True)
         my_happy = st.selectbox("B：あなたは一日幸せでしたか？（0点: とても不幸／10点: とても幸せ）",options=happy_score)
         group_happy = st.selectbox('C：チーム全体としては，一日幸せだったと思いますか？（0点: とても不幸／10点: とても幸せ）',options=group_happy_score)
+        communication = st.selectbox(
+            'D：一日の中での、チームメンバーとのコミュニケーションの有無を教えて下さい（会話した相手の人数は問いません）',
+            options=('選択して下さい','オフラインで会話をした','オンラインで会話をした（WEBミーティング・電話など）','ほとんど・全く会話をしなかった（5分未満の目安）')
+            )
         location = st.selectbox(
-            'D：業務中，主に滞在した場所をお選び下さい',
+            'E：業務中，主に滞在した場所をお選び下さい',
             options=('選択して下さい','社内の自フロア','自宅','得意先', 'その他')
             )
-        location_other = st.text_input('E：Dでその他を選択した方は，差し支えない範囲で場所をご記入ください')
+        location_other = st.text_input('F：Eでその他を選択した方は，差し支えない範囲で場所をご記入ください')
 
         submitted=st.form_submit_button('登録')
         if submitted == True:
@@ -77,6 +81,7 @@ def main():
                             'diary':diary,
                             'my_happy':my_happy,
                             'group_happy':group_happy,
+                            'communication':communication,
                             'location':location,
                             'location_other':location_other,
                             'timestamp':str(datetime.datetime.now()),

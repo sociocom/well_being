@@ -55,15 +55,19 @@ def main():
         #my_happy = st.radio("B：あなたは今日一日幸せでしたか？（0点:とても不幸／10点：とても幸せ）",options=happy_score,horizontal=True)
         my_happy = st.selectbox("B：あなたは一日幸せでしたか？（0点: とても不幸／10点: とても幸せ）",options=happy_score)
         group_happy = st.selectbox('C：チーム全体としては，一日幸せだったと思いますか？（0点: とても不幸／10点: とても幸せ）',options=group_happy_score)
-        communication = st.selectbox(
-            'D：一日の中での、チームメンバーとのコミュニケーションの有無を教えて下さい（会話した相手の人数は問いません）',
-            options=('選択して下さい','オフラインで会話をした','オンラインで会話をした（WEBミーティング・電話など）','ほとんど・全く会話をしなかった（5分未満の目安）')
+        real_communication = st.selectbox(
+            'D：一日の中での、チームメンバーとの対面でのコミュニケーションの有無を教えて下さい（会話した相手の人数は問いません）',
+            options=('選択して下さい','全く行わなかった','少し行った（10分未満程度）','多く行った')
+            )
+        online_communication = st.selectbox(
+            'E：一日の中での、チームメンバーとのオンラインでのコミュニケーション（WEBミーティング・電話など）の有無を教えて下さい（会話した相手の人数は問いません）',
+            options=('選択して下さい','全く行わなかった','少し行った（10分未満程度）','多く行った')
             )
         location = st.selectbox(
-            'E：業務中，主に滞在した場所をお選び下さい',
+            'F：業務中，主に滞在した場所をお選び下さい',
             options=('選択して下さい','社内の自フロア','自宅','得意先', 'その他')
             )
-        location_other = st.text_input('F：Eでその他を選択した方は，差し支えない範囲で場所をご記入ください')
+        location_other = st.text_input('G：Eでその他を選択した方は，差し支えない範囲で場所をご記入ください')
 
         submitted=st.form_submit_button('登録')
         if submitted == True:

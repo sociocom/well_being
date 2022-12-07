@@ -47,7 +47,7 @@ def main():
         r_diary = requests.get(url + '/get_diary', params={'user':name})
         r_diary_DB = r_diary.json()
         df_diary=pd.DataFrame.from_dict(r_diary_DB,orient='index')
-        df_diary.columns=['過去の日記']
+        df_diary.columns=['diary']
         df_diary = df_diary.sort_index(ascending=False)
 
         with st.expander("クリックで過去のあなたの日記を表示します"):

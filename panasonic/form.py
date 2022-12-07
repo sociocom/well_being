@@ -71,6 +71,9 @@ def main():
         location_other = st.text_input('G：Eでその他を選択した方は，差し支えない範囲で場所をご記入ください')
 
         submitted=st.form_submit_button('登録')
+        
+        w = 400
+        h = 350
         if submitted == True:
             st.balloons()
             if name != 'demo':
@@ -143,8 +146,8 @@ def main():
                             scale=alt.Scale(domainMax=10,domainMin=0)
                            )
                 ).properties(
-                    width=650,
-                    height=400
+                    width=w,
+                    height=h
                     )
 
                 points = alt.Chart(df_fb).mark_circle(
@@ -154,8 +157,8 @@ def main():
                     y=alt.Y('my_happy:Q'),
                     size = 'count()'
                 ).properties(
-                    width=650,
-                    height=400
+                    width=w,
+                    height=h
                     )
 
                 points_self = alt.Chart(df_fb_self).mark_circle(
@@ -165,8 +168,8 @@ def main():
                     y=alt.Y('my_happy:Q'),
                     size = 'count()'
                 ).properties(
-                    width=650,
-                    height=400
+                    width=w,
+                    height=h
                     )
 
                 layer = alt.layer(line,points,points_self
@@ -207,8 +210,8 @@ def main():
                             scale=alt.Scale(domainMax=10,domainMin=0)
                            )
                 ).properties(
-                    width=650,
-                    height=400
+                    width=w,
+                    height=h
                     )
 
                 points = alt.Chart(df_fb).mark_circle(
@@ -218,8 +221,8 @@ def main():
                     y=alt.Y('my_happy:Q'),
                     size = 'count()'
                 ).properties(
-                    width=650,
-                    height=400
+                    width=w,
+                    height=h
                     )
 
                 points_self = alt.Chart(df_fb_self).mark_circle(
@@ -229,8 +232,8 @@ def main():
                     y=alt.Y('my_happy:Q'),
                     size = 'count()'
                 ).properties(
-                    width=650,
-                    height=400
+                    width=w,
+                    height=h
                     )
 
                 layer = alt.layer(line,points,points_self

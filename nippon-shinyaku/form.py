@@ -65,6 +65,8 @@ def main():
         st.text('一度「登録」を押しても反応がない場合、再度クリックをお試し下さい。')
         st.text('登録が問題なく行われた場合、ボタン押下後に風船が出てきた後、下部にグラフが表示されます。')
         
+        w=400
+        h=350
         if submitted == True:
             st.balloons()
             if name != 'demo':
@@ -135,8 +137,8 @@ def main():
                             scale=alt.Scale(domainMax=10,domainMin=0)
                            )
                 ).properties(
-                    width=650,
-                    height=400
+                    width=w,
+                    height=h
                     )
 
                 points = alt.Chart(df_fb).mark_circle(
@@ -146,8 +148,8 @@ def main():
                     y=alt.Y('my_happy:Q'),
                     size = 'count()'
                 ).properties(
-                    width=650,
-                    height=400
+                    width=w,
+                    height=h
                     )
 
                 points_self = alt.Chart(df_fb_self).mark_circle(
@@ -157,8 +159,8 @@ def main():
                     y=alt.Y('my_happy:Q'),
                     size = 'count()'
                 ).properties(
-                    width=650,
-                    height=400
+                    width=w,
+                    height=h
                     )
 
                 layer = alt.layer(line,points,points_self
@@ -193,8 +195,8 @@ def main():
                             scale=alt.Scale(domainMax=10,domainMin=0)
                            )
                 ).properties(
-                    width=650,
-                    height=400
+                    width=w,
+                    height=h
                     )
 
                 points = alt.Chart(df_fb).mark_circle(
@@ -204,8 +206,8 @@ def main():
                     y=alt.Y('my_happy:Q'),
                     size = 'count()'
                 ).properties(
-                    width=650,
-                    height=400
+                    width=w,
+                    height=h
                     )
 
                 points_self = alt.Chart(df_fb_self).mark_circle(
@@ -215,8 +217,8 @@ def main():
                     y=alt.Y('my_happy:Q'),
                     size = 'count()'
                 ).properties(
-                    width=650,
-                    height=400
+                    width=w,
+                    height=h
                     )
 
                 layer = alt.layer(line,points,points_self

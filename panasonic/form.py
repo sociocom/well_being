@@ -72,7 +72,7 @@ def main():
 
         submitted=st.form_submit_button('登録')
         
-        w = 300
+        w = 350
         h = 350
         if submitted == True:
             st.balloons()

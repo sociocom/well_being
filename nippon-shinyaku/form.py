@@ -47,10 +47,10 @@ def main():
         r_diary = requests.get(url + '/get_diary', params={'user':name})
         r_diary_DB = r_diary.json()
         df_diary=pd.DataFrame.from_dict(r_diary_DB,orient='index')
-        #df_diary.columns=['diary']
+        df_diary.columns=['日記テキスト']
         df_diary = df_diary.sort_index(ascending=False)
 
-        with st.expander("クリックで過去のあなたの日記を表示します"):
+        with st.expander("クリックであなたの過去の日記を表示します"):
             st.table(data=df_diary)
         
         with st.expander("クリックで日記の入力例を表示します"):
@@ -100,15 +100,6 @@ def main():
 
                 requests.post(url + '/post',json=data_post)
                 st.success('入力完了しました！')
-
-                #r_diary = requests.get(url + '/get_diary', params={'user':name})
-                #r_diary_DB = r_diary.json()
-                #df_diary=pd.DataFrame.from_dict(r_diary_DB,orient='index')
-                #df_diary.columns=['日記テキスト']
-                #df_diary = df_diary.sort_index(ascending=False)
-
-                #with st.expander("クリックであなたの過去の日記を表示します"):
-                    #st.table(data=df_diary)
 
                 r_fb = requests.get(url + '/get_fb', params={'user':name, 'team_url':team_url})
                 r_fb_DB = r_fb.json()

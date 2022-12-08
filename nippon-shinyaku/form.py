@@ -18,6 +18,7 @@ import pytz
 
 happy_score = ['選択して下さい（0〜10点）',0,1,2,3,4,5,6,7,8,9,10]
 group_happy_score = ['選択して下さい（0〜10点）',0,1,2,3,4,5,6,7,8,9,10,'全くわからない']
+communication_score = ['選択して下さい（0〜5点）',0,1,2,3,4,5]
 today = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
 day_list=[]
 diary_list=[]
@@ -65,6 +66,14 @@ def main():
         #my_happy = st.radio("B：あなたは今日一日幸せでしたか？（0点:とても不幸／10点：とても幸せ）",options=happy_score,horizontal=True)
         my_happy = st.selectbox("B：あなたは一日幸せでしたか？（0点: とても不幸／10点: とても幸せ）",options=happy_score)
         group_happy = st.selectbox('C：チーム全体としては，一日幸せだったと思いますか？（0点: とても不幸／10点: とても幸せ）',options=group_happy_score)
+        real_communication = st.selectbox(
+            'D：一日の中での、チームメンバーとの対面でのコミュニケーションの有無を教えて下さい（0点: 全くなかった／5点: 多くあった）',
+            options=communication_score
+            )
+        online_communication = st.selectbox(
+            'E：一日の中での、チームメンバーとのオンライン（WEBミーティング・電話など）でのコミュニケーションの有無を教えて下さい（0点: 全くなかった／5点: 多くあった）',
+            options=communication_score
+            )
         location = st.selectbox(
             'D：業務中，主に滞在した場所をお選び下さい',
             options=('選択して下さい','社内の自フロア','自宅','得意先', 'その他')
@@ -92,6 +101,8 @@ def main():
                             'diary':diary,
                             'my_happy':my_happy,
                             'group_happy':group_happy,
+                            'communication_real':real_communication,
+                            'communication_online':online_communication,
                             'location':location,
                             'location_other':location_other,
                             'timestamp':str(datetime.datetime.now()),

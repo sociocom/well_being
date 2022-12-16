@@ -15,7 +15,10 @@ import bcrypt
 import mojimoji
 import pytz
 
-
+dic_div = {'A':'人事課',
+          'B':'HR戦略課',
+          'C':'WB推進課',
+          }
 happy_score = ['選択して下さい（0〜10点）',0,1,2,3,4,5,6,7,8,9,10]
 group_happy_score = ['選択して下さい（0〜10点）',0,1,2,3,4,5,6,7,8,9,10,'全くわからない']
 communication_score = ['選択して下さい（0〜5点）',0,1,2,3,4,5]
@@ -28,6 +31,7 @@ team_url=query_params['team'][0]
 
 
 def main():
+    st.write(str(dic_div[team_url]) + 'の入力フォーム')
     st.write(str(datetime.date.today()))
     with st.expander('パスワード変更はこちら'):
         new_pass = st.text_input(label='↓新しいパスワードをご入力下さい')

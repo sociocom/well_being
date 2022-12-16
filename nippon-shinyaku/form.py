@@ -31,7 +31,7 @@ team_url=query_params['team'][0]
 
 
 def main():
-    st.write(str(dic_div[team_url]) + 'の入力フォーム')
+    st.write('「' + str(dic_div[team_url]) + '」の入力フォーム')
     st.write(str(datetime.date.today()))
     with st.expander('パスワード変更はこちら'):
         new_pass = st.text_input(label='↓新しいパスワードをご入力下さい')

@@ -23,7 +23,7 @@ today = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
 day_list=[]
 diary_list=[]
 url = 'http://aoi.naist.jp/wellbeing_nippon-shinyaku'
-team_url='Z'
+team_url=query_params['team'][0]
 
 
 def main():

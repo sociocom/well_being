@@ -28,6 +28,7 @@ team_url=query_params['team'][0]
 
 
 def main():
+    datetime.date.today()
     with st.expander('パスワード変更はこちら'):
         new_pass = st.text_input(label='↓新しいパスワードをご入力下さい')
         new_pass_hash = bcrypt.hashpw(new_pass.encode(),bcrypt.gensalt()).decode()

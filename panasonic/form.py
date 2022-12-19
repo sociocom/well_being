@@ -44,6 +44,16 @@ def main():
     with st.form('my_form'):
         day = st.date_input('対象の日付を入力して下さい',today)
         diary = st.text_area(label='A：3行程度で日記をご記入ください（仕事に無関係でも構いません）',height=12)
+
+        r_diary = requests.get(url + '/get_diary', params={'user':name})
+        r_diary_DB = r_diary.json()
+        df_diary=pd.DataFrame.from_dict(r_diary_DB,orient='index')
+        df_diary.columns=['日記テキスト']
+        df_diary = df_diary.sort_index(ascending=False)
+
+        with st.expander("クリックであなたの過去の日記を表示します"):
+            st.table(data=df_diary)
+        
         with st.expander("クリックで日記の入力例を表示します"):
             st.caption('入力例1：今日仕事忙しすぎて朝しか食べてなくてさっき帰ってきたけど、こんな時間だし食べなくていっか。食べて太るよりは我慢して痩せた方が絶対いいし。いい方法ではないかもしれないけど痩せたい！')
             st.caption('入力例2：珍しく上司から褒められた。あんまり褒めるところ見たことがない上司だから嬉しいけどヘンな感じ（笑）。たまにこういうことがあると頑張ろうって気になります。')

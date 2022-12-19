@@ -52,6 +52,7 @@ def main():
         df_diary = df_diary.sort_index(ascending=False)
 
         with st.expander("クリックであなたの過去の日記を表示します"):
+            st.write('※同日に複数の入力があった場合、初回の入力分のみが表示されます')
             st.table(data=df_diary)
         
         with st.expander("クリックで日記の入力例を表示します"):

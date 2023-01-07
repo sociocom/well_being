@@ -61,51 +61,6 @@ def main():
         st.subheader('チームごとの回答数（1ユーザー1カウントで集計）')                
         st.caption('※指定した期間内の合計をカウント')
 
-        acnt_fb = requests.get(url + '/get_anscnt')
-        acnt_fb_DB = acnt_fb.json()
-        df_acnt=pd.DataFrame.from_dict(acnt_fb_DB,orient='index')
-        df_acnt['date'] = df_acnt.index
-
-        df_acnt['date']=pd.to_datetime(df_acnt['date'])
-        day_list=[]
-        for days in df_acnt['date']:
-            day_list.append(days + timedelta(hours=-9))
-        df_acnt['date'] = day_list
-        
-        df_acnt = df_acnt[(df_acnt['date'] >= from_day) & (df_acnt['date'] <= to_day)]
-
-        df_acnt=pd.melt(
-            df_acnt,
-            id_vars=['date'],
-            value_vars=df_acnt.columns.values.tolist()[:-1],
-            var_name='Team',
-            value_name='Count')
-        df_acnt = df_acnt.astype({'Count': int})
-
-        answers = alt.Chart(df_acnt).mark_bar(
-            color = 'orange',size = 12
-        ).encode(
-            x=alt.X('Team:O',
-                    axis=alt.Axis(labelFontSize=14, titleFontSize=18,title='チーム名')),
-            y=alt.Y('sum(Count):Q',
-                    axis=alt.Axis(titleFontSize=18, title='回答数'))
-        ).properties(
-            width=650,
-            height=300
-            )
-
-        text_ans = alt.Chart(df_acnt).mark_text(
-            dy=-10, color='black'
-        ).encode(
-            x=alt.X('Team:O',
-                    axis=alt.Axis(labelFontSize=14, titleFontSize=18,title='チーム名')),
-            y=alt.Y('sum(Count):Q',
-                    axis=alt.Axis(titleFontSize=18, title='回答数')),
-            text=alt.Text('sum(Count):Q')
-        )
-
-        st.write(answers+ text_ans)
-
 
         #my_happy
 

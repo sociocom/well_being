@@ -193,6 +193,9 @@ def main():
             df_fb['date'] = day_list
             df_fb_self=df_fb[df_fb['user']==name]
 
+            w = 800
+            h = 400
+            
             st.subheader('週間幸せスコア')                
             st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア／青色の丸：あなたのスコア')
             st.caption('※水色の丸の大きさはスコアごとの人数を表しています')
@@ -209,8 +212,8 @@ def main():
                         scale=alt.Scale(domainMax=10,domainMin=0)
                        )
             ).properties(
-                width=650,
-                height=400
+                width=w,
+                height=h
                 )
 
             points = alt.Chart(df_fb).mark_circle(
@@ -220,8 +223,8 @@ def main():
                 y=alt.Y('my_happy:Q'),
                 size = 'count()'
             ).properties(
-                width=650,
-                height=400
+                width=w,
+                height=h
                 )
 
             points_self = alt.Chart(df_fb_self).mark_circle(
@@ -231,8 +234,8 @@ def main():
                 y=alt.Y('my_happy:Q'),
                 size = 'count()'
             ).properties(
-                width=650,
-                height=400
+                width=w,
+                height=h
                 )
 
             layer = alt.layer(line,points,points_self

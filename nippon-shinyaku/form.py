@@ -26,7 +26,7 @@ communication_score = ['選択して下さい（0〜5点）',0,1,2,3,4,5]
 today = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
 day_list=[]
 diary_list=[]
-url = 'http://aoi.naist.jp/wellbeing_nippon-shinyaku'
+url = st.secrets['URL']
 query_params = st.experimental_get_query_params()
 team_url=query_params['team'][0]
 

@@ -22,7 +22,7 @@ communication_score = ['選択して下さい（0〜5点）',0,1,2,3,4,5]
 today = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
 day_list=[]
 diary_list=[]
-url = 'http://aoi.naist.jp/wellbeing'
+url = 'http://well-being.naist.jp/demo'
 team_url='Z'
 
 

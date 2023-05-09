@@ -156,7 +156,7 @@ def main():
 #    'some_cookie_name', 'some_signature_key', cookie_expiry_days=1)
 
 # ログインメソッドで入力フォームを配置
-st.title(':tulip:個と場のWell-being日記')
+st.title(':heartbeat:個と場のWell-being日記')
 name= "demo"
 username = "demo"
 main()

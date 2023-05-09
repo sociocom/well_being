@@ -89,11 +89,6 @@ def main():
             st.write(datetime.datetime.now())
             df_fb=pd.read_excel('DB_demo.xlsx')
             df_fb['date']=pd.to_datetime(df_fb['date'])
-            day_list=[]
-            for days in df_fb['date']:
-                day_list.append(days + datetime.timedelta(hours=-9))
-            df_fb['date'] = day_list
-            st.write(day_list)
             df_fb_self=df_fb[df_fb['user']==name]
 
             st.subheader('週間Well-beingスコア')                
@@ -104,8 +99,8 @@ def main():
             ).encode(
                 x=alt.X('date:T',
                         axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付'),
-                        scale=alt.Scale(domainMax={"year": 2022, "month": 7, "date": 20},
-                                        domainMin={"year": 2022, "month": 7, "date": 14})
+                        scale=alt.Scale(domainMax={"year": 2023, "month": 5, "date": 9},
+                                        domainMin={"year": 2023, "month": 5, "date": 16})
                         ),
                 y=alt.Y('mean(my_happy):Q',
                         axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'),

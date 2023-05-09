@@ -93,6 +93,7 @@ def main():
             for days in df_fb['date']:
                 day_list.append(days + datetime.timedelta(hours=-9))
             df_fb['date'] = day_list
+            st.write(day_list)
             df_fb_self=df_fb[df_fb['user']==name]
 
             st.subheader('週間Well-beingスコア')                

@@ -257,7 +257,7 @@ def main():
               
 
 # ユーザ情報
-login_info = requests.get(url + '/check_login').json()
+login_info = requests.get(url + '/check_login')
 names = login_info['user']
 usernames = login_info['username']
 hashed_passwords = login_info['password']

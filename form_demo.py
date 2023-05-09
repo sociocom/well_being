@@ -88,6 +88,7 @@ def main():
             
             st.write(datetime.datetime.now())
             df_fb=pd.read_excel('DB_demo.xlsx')
+            df_fb=df_fb.sort_values('date')
             df_fb['date']=pd.to_datetime(df_fb['date'])
             df_fb_self=df_fb[df_fb['user']==name]
 

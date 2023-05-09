@@ -27,6 +27,7 @@ team_url='Z'
 
 
 def main():
+    
     with st.expander('パスワード変更はこちら'):
         new_pass = st.text_input(label='↓新しいパスワードをご入力下さい')
         new_pass_hash = bcrypt.hashpw(new_pass.encode(),bcrypt.gensalt()).decode()
@@ -257,28 +258,30 @@ def main():
               
 
 # ユーザ情報
-login_info = requests.get(url + '/check_login').json()
-print(login_info)
-names = login_info['user']
-usernames = login_info['username']
-hashed_passwords = login_info['password']
+#login_info = requests.get(url + '/check_login').json()
+#print(login_info)
+#names = login_info['user']
+#usernames = login_info['username']
+#hashed_passwords = login_info['password']
 
 
 # cookie_expiry_daysでクッキーの有効期限を設定可能。
 # 認証情報の保持期間を設定でき値を0とするとアクセス毎に認証を要求する
-authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
-    'some_cookie_name', 'some_signature_key', cookie_expiry_days=1)
+#authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
+#    'some_cookie_name', 'some_signature_key', cookie_expiry_days=1)
 
 # ログインメソッドで入力フォームを配置
 st.title(':tulip:個と場のWell-being日記')
-name, authentication_status, username = authenticator.login('Login', 'main')
+name= "demo"
+username = "demo"
+main()
 
 # 返り値、authenticaton_statusの状態で処理を場合分け
-if authentication_status:
-    authenticator.logout('Logout', 'main')
-    st.write('Welcome *%s*' % (name))
-    main()
-elif authentication_status == False:
-    st.error('UsernameまたはPasswordが間違っています（英数字・記号は半角にして下さい）')
-elif authentication_status == None:
-    st.warning('UsernameとPasswordをご入力下さい')
+#if authentication_status:
+#    authenticator.logout('Logout', 'main')
+#    st.write('Welcome *%s*' % (name))
+#    main()
+#elif authentication_status == False:
+#    st.error('UsernameまたはPasswordが間違っています（英数字・記号は半角にして下さい）')
+#elif authentication_status == None:
+#    st.warning('UsernameとPasswordをご入力下さい')

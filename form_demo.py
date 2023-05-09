@@ -47,8 +47,7 @@ def main():
         diary = st.text_area(label='A：3行程度で日記をご記入ください（仕事に無関係でも構いません）',height=12)
         
         df_diary=pd.read_excel('data_dammy.xlsx')
-        df_diary.columns=['日記テキスト']
-        df_diary = df_diary.sort_index(ascending=False)
+        #df_diary = df_diary.sort_index(ascending=False)
 
         with st.expander("クリックであなたの過去の日記を表示します"):
             st.write('※同日に複数の入力があった場合、初回の入力分のみが表示されます')

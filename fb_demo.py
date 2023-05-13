@@ -56,7 +56,7 @@ def main():
       
     from_day=from_day.date()
     to_day=to_day.date()
-    term = to_day - from_day
+    term = int(to_day - from_day)
     term
     
     st.subheader('チームごとの回答数（1ユーザー1カウントで集計）')                

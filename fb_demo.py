@@ -41,6 +41,7 @@ def main():
 
     df = pd.read_excel('demo_fb.xlsx')
 
+    df.columns
     df['date']=pd.to_datetime(df['date'])
     day_list=[]
     for days in df['date']:

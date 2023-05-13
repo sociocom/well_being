@@ -129,7 +129,8 @@ def main():
         y=alt.Y('mean(my_happy):Q',
                 axis=alt.Axis(titleFontSize=18, title='「あなたの幸せ」スコア'),
                 scale=alt.Scale(domainMax=10,domainMin=0)
-                )
+                ),
+        opacity=alt.condition(brush, alt.value(1), alt.value(0.2))
     ).properties(
         width=750,
         height=400

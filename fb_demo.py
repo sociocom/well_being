@@ -81,7 +81,7 @@ def main():
     text_ans = alt.Chart(df_acnt).mark_text(
         dy=-10, color='black'
     ).encode(
-        x=alt.X('Team:O',
+        x=alt.X('team:O',
                 axis=alt.Axis(labelFontSize=14, titleFontSize=18,title='チーム名')),
         y=alt.Y('sum(Count):Q',
                 axis=alt.Axis(titleFontSize=18, title='回答数')),

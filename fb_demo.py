@@ -133,7 +133,7 @@ def main():
         height=400
         )
 
-    layer = alt.layer(line
+    layer = alt.layer(line,points
     ).configure_axis(
         grid=False
     ).resolve_scale(

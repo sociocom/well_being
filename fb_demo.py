@@ -105,6 +105,17 @@ def main():
 
     df_fb
         
+    points = alt.Chart(df_fb).mark_circle(
+        color='lightskyblue'
+    ).encode(
+        x=alt.X('date:T',axis=None),
+        y=alt.Y('my_happy:Q'),
+        size = 'count()'
+    ).properties(
+        width=750,
+        height=400
+        )
+        
     line = alt.Chart(df_fb).mark_line(
         color='lightskyblue'
     ).encode(
@@ -117,17 +128,6 @@ def main():
                 axis=alt.Axis(titleFontSize=18, title='「あなたの幸せ」スコア'),
                 scale=alt.Scale(domainMax=10,domainMin=0)
                 )
-    ).properties(
-        width=750,
-        height=400
-        )
-
-    points = alt.Chart(df_fb).mark_circle(
-        color='lightskyblue'
-    ).encode(
-        x=alt.X('date:T',axis=None),
-        y=alt.Y('my_happy:Q'),
-        size = 'count()'
     ).properties(
         width=750,
         height=400

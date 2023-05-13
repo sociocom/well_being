@@ -136,6 +136,9 @@ def main():
     layer = alt.layer(line,points
     ).configure_axis(
         grid=False
+    ).resolve_scale(
+    x='shared',
+    y='shared'
     )
     st.write(layer)
 

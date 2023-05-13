@@ -65,7 +65,7 @@ def main():
     df['date']=pd.to_datetime(df['date']) - pd.Timedelta(hours=15)
     df = df[(df['date'] >= from_day) & (df['date'] <= to_day)]
     
-    df.head()
+    df
     
     df_acnt = df.groupby(['date', 'team']).size().reset_index(name='Count')
 

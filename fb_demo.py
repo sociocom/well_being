@@ -54,6 +54,8 @@ def main():
         value_vars=df.columns.values.tolist()[:-1],
         var_name='team',
         value_name='Count')
+    
+    df_acnt
     df_acnt = df_acnt.astype({'Count': int})
 
     answers = alt.Chart(df_acnt).mark_bar(

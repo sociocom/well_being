@@ -55,8 +55,8 @@ def main():
     to_day = datetime.fromordinal(to_day.toordinal())
     
     
-    from_day=from_day.dt.date
-    to_day=to_day.dt.date
+    from_day=from_day.date
+    to_day=to_day.date
     
     st.subheader('チームごとの回答数（1ユーザー1カウントで集計）')                
     st.caption('※指定した期間内の合計をカウント')

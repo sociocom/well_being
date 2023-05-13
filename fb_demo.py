@@ -193,7 +193,15 @@ def main():
     df_emo = df[['date','怒り','不安','嫌悪','楽しさ','悲しみ','驚き','信頼']]
     if selected_team != '全てのチーム':
         df_emo = df_emo[df_emo['team_url']==selected_team]
-        
+    
+    df_emo=pd.melt(
+        df_emo,
+        id_vars=['date'],
+        value_vars=['怒り','不安','嫌悪','楽しさ','悲しみ','驚き','信頼'],
+        var_name='emotion',
+        value_name='score'
+    )
+    
     st.subheader('日記の感情スコア')
     line_emo = alt.Chart(df_emo).mark_line(
     ).encode(

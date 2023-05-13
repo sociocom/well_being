@@ -46,7 +46,7 @@ def main():
         day_list.append(days + timedelta(hours=-9))
     df['date'] = day_list
 
-    df.head()
+    st.table(df.head())
     
     df_acnt=df.melt(
         id_vars=['date'],

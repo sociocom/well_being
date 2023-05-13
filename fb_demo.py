@@ -188,7 +188,7 @@ def main():
 
 
     #emotion
-    df_emo = df[['date','怒り','不安','嫌悪','楽しさ','悲しみ','驚き','信頼']]
+    df_emo = df[['date','team','怒り','不安','嫌悪','楽しさ','悲しみ','驚き','信頼']]
     if selected_team != '全てのチーム':
         df_emo = df_emo[df_emo['team']==selected_team]
     

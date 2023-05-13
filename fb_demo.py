@@ -55,8 +55,8 @@ def main():
     to_day = datetime.fromordinal(to_day.toordinal())
     
     
-    from_day=from_day.date
-    to_day=to_day.date
+    from_day=from_day.date()
+    to_day=to_day.date()
     
     from_day
     to_day

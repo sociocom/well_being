@@ -46,8 +46,7 @@ def main():
         day_list.append(days + timedelta(hours=-9))
     df['date'] = day_list
 
-    df_acnt=pd.melt(
-        df,
+    df_acnt=df.melt(
         id_vars=['date'],
         value_vars=team_list,
         var_name='team',

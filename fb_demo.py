@@ -62,7 +62,7 @@ def main():
     st.caption('※指定した期間内の合計をカウント')
 
     df = pd.read_excel('demo_fb.xlsx')
-    df['date']=pd.to_datetime(df['date']) - pd.Timedelta(hours=15)
+    df['date']=pd.to_datetime(df['date'])
     df = df[(df['date'] >= from_day) & (df['date'] <= to_day)]
     
     df

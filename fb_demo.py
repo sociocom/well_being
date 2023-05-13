@@ -62,7 +62,7 @@ def main():
     st.caption('※指定した期間内の合計をカウント')
 
     df = pd.read_excel('demo_fb.xlsx')
-    df['date']=pd.to_datetime(df['date']).day
+    df['date']=pd.to_datetime(df['date']).dt.date
     df = df[(df['date'] >= from_day) & (df['date'] <= to_day)]
     
     df_acnt = df.groupby(['date', 'team']).size().reset_index(name='Count')

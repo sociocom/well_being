@@ -102,8 +102,6 @@ def main():
         df_fb = df[df['team']==selected_team]
     else:
         df_fb = df
-
-    df_fb
         
     points = alt.Chart(df_fb).mark_circle(
         color='lightskyblue'

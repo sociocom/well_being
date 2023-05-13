@@ -67,7 +67,7 @@ def main():
     df_acnt = df_acnt[(df_acnt['date'] >= from_day) & (df_acnt['date'] <= to_day)]
 
     answers = alt.Chart(df_acnt).mark_bar(
-        color = 'orange',size = 12
+        color = 'orange',size = 36
     ).encode(
         x=alt.X('team:O',
                 axis=alt.Axis(labelFontSize=14, titleFontSize=18,title='チーム名')),

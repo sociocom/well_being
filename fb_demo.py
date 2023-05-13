@@ -46,11 +46,11 @@ def main():
         day_list.append(days + timedelta(hours=-9))
     df['date'] = day_list
 
-    st.table(df.head())
+    df.head()
     
     df_acnt=df.melt(
         id_vars=['date'],
-        value_vars=team_list,
+        value_vars='team,
         var_name='team',
         value_name='Count')
     

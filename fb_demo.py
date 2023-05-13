@@ -32,7 +32,7 @@ def main():
     past_m = past_day.month
     past_d = past_day.day
     
-    team_list=['選択してください','A','B','C','D','E']
+    team_list=['全てのチーム','A','B','C','D','E']
 
     with st.sidebar:
         st.markdown('**集計条件を指定して下さい**')
@@ -59,12 +59,10 @@ def main():
     st.caption('※指定した期間内の合計をカウント')
 
     df = pd.read_excel('demo_fb.xlsx')
-
-    df.columns
     df['date']=pd.to_datetime(df['date'])
+    df = df[(df['date'] >= from_day) & (df['date'] <= to_day)]
     
     df_acnt = df.groupby(['date', 'team']).size().reset_index(name='Count')
-    df_acnt = df_acnt[(df_acnt['date'] >= from_day) & (df_acnt['date'] <= to_day)]
 
     answers = alt.Chart(df_acnt).mark_bar(
         color = 'orange',size = 36
@@ -96,21 +94,11 @@ def main():
     st.subheader('「あなたは一日幸せでしたか？」への回答スコア')                
     st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア')
     st.caption('※水色の丸の大きさはスコアごとの人数を表しています')
-    r_fb = requests.get(url + '/get_fb_all')
-    r_fb_DB = r_fb.json()
-    df_fb=pd.DataFrame.from_dict(r_fb_DB,orient='index').T
-
-    df_fb['date']=pd.to_datetime(df_fb['date'])
-    day_list=[]
-    for days in df_fb['date']:
-        day_list.append(days + timedelta(hours=-9))
-    df_fb['date'] = day_list
-
-    df_fb = df_fb.dropna(subset=['my_happy'])
 
     if selected_team != '全てのチーム':
-        df_fb = df_fb[df_fb['team_url']==selected_team]
-    df_fb = df_fb[(df_fb['date'] >= from_day) & (df_fb['date'] <= to_day)]
+        df_fb = df[df['team']==selected_team]
+    else:
+        df_fb = df
 
     line = alt.Chart(df_fb).mark_line(
         color='lightskyblue'
@@ -144,30 +132,16 @@ def main():
     ).configure_axis(
         grid=False
     )
-
     st.write(layer)
 
-
     #group_happy
-
-    r_group = requests.get(url + '/get_group')
-    r_group_DB = r_group.json()
-    df_group=pd.DataFrame.from_dict(r_group_DB,orient='index').T
-    df_group['date']=pd.to_datetime(df_group['date'])
-
-    day_list=[]
-    for days in df_group['date']:
-        day_list.append(days + timedelta(hours=-9))
-    df_group['date'] = day_list
-
-    df_group = df_group.dropna(subset=['group_happy'])
-
+    df_group = df_fb.dropna(subset=['group_happy'])
     st.subheader('「チームとしては幸せだったと思いますか？」への回答スコア')                
     st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア')
     st.caption('※水色の丸の大きさはスコアごとの人数を表しています')
-
+    
     if selected_team != '全てのチーム':
-        df_group = df_group[df_group['team_url']==selected_team]
+        df_group = df_group[df_group['team']==selected_team]
     df_group = df_group[(df_group['date'] >= from_day) & (df_group['date'] <= to_day)]
 
     line_group = alt.Chart(df_group).mark_line(

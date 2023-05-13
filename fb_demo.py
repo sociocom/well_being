@@ -79,7 +79,7 @@ def main():
         )
 
     text_ans = alt.Chart(df_acnt).mark_text(
-        dy=-10, color='black', textfont=dict(size=24)
+        dy=-10, color='black', fontsize=24
     ).encode(
         x=alt.X('team:O',
                 axis=alt.Axis(labelFontSize=24, titleFontSize=18,title='チーム名')),

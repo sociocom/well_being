@@ -115,17 +115,14 @@ def main():
     )
 
     
-    # x軸のデータ型をintervalに変更し、intervalを1日に設定
-    x_interval = alt.Interval(
-        from_=alt.datum['date'],
-        to=alt.datum['date'] + pd.DateOffset(days=1),
-        )
-        
+    brush = alt.selection_interval(encodings=["x"])
+    x_values = ["2022-09-05", "2022-09-06", "2022-09-07"]
+    
     line = alt.Chart(df_fb).mark_line(
         color='lightskyblue'
     ).encode(
         x=alt.X('date:T',
-                axis=alt.Axis(interval = x_interval, format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付'),
+                axis=alt.Axis(values=x_values, format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付'),
                 #scale=alt.Scale(domainMax={"year": to_day.year, "month": to_day.month, "date": to_day.day},
                 #                domainMin={"year": from_day.year, "month": from_day.month, "date": from_day.day}),
                 scale = alt.Scale(type='ordinal',aggregate='distinct')

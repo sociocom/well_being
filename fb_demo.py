@@ -62,7 +62,7 @@ def main():
     st.caption('※指定した期間内の合計をカウント')
 
     df = pd.read_excel('demo_fb.xlsx')
-    df['date']=pd.to_datetime(df['date'])
+    df['date']=pd.to_datetime(df['date']).day
     df = df[(df['date'] >= from_day) & (df['date'] <= to_day)]
     
     df_acnt = df.groupby(['date', 'team']).size().reset_index(name='Count')
@@ -121,10 +121,8 @@ def main():
     ).encode(
         x=alt.X('date:T',
                 axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付'),
-                #scale=alt.Scale(domainMax={"year": to_day.year, "month": to_day.month, "date": to_day.day},
-                #                domainMin={"year": from_day.year, "month": from_day.month, "date": from_day.day})
-                scale=alt.Scale(domainMax=max(list(df_fb['date'])),
-                                domainMin=min(list(df_fb['date'])))
+                scale=alt.Scale(domainMax={"year": to_day.year, "month": to_day.month, "date": to_day.day},
+                                domainMin={"year": from_day.year, "month": from_day.month, "date": from_day.day})
                 ),
         y=alt.Y('mean(my_happy):Q',
                 axis=alt.Axis(titleFontSize=18, title='「あなたの幸せ」スコア'),

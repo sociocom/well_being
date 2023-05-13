@@ -122,7 +122,7 @@ def main():
         x=alt.X('date:T',
                 axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付'),
                 #scale=alt.Scale(domainMax={"year": to_day.year, "month": to_day.month, "date": to_day.day},
-                                domainMin={"year": from_day.year, "month": from_day.month, "date": from_day.day})
+                #                domainMin={"year": from_day.year, "month": from_day.month, "date": from_day.day})
                 scale=alt.Scale(domainMax=max(list(df_fb['date'])),
                                 domainMin=min(list(df_fb['date'])))
                 ),

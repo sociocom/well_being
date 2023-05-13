@@ -45,17 +45,9 @@ def main():
     for days in df['date']:
         day_list.append(days + timedelta(hours=-9))
     df['date'] = day_list
-
-    df.head()
     
-    df_acnt=df.melt(
-        id_vars=['date'],
-        value_vars='team',
-        var_name='team',
-        value_name='Count')
-    
+    df_acnt = df.groupby(['date', 'team']).size().reset_index(name='count')
     df_acnt
-    df_acnt = df_acnt.astype({'Count': int})
 
     answers = alt.Chart(df_acnt).mark_bar(
         color = 'orange',size = 12

@@ -32,9 +32,7 @@ def main():
     past_m = past_day.month
     past_d = past_day.day
     
-    team_list=('全てのチーム',
-        'A','B','C','D','E'
-        )
+    team_list=['A','B','C','D','E']
 
     st.subheader('チームごとの回答数（1ユーザー1カウントで集計）')                
     st.caption('※指定した期間内の合計をカウント')
@@ -51,7 +49,7 @@ def main():
     df_acnt=pd.melt(
         df,
         id_vars=['date'],
-        value_vars=team_list.tolist()[1:],
+        value_vars=team_list,
         var_name='team',
         value_name='Count')
     

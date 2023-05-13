@@ -246,7 +246,7 @@ def main():
         color='lightgreen'
     ).encode(
         x=alt.X('date:T'),
-        y=alt.Y('pred:Q'),
+        y=alt.Y('gch:Q'),
         size = 'count()'
     ).properties(
         width=650,

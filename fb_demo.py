@@ -20,22 +20,20 @@ happy_score = ['選択して下さい（0〜10点）',0,1,2,3,4,5,6,7,8,9,10]
 today = date.today()
 day_list=[]
 diary_list=[]
-url = 'http://well-being.naist.jp/HDD'
+#url = 'http://well-being.naist.jp/demo'
 
 def main():
     ty = today.year
     tm = today.month
     td = today.day
 
-    past_day= today-timedelta(days=13)
+    past_day= today-timedelta(days=6)
     past_y = past_day.year
     past_m = past_day.month
     past_d = past_day.day
     
     team_list=('全てのチーム',
-        'A','B','C','D','E','F','G','H','I','J',
-        'K','L','M','N','O','P','Q','R','S','T',
-        'U','V','W','X','Y','Z'
+        'A','B','C','D','E'
         )
 
     with st.sidebar:
@@ -65,24 +63,19 @@ def main():
         st.subheader('チームごとの回答数（1ユーザー1カウントで集計）')                
         st.caption('※指定した期間内の合計をカウント')
 
-        acnt_fb = requests.get(url + '/get_anscnt')
-        acnt_fb_DB = acnt_fb.json()
-        df_acnt=pd.DataFrame.from_dict(acnt_fb_DB,orient='index')
-        df_acnt['date'] = df_acnt.index
+        df = pd.read_excel('demo_fb.xlsx')
 
-        df_acnt['date']=pd.to_datetime(df_acnt['date'])
+        df['date']=pd.to_datetime(df['date'])
         day_list=[]
-        for days in df_acnt['date']:
+        for days in df['date']:
             day_list.append(days + timedelta(hours=-9))
-        df_acnt['date'] = day_list
+        df['date'] = day_list
         
-        df_acnt = df_acnt[(df_acnt['date'] >= from_day) & (df_acnt['date'] <= to_day)]
-
         df_acnt=pd.melt(
-            df_acnt,
+            df,
             id_vars=['date'],
             value_vars=df_acnt.columns.values.tolist()[:-1],
-            var_name='Team',
+            var_name='team',
             value_name='Count')
         df_acnt = df_acnt.astype({'Count': int})
 

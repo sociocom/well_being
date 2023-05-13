@@ -82,13 +82,13 @@ def main():
         dy=-10, color='black'
     ).encode(
         x=alt.X('team:O',
-                axis=alt.Axis(labelFontSize=14, titleFontSize=18,title='チーム名')),
+                axis=alt.Axis(labelFontSize=24, titleFontSize=18,title='チーム名')),
         y=alt.Y('sum(Count):Q',
-                axis=alt.Axis(titleFontSize=18, title='回答数')),
+                axis=alt.Axis(titleFontSize=24, title='回答数')),
         text=alt.Text('sum(Count):Q')
     )
 
-    st.write(answers+ text_ans)
+    st.write(answers + text_ans)
 
 
     #my_happy

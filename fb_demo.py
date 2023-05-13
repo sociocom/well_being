@@ -62,7 +62,7 @@ def main():
     st.caption('※指定した期間内の合計をカウント')
 
     df = pd.read_excel('demo_fb.xlsx')
-    df['date']=pd.to_datetime(df['date'])+timedelta(hours=-9)
+    df['date']=pd.to_datetime(df['date'])
     df = df[(df['date'] >= from_day) & (df['date'] <= to_day)]
     
     df_acnt = df.groupby(['date', 'team']).size().reset_index(name='Count')
@@ -120,7 +120,7 @@ def main():
         color='lightskyblue'
     ).encode(
         x=alt.X('date:T',
-                axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付',labelAlign='left',tickCount=7),
+                axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付'),
                 scale=alt.Scale(domainMax={"year": to_day.year, "month": to_day.month, "date": to_day.day},
                                 domainMin={"year": from_day.year, "month": from_day.month, "date": from_day.day})
                 ),

@@ -54,7 +54,10 @@ def main():
     to_day = pytz.timezone('Asia/Tokyo').localize(to_native)
     to_day = datetime.fromordinal(to_day.toordinal())
     
-
+    
+    from_day
+    to_day
+    
     st.subheader('チームごとの回答数（1ユーザー1カウントで集計）')                
     st.caption('※指定した期間内の合計をカウント')
 

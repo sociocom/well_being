@@ -53,13 +53,10 @@ def main():
     to_native = datetime.combine(to_day, time())
     to_day = pytz.timezone('Asia/Tokyo').localize(to_native)+timedelta(hours=15)
     to_day = datetime.fromordinal(to_day.toordinal())
-    
-    
+      
     from_day=from_day.date()
     to_day=to_day.date()
-    
-    from_day
-    to_day
+
     
     st.subheader('チームごとの回答数（1ユーザー1カウントで集計）')                
     st.caption('※指定した期間内の合計をカウント')
@@ -143,7 +140,7 @@ def main():
     x='shared',
     y='shared'
     )
-    st.write(layer)
+    st.altair_chart(layer)
 
     #group_happy
     df_group = df_fb.dropna(subset=['group_happy'])

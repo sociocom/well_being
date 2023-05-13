@@ -41,10 +41,6 @@ def main():
 
     df.columns
     df['date']=pd.to_datetime(df['date'])
-    day_list=[]
-    for days in df['date']:
-        day_list.append(days + timedelta(hours=-9))
-    df['date'] = day_list
     
     df_acnt = df.groupby(['date', 'team']).size().reset_index(name='count')
     df_acnt

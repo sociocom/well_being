@@ -190,34 +190,11 @@ def main():
 
 
     #emotion
-
-    r_emo = requests.get(url + '/get_emo')
-    r_emo_DB = r_emo.json()
-    df_emo=pd.DataFrame.from_dict(r_emo_DB,orient='index').T
-
-    df_emo['date']=pd.to_datetime(df_emo['date'])
-    day_list=[]
-    for days in df_emo['date']:
-        day_list.append(days + timedelta(hours=-9))
-    df_emo['date'] = day_list
-
+    df_emo = df['date','怒り','不安','嫌悪','楽しさ','悲しみ','驚き','信頼']
     if selected_team != '全てのチーム':
         df_emo = df_emo[df_emo['team_url']==selected_team]
-    df_emo = df_emo[(df_emo['date'] >= from_day) & (df_emo['date'] <= to_day)]
-
-    df_emo=pd.melt(
-        df_emo,
-        id_vars=['date'],
-        value_vars=['怒り','不安','嫌悪','楽しさ','悲しみ','驚き','信頼'],
-        var_name='emotion',
-        value_name='score')
-
-    r_time_emo = requests.get(url + '/get_emo_time')
-    time_emo_dic = r_time_emo.json()
-    time_emo = time_emo_dic['update']
-
+        
     st.subheader('日記の感情スコア')
-    st.text('データ更新日時　＞＞　'+ time_emo)
     line_emo = alt.Chart(df_emo).mark_line(
     ).encode(
         x=alt.X('date:T',

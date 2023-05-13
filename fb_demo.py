@@ -221,28 +221,13 @@ def main():
 
 
     #愚痴スコア
-
-    r_gch = requests.get(url + '/get_gch')
-    r_gch_DB = r_gch.json()
-    df_gch=pd.DataFrame.from_dict(r_gch_DB,orient='index').T
-
-    df_gch['date']=pd.to_datetime(df_gch['date'])
-    day_list=[]
-    for days in df_gch['date']:
-        day_list.append(days + timedelta(hours=-9))
-    df_gch['date'] = day_list
-
+    df_gch = df
     if selected_team != '全てのチーム':
         df_gch = df_gch[df_gch['team_url']==selected_team]
-    df_gch = df_gch[(df_gch['date'] >= from_day) & (df_gch['date'] <= to_day)]
-
-    r_time_gch = requests.get(url + '/get_gch_time')
-    time_gch = r_time_gch.json()['update']
 
     st.subheader('日記の「愚痴っぽさ」スコア')
     st.caption('緑色の線：チームの平均スコア／緑色の丸：チームの個別スコア')
     st.caption('※緑色の丸の大きさはスコアごとの人数を表しています')
-    st.text('データ更新日時　＞＞　'+ time_gch)
     line_gch = alt.Chart(df_gch).mark_line(
         color='olive'
     ).encode(
@@ -251,7 +236,7 @@ def main():
                 scale=alt.Scale(domainMax={"year": to_day.year, "month": to_day.month, "date": to_day.day},
                                 domainMin={"year": from_day.year, "month": from_day.month, "date": from_day.day})
                 ),
-        y=alt.Y('mean(pred):Q',axis=alt.Axis(titleFontSize=18, title='愚痴スコア'))
+        y=alt.Y('mean(gch):Q',axis=alt.Axis(titleFontSize=18, title='愚痴スコア'))
     ).properties(
         width=650,
         height=400,
@@ -272,21 +257,9 @@ def main():
 
 
     #文字数・語彙数
-
-    r_lang = requests.get(url + '/get_lang')
-    r_lang_DB = r_lang.json()
-    df_lang=pd.DataFrame.from_dict(r_lang_DB,orient='index').T
-
-    df_lang['date']=pd.to_datetime(df_lang['date'])
-    day_list=[]
-    for days in df_lang['date']:
-        day_list.append(days + timedelta(hours=-9))
-    df_lang['date'] = day_list
-
+    df_lang = df
     if selected_team != '全てのチーム':
         df_lang = df_lang[df_lang['team_url']==selected_team]
-    df_lang = df_lang[(df_lang['date'] >= from_day) & (df_lang['date'] <= to_day)]
-    #write(df_lang)
 
     st.subheader('日記の文字数（チーム平均）')
     line_lang = alt.Chart(df_lang).mark_line(
@@ -325,21 +298,9 @@ def main():
 
     #品詞数
 
-    r_pos = requests.get(url + '/get_pos')
-    r_pos_DB = r_pos.json()
-    df_pos=pd.DataFrame.from_dict(r_pos_DB,orient='index').T
-    #st.write(df_pos)
-
-    df_pos['date']=pd.to_datetime(df_pos['date'])
-    day_list=[]
-    for days in df_pos['date']:
-        day_list.append(days + timedelta(hours=-9))
-    df_pos['date'] = day_list
-    #st.write(day_list)
-
+    df_pos = df
     if selected_team != '全てのチーム':
         df_pos = df_pos[df_pos['team_url']==selected_team]
-    df_pos = df_pos[(df_pos['date'] >= from_day) & (df_pos['date'] <= to_day)]
 
     df_pos=pd.melt(
         df_pos,

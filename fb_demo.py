@@ -190,7 +190,7 @@ def main():
     #emotion
     df_emo = df[['date','怒り','不安','嫌悪','楽しさ','悲しみ','驚き','信頼']]
     if selected_team != '全てのチーム':
-        df_emo = df_emo[df_emo['team_url']==selected_team]
+        df_emo = df_emo[df_emo['team']==selected_team]
     
     df_emo=pd.melt(
         df_emo,
@@ -221,7 +221,7 @@ def main():
     #愚痴スコア
     df_gch = df
     if selected_team != '全てのチーム':
-        df_gch = df_gch[df_gch['team_url']==selected_team]
+        df_gch = df_gch[df_gch['team']==selected_team]
 
     st.subheader('日記の「愚痴っぽさ」スコア')
     st.caption('緑色の線：チームの平均スコア／緑色の丸：チームの個別スコア')
@@ -257,7 +257,7 @@ def main():
     #文字数・語彙数
     df_lang = df
     if selected_team != '全てのチーム':
-        df_lang = df_lang[df_lang['team_url']==selected_team]
+        df_lang = df_lang[df_lang['team']==selected_team]
 
     st.subheader('日記の文字数（チーム平均）')
     line_lang = alt.Chart(df_lang).mark_line(
@@ -298,7 +298,7 @@ def main():
 
     df_pos = df
     if selected_team != '全てのチーム':
-        df_pos = df_pos[df_pos['team_url']==selected_team]
+        df_pos = df_pos[df_pos['team']==selected_team]
 
     df_pos=pd.melt(
         df_pos,

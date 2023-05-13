@@ -108,7 +108,7 @@ def main():
     points = alt.Chart(df_fb).mark_circle(
         color='lightskyblue'
     ).encode(
-        x=alt.X('date:T',axis=alt.Axis(align='center')),
+        x=alt.X('date:T',axis=alt.Axis(labelalign='center')),
         y=alt.Y('my_happy:Q'),
         size = 'count()'
     ).properties(
@@ -120,7 +120,7 @@ def main():
         color='lightskyblue'
     ).encode(
         x=alt.X('date:T',
-                axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付',align='center'),
+                axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付',labelalign='center'),
                 scale=alt.Scale(domainMax={"year": to_day.year, "month": to_day.month, "date": to_day.day},
                                 domainMin={"year": from_day.year, "month": from_day.month, "date": from_day.day})
                 ),

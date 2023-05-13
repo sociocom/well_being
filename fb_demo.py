@@ -48,10 +48,10 @@ def main():
         run = st.button('集計実行')
 
     from_native = datetime.combine(from_day, time())
-    from_day = pytz.timezone('Asia/Tokyo').localize(from_native) + timedelta(hours=15)
+    from_day = pytz.timezone('Asia/Tokyo').localize(from_native)+timedelta(hours=15)
     from_day = datetime.fromordinal(from_day.toordinal())
     to_native = datetime.combine(to_day, time())
-    to_day = pytz.timezone('Asia/Tokyo').localize(to_native)　+ timedelta(hours=15)
+    to_day = pytz.timezone('Asia/Tokyo').localize(to_native)+timedelta(hours=15)
     to_day = datetime.fromordinal(to_day.toordinal())
     
     

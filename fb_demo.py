@@ -51,7 +51,7 @@ def main():
     df_acnt=pd.melt(
         df,
         id_vars=['date'],
-        value_vars=df_acnt.columns.values.tolist()[:-1],
+        value_vars=df.columns.values.tolist()[:-1],
         var_name='team',
         value_name='Count')
     df_acnt = df_acnt.astype({'Count': int})

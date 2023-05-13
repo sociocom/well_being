@@ -65,10 +65,8 @@ def main():
     df['date']=pd.to_datetime(df['date'])
     df = df[(df['date'] >= from_day) & (df['date'] <= to_day)]
     
-    df
-    
     df_acnt = df.groupby(['date', 'team']).size().reset_index(name='Count')
-
+    
     answers = alt.Chart(df_acnt).mark_bar(
         color = 'orange',size = 36
     ).encode(
@@ -105,6 +103,8 @@ def main():
     else:
         df_fb = df
 
+    df_fb
+        
     line = alt.Chart(df_fb).mark_line(
         color='lightskyblue'
     ).encode(

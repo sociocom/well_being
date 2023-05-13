@@ -17,7 +17,7 @@ import pytz
 
 mood=["幸せではない","やや幸せではない","ふつう","やや幸せ","幸せ"]
 happy_score = ['選択して下さい（0〜10点）',0,1,2,3,4,5,6,7,8,9,10]
-today = date.today()
+today = datetime.strptime('20220912','%Y%m%d')
 day_list=[]
 diary_list=[]
 #url = 'http://well-being.naist.jp/demo'
@@ -27,12 +27,33 @@ def main():
     tm = today.month
     td = today.day
 
-    past_day= today-timedelta(days=6)
+    past_day= today-timedelta(days=7)
     past_y = past_day.year
     past_m = past_day.month
     past_d = past_day.day
     
-    team_list=['A','B','C','D','E']
+    team_list=['選択してください','A','B','C','D','E']
+
+    with st.sidebar:
+        st.markdown('**集計条件を指定して下さい**')
+        selected_team = st.selectbox(
+            '↓表示するチーム名をお選び下さい',team_list
+            )
+        from_day = st.date_input(
+            '↓集計期間の開始日をお選び下さい',past_day
+            )
+        to_day = st.date_input(
+            '↓集計期間の終了日をお選び下さい',today
+            )
+        run = st.button('集計実行')
+
+    from_native = datetime.combine(from_day, time())
+    from_day = pytz.timezone('America/New_York').localize(from_native)+ timedelta(days=-1)
+    from_day = datetime.fromordinal(from_day.toordinal())
+    to_native = datetime.combine(to_day, time())
+    to_day = pytz.timezone('Pacific/Auckland').localize(to_native)
+    to_day = datetime.fromordinal(to_day.toordinal())
+    
 
     st.subheader('チームごとの回答数（1ユーザー1カウントで集計）')                
     st.caption('※指定した期間内の合計をカウント')

@@ -125,7 +125,7 @@ def main():
     points = alt.Chart(df_fb).mark_circle(
         color='lightskyblue'
     ).encode(
-        x=alt.X('date:T'),
+        x=alt.X('date:T',axis=None),
         y=alt.Y('my_happy:Q'),
         size = 'count()'
     ).properties(

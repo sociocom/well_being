@@ -50,7 +50,7 @@ def main():
     
     df_acnt=df.melt(
         id_vars=['date'],
-        value_vars='team,
+        value_vars='team',
         var_name='team',
         value_name='Count')
     

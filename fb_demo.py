@@ -108,7 +108,7 @@ def main():
     points = alt.Chart(df_fb).mark_circle(
         color='lightskyblue'
     ).encode(
-        x=alt.X('date:T',axis=alt.Axis(labelAlign='center')),
+        x=alt.X('date:T'),
         y=alt.Y('my_happy:Q'),
         size = 'count()'
     ).properties(
@@ -133,7 +133,7 @@ def main():
         height=400
         )
 
-    layer = alt.layer(line,points
+    layer = alt.layer(line
     ).configure_axis(
         grid=False
     ).resolve_scale(

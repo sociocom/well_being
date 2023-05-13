@@ -113,7 +113,7 @@ def main():
                 scale=alt.Scale(domainMax=10,domainMin=0)
                 )
     ).properties(
-        width=650,
+        width=750,
         height=400
         )
 
@@ -124,7 +124,7 @@ def main():
         y=alt.Y('my_happy:Q'),
         size = 'count()'
     ).properties(
-        width=650,
+        width=750,
         height=400
         )
 
@@ -157,7 +157,7 @@ def main():
                 scale=alt.Scale(domainMax=10,domainMin=0)
                 )
     ).properties(
-        width=650,
+        width=750,
         height=400
         )
 
@@ -168,7 +168,7 @@ def main():
         y=alt.Y('group_happy:Q'),
         size = 'count()'
     ).properties(
-        width=650,
+        width=750,
         height=400
         )
 

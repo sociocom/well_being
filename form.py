@@ -272,7 +272,7 @@ authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
     'some_cookie_name', 'some_signature_key', cookie_expiry_days=1)
 
 # ログインメソッドで入力フォームを配置
-st.title('Well-being Daily Report')
+st.title(':balloon:Well-being Daily Report')
 name, authentication_status, username = authenticator.login('Login', 'main')
 st.caption("不具合等はこちらまでお願いします→sociocom-exp-contact[at]is.naist.jp")
 

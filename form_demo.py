@@ -62,19 +62,21 @@ def main():
             st.caption('入力例6：旦那は気楽に1人で外出出来ていいなー。決して娘と一緒に居るのが嫌な訳じゃないけど…たまには1人で買い物行きたいなー')
             st.caption('入力例7：最近毎日雨降ってる気がする。洗濯物干せないとかはまだいいけど、何より傘持ったまま朝から満員電車に乗るのが辛すぎる。')
 
+        diary = st.text_area(label='B：職場の所属チームについて感じたことをご記入ください（任意）',height=12)
+
         #my_happy = st.radio("B：あなたは今日一日幸せでしたか？（0点:とても不幸／10点：とても幸せ）",options=happy_score,horizontal=True)
-        my_happy = st.selectbox("B：あなたは一日幸せでしたか？（0点: とても不幸／10点: とても幸せ）",options=happy_score)
-        group_happy = st.selectbox('C：チーム全体としては，一日幸せだったと思いますか？（0点: とても不幸／10点: とても幸せ）',options=group_happy_score)
+        my_happy = st.selectbox("C：あなたは一日幸せでしたか？（0点: とても不幸／10点: とても幸せ）",options=happy_score)
+        group_happy = st.selectbox('D：チーム全体としては，一日幸せだったと思いますか？（0点: とても不幸／10点: とても幸せ）',options=group_happy_score)
         real_communication = st.selectbox(
-            'D：一日の中での、チームメンバーとの対面でのコミュニケーションの有無を教えて下さい（0点: 全くなかった／5点: 多くあった）',
+            'E：一日の中での、チームメンバーとの対面でのコミュニケーションの有無を教えて下さい（0点: 全くなかった／5点: 多くあった）',
             options=communication_score
             )
         online_communication = st.selectbox(
-            'E：一日の中での、チームメンバーとのオンライン（WEBミーティング・電話など）でのコミュニケーションの有無を教えて下さい（0点: 全くなかった／5点: 多くあった）',
+            'F：一日の中での、チームメンバーとのオンライン（WEBミーティング・電話など）でのコミュニケーションの有無を教えて下さい（0点: 全くなかった／5点: 多くあった）',
             options=communication_score
             )
         location = st.selectbox(
-            'F：業務中，主に滞在した場所をお選び下さい',
+            'G：業務中，主に滞在した場所をお選び下さい',
             options=('選択して下さい','社内の自フロア','自宅','得意先', 'その他')
             )
         location_other = st.text_input('G：Eでその他を選択した方は，差し支えない範囲で場所をご記入ください')

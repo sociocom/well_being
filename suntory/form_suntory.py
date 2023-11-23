@@ -235,6 +235,7 @@ def main():
               
 
 # ユーザ情報
+response = requests.get(url + '/check_login')
 print(response.raise_for_status())  # リクエストエラーを確認する
 login_info = requests.get(url + '/check_login').json()
 names = login_info['user']

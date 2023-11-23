@@ -235,25 +235,11 @@ def main():
               
 
 # ユーザ情報
-#login_info = requests.get(url + '/check_login').json()
-try:
-    response = requests.get(url + '/check_login')
-    response.raise_for_status()  # リクエストエラーを確認する
-    if response.text:  # レスポンスが空でない場合
-        login_info = response.json()  # JSONを解析してみる
-        # login_infoを使います
-    else:
-        print("レスポンスが空です。")
-except requests.exceptions.HTTPError as http_err:
-    print(f'HTTPエラーが発生しました： {http_err}')
-except requests.exceptions.RequestException as req_err:
-    print(f'リクエスト例外が発生しました： {req_err}')
-except requests.exceptions.JSONDecodeError as json_err:
-    print(f'JSONデコードエラーが発生しました： {json_err}')
-    print(f'レスポンスの内容： {response.text}')  # デバッグ用にレスポンスコンテンツを表示
-#names = login_info['user']
-#usernames = login_info['username']
-#hashed_passwords = login_info['password']
+print(response.raise_for_status())  # リクエストエラーを確認する
+login_info = requests.get(url + '/check_login').json()
+names = login_info['user']
+usernames = login_info['username']
+hashed_passwords = login_info['password']
 
 # パスワードをハッシュ化（リスト等、イテラブルなオブジェクトである必要がある）
 #hashed_passwords = stauth.Hasher(passwords).generate()

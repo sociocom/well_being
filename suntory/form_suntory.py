@@ -251,9 +251,9 @@ except requests.exceptions.RequestException as req_err:
 except requests.exceptions.JSONDecodeError as json_err:
     print(f'JSONデコードエラーが発生しました： {json_err}')
     print(f'レスポンスの内容： {response.text}')  # デバッグ用にレスポンスコンテンツを表示
-names = login_info['user']
-usernames = login_info['username']
-hashed_passwords = login_info['password']
+#names = login_info['user']
+#usernames = login_info['username']
+#hashed_passwords = login_info['password']
 
 # パスワードをハッシュ化（リスト等、イテラブルなオブジェクトである必要がある）
 #hashed_passwords = stauth.Hasher(passwords).generate()

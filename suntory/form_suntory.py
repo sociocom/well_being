@@ -351,7 +351,7 @@ if authentication_status:
             cons1 = st.checkbox('調査の目的、期間、方法等の内容。')
             st.markdown('''
                 &emsp;&emsp;- 調査目的: 従業員の幸福感やモチベーション、メンタルヘルスや組織のパフォーマンスの向上\n
-                &emsp;&emsp;- 期間: 2022年9月～2023年3月\n
+                &emsp;&emsp;- 期間: 2023年12月～2024年12月（期間延長の可能性あり）\n
                 &emsp;&emsp;- 方法: WEB上の日記記入ページにアクセスして回答\n
                 ''')
             cons2 = st.checkbox('この調査から得られた測定結果が当該学術研究の目的に利用されること。')

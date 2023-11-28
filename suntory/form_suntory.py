@@ -90,6 +90,7 @@ def main():
         location = st.selectbox(
             'G：業務中，主に滞在した場所をお選び下さい',
             options=('選択して下さい','工場内の自フロア','自宅','得意先', 'その他')
+            )
         location_other = st.text_input('H：Gでその他を選択した方は，差し支えない範囲で場所をご記入ください')
 
         submitted=st.form_submit_button('登録')

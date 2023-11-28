@@ -206,7 +206,7 @@ def main():
 
         else:
             st.balloons()
-            df_fb=pd.read_excel('../DB_demo.xlsx')
+            df_fb=pd.read_excel('DB_demo.xlsx')
             df_fb['date']=pd.to_datetime(df_fb['date'])
             day_list=[]
             for days in df_fb['date']:

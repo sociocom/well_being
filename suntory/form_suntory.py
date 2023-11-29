@@ -94,8 +94,8 @@ def main():
         location_other = st.text_input('H：Gでその他を選択した方は，差し支えない範囲で場所をご記入ください')
 
         submitted=st.form_submit_button('登録')
-        st.markdown('## 一度「登録」を押しても反応がない場合、再度クリックをお試し下さい。')
-        st.markdown('## 登録が問題なく行われた場合、ボタン押下後に風船が出てきた後、下部にグラフが表示されます。')
+        st.markdown('#### 一度「登録」を押しても反応がない場合、再度クリックをお試し下さい。')
+        st.markdown('#### 登録が問題なく行われた場合、ボタン押下後に風船が出てきた後、下部にグラフが表示されます。')
         
     if submitted:
         if name != 'demo':

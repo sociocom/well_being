@@ -76,7 +76,7 @@ def main():
             st.caption('入力例6：旦那は気楽に1人で外出出来ていいなー。決して娘と一緒に居るのが嫌な訳じゃないけど…たまには1人で買い物行きたいなー')
             st.caption('入力例7：最近毎日雨降ってる気がする。洗濯物干せないとかはまだいいけど、何より傘持ったまま朝から満員電車に乗るのが辛すぎる。')
 
-        diary = st.text_area(label='B：職場の所属チームについて感じたことをご記入ください（任意）',height=12)
+        diary_team = st.text_area(label='B：職場の所属チームについて感じたことをご記入ください（任意）',height=12)
         my_happy = st.selectbox("C：あなたは一日幸せでしたか？（0点: とても不幸／10点: とても幸せ）",options=happy_score)
         group_happy = st.selectbox('D：チーム全体としては，一日幸せだったと思いますか？（0点: とても不幸／10点: とても幸せ）',options=group_happy_score)
         real_communication = st.selectbox(
@@ -109,6 +109,7 @@ def main():
                         'contents':{
                         'day':str(day),
                         'diary':diary,
+                        'diary_team':diary_team,
                         'my_happy':my_happy,
                         'group_happy':group_happy,
                         'communication_real':real_communication,

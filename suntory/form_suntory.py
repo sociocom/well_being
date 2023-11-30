@@ -293,7 +293,7 @@ authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
 st.title(':hatching_chick: 個と場のWell-being日記')
 st.write('''
 :bow: Username・Passwordの登録がまだ完了しておりませんので少々お待ちください。
-12/1(金)15:00頃までに完了予定となります。ご不便をおかけ致します。
+12/1(金)15:00頃までの完了を予定しております。ご不便をおかけ致します。
 ''')
 name, authentication_status, username = authenticator.login('Login', 'main')
 st.caption("不具合等はこちらまでお願いします→sociocom-exp-contact[at]is.naist.jp")

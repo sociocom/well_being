@@ -292,7 +292,7 @@ authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
 # ログインメソッドで入力フォームを配置
 st.title(':hatching_chick: 個と場のWell-being日記')
 st.write('''
-:bow: ID・パスワードの登録がまだ完了しておりませんので少々お待ちください。
+:bow: Username・Passwordの登録がまだ完了しておりませんので少々お待ちください。
 12/1(金)15:00頃までに完了予定となります。ご不便をおかけ致します。
 ''')
 name, authentication_status, username = authenticator.login('Login', 'main')

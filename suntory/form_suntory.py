@@ -40,7 +40,7 @@ dic_team = {
 
 def main():
     st.write('チーム「' + dic_team[team_url] + '」の入力画面です')
-    with st.expander('パスワード変更はこちら'):
+    with st.expander('パスワード変更はこちら（初回ログイン時は変更をお願いします）'):
         new_pass = st.text_input(label='↓新しいパスワードをご入力下さい')
         new_pass_hash = bcrypt.hashpw(new_pass.encode(),bcrypt.gensalt()).decode()
         if st.button('パスワード変更') ==True:
@@ -292,8 +292,9 @@ authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
 # ログインメソッドで入力フォームを配置
 st.title(':hatching_chick: 個と場のWell-being日記')
 st.write('''
-:bow: Username・Passwordの登録がまだ完了しておりませんので少々お待ちください。
-12/1(金)15:00頃までの完了を予定しております。ご不便をおかけ致します。
+（12/1 14:30）Username・Passwordの登録が完了しました。実験のご協力をお願い致します。
+初回ログイン時のUsername・Passwordは、いずれも6桁の氏名コードとなります。
+初回ログイン後、パスワードの変更を行って下さい。
 ''')
 name, authentication_status, username = authenticator.login('Login', 'main')
 st.caption("不具合等はこちらまでお願いします→sociocom-exp-contact[at]is.naist.jp")

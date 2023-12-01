@@ -296,6 +296,9 @@ st.write('''
 初回ログイン時のUsername・Passwordは、いずれも6桁の氏名コードとなります。
 初回ログイン後、パスワードの変更を行って下さい。
 ''')
+st.write('''
+（12/1 17:30）Usernameの1文字目が0の方は、冒頭の0を除いたものでログインをお願いします。
+''')
 name, authentication_status, username = authenticator.login('Login', 'main')
 st.caption("不具合等はこちらまでお願いします→sociocom-exp-contact[at]is.naist.jp")
 

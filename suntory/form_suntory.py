@@ -292,7 +292,7 @@ authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
 # ログインメソッドで入力フォームを配置
 st.title(':hatching_chick: 個と場のWell-being日記')
 st.write('''
-（12/1 14:30）Username・Passwordの登録が完了しました。実験のご協力をお願い致します。
+（12/1 14:30）Username・Passwordの登録が完了しました。今後、実験のご協力をよろしくお願い致します。
 初回ログイン時のUsername・Passwordは、いずれも6桁の氏名コードとなります。
 初回ログイン後、パスワードの変更を行って下さい。
 ''')

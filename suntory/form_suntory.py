@@ -40,7 +40,7 @@ dic_team = {
 
 def main():
     st.write('チーム「' + dic_team[team_url] + '」の入力画面です')
-    with st.expander('パスワード変更はこちら（初回ログイン時は変更をお願いします）'):
+    with st.expander('パスワード変更はこちら（初回ログイン時はご変更ください）'):
         new_pass = st.text_input(label='↓新しいパスワードをご入力下さい')
         new_pass_hash = bcrypt.hashpw(new_pass.encode(),bcrypt.gensalt()).decode()
         if st.button('パスワード変更') ==True:

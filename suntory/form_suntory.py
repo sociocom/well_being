@@ -201,7 +201,7 @@ def main():
             feed = '''
             **▼アプリ改善のため、下記のリンクよりご意見・ご感想をお聞かせ下さい** 
 
-            https://forms.gle/NF2FTyz1mK2kmtFs8'''
+            https://docs.google.com/forms/d/e/1FAIpQLSeOrAHDMKQAF4CsWES6tm06iFGTYbT3yaedeX7C3jGDEYb5Pw/viewform?usp=sharing'''
             st.markdown(feed)
 
         else:
@@ -269,7 +269,7 @@ def main():
             feed = '''
             **▼アプリ改善のため、ご意見があれば下記のリンクよりお聞かせ下さい** 
 
-            https://forms.gle/NF2FTyz1mK2kmtFs8'''
+            https://docs.google.com/forms/d/e/1FAIpQLSeOrAHDMKQAF4CsWES6tm06iFGTYbT3yaedeX7C3jGDEYb5Pw/viewform?usp=sharing'''
             st.markdown(feed)
               
 

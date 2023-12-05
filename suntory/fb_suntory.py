@@ -20,7 +20,7 @@ happy_score = ['選択して下さい（0〜10点）',0,1,2,3,4,5,6,7,8,9,10]
 today = date.today()
 day_list=[]
 diary_list=[]
-url = st.secrets['URL']
+url = 'http://well-being.naist.jp/HDD'
 
 def main():
     ty = today.year
@@ -33,12 +33,14 @@ def main():
     past_d = past_day.day
     
     team_list=('全てのチーム',
-        'A','Y','Z'
+        'A','B','C','D','E','F','Z'
         )
 
     with st.sidebar:
         st.markdown('**集計条件を指定して下さい**')
-        selected_team = 'Z'
+        selected_team = st.selectbox(
+            '↓表示するチーム名をお選び下さい',team_list
+            )
         from_day = st.date_input(
             '↓集計期間の開始日をお選び下さい',past_day
             )
@@ -48,10 +50,10 @@ def main():
         run = st.button('集計実行')
         
     from_native = datetime.combine(from_day, time())
-    from_day = pytz.timezone('Asia/Tokyo').localize(from_native)
+    from_day = pytz.timezone('America/New_York').localize(from_native)+ timedelta(days=-1)
     from_day = datetime.fromordinal(from_day.toordinal())
     to_native = datetime.combine(to_day, time())
-    to_day = pytz.timezone('Asia/Tokyo').localize(to_native)
+    to_day = pytz.timezone('Pacific/Auckland').localize(to_native)
     to_day = datetime.fromordinal(to_day.toordinal())
 
 
@@ -60,6 +62,51 @@ def main():
 
         st.subheader('チームごとの回答数（1ユーザー1カウントで集計）')                
         st.caption('※指定した期間内の合計をカウント')
+
+        acnt_fb = requests.get(url + '/get_anscnt')
+        acnt_fb_DB = acnt_fb.json()
+        df_acnt=pd.DataFrame.from_dict(acnt_fb_DB,orient='index')
+        df_acnt['date'] = df_acnt.index
+
+        df_acnt['date']=pd.to_datetime(df_acnt['date'])
+        day_list=[]
+        for days in df_acnt['date']:
+            day_list.append(days + timedelta(hours=-9))
+        df_acnt['date'] = day_list
+        
+        df_acnt = df_acnt[(df_acnt['date'] >= from_day) & (df_acnt['date'] <= to_day)]
+
+        df_acnt=pd.melt(
+            df_acnt,
+            id_vars=['date'],
+            value_vars=df_acnt.columns.values.tolist()[:-1],
+            var_name='Team',
+            value_name='Count')
+        df_acnt = df_acnt.astype({'Count': int})
+
+        answers = alt.Chart(df_acnt).mark_bar(
+            color = 'orange',size = 12
+        ).encode(
+            x=alt.X('Team:O',
+                    axis=alt.Axis(labelFontSize=14, titleFontSize=18,title='チーム名')),
+            y=alt.Y('sum(Count):Q',
+                    axis=alt.Axis(titleFontSize=18, title='回答数'))
+        ).properties(
+            width=650,
+            height=300
+            )
+
+        text_ans = alt.Chart(df_acnt).mark_text(
+            dy=-10, color='black'
+        ).encode(
+            x=alt.X('Team:O',
+                    axis=alt.Axis(labelFontSize=14, titleFontSize=18,title='チーム名')),
+            y=alt.Y('sum(Count):Q',
+                    axis=alt.Axis(titleFontSize=18, title='回答数')),
+            text=alt.Text('sum(Count):Q')
+        )
+
+        st.write(answers+ text_ans)
 
 
         #my_happy
@@ -176,7 +223,7 @@ def main():
 
         st.write(layer_group)
 
-
+        
         #emotion
 
         r_emo = requests.get(url + '/get_emo')
@@ -272,7 +319,7 @@ def main():
             )
 
         st.write(alt.layer(line_gch,points_gch).configure_axis(grid=False))
-
+        
 
         #文字数・語彙数
 
@@ -338,6 +385,7 @@ def main():
         for days in df_pos['date']:
             day_list.append(days + timedelta(hours=-9))
         df_pos['date'] = day_list
+        #st.write(day_list)
 
         if selected_team != '全てのチーム':
             df_pos = df_pos[df_pos['team_url']==selected_team]
@@ -389,7 +437,7 @@ authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
     'some_cookie_name', 'some_signature_key', cookie_expiry_days=1)
 
 # ログインメソッドで入力フォームを配置
-st.title(':hatching_chick: チームのWell-being（計測ダッシュボード）')
+st.title('チームのWell-being（計測ダッシュボード）')
 name, authentication_status, username = authenticator.login('Login', 'main')
 
 # 返り値、authenticaton_statusの状態で処理を場合分け

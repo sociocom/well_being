@@ -63,7 +63,6 @@ def main():
 
         acnt_fb = requests.get(url + '/get_anscnt')
         acnt_fb_DB = acnt_fb.json()
-        st.table(acnt_fb_DB)
         df_acnt=pd.DataFrame.from_dict(acnt_fb_DB,orient='index')
         df_acnt['date'] = df_acnt.index
 

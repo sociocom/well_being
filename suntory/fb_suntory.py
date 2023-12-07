@@ -96,7 +96,7 @@ def main():
             color = 'orange',size = 12
         ).encode(
             x=alt.X('Team:O',
-                    axis=alt.Axis(labelFontSize=14, titleFontSize=18,title='チーム名')),
+                    axis=alt.Axis(labelFontSize=14, titleFontSize=18,title='チーム名',labelAngle=45)),
             y=alt.Y('sum(Count):Q',
                     axis=alt.Axis(titleFontSize=18, title='回答数'))
         ).properties(

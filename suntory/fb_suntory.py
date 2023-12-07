@@ -29,7 +29,7 @@ dic_team = {
     '（梓P）包装部門':'F'
 }
 
-flipped_dic = dict(zip(dic_team.values(), dict_team.keys()))
+flipped_dic = dict(zip(dic_team.values(), dic_team.keys()))
 
 def main():
     ty = today.year

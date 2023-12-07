@@ -33,7 +33,7 @@ def main():
     past_d = past_day.day
     
     team_list=('全てのチーム',
-        'A','B','C','D','E','F','Z'
+        'A','B','C','D','E','F'
         )
 
     with st.sidebar:

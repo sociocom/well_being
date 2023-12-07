@@ -39,7 +39,7 @@ def main():
     past_m = past_day.month
     past_d = past_day.day
     
-    team_list=(['全てのチーム']+dic_team.keys())
+    team_list=(['全てのチーム']+list(dic_team.keys()))
 
     with st.sidebar:
         st.markdown('**集計条件を指定して下さい**')

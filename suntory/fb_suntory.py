@@ -21,12 +21,12 @@ day_list=[]
 diary_list=[]
 url = st.secrets['URL']
 dic_team = {
-    '（大P）連続蒸留部門':'A',
-    '（大P）中味部門':'B',
-    '（大P）包装部門':'C',
-    '（大P）間接部門':'D',
-    '（梓P）中味部門':'E',
-    '（梓P）包装部門':'F'
+    '大P;連続蒸留部門':'A',
+    '大P;中味部門':'B',
+    '大P;包装部門':'C',
+    '大P;間接部門':'D',
+    '梓P;中味部門':'E',
+    '梓P;包装部門':'F'
 }
 
 flipped_dic = dict(zip(dic_team.values(), dic_team.keys()))
@@ -96,7 +96,7 @@ def main():
             color = 'orange',size = 12
         ).encode(
             x=alt.X('Team:O',
-                    axis=alt.Axis(labelFontSize=14, titleFontSize=18,title='チーム名',labelAngle=45)),
+                    axis=alt.Axis(labelFontSize=12, titleFontSize=18,title='チーム名',labelAngle=45)),
             y=alt.Y('sum(Count):Q',
                     axis=alt.Axis(titleFontSize=18, title='回答数'))
         ).properties(

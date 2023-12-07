@@ -20,6 +20,14 @@ today = date.today()
 day_list=[]
 diary_list=[]
 url = st.secrets['URL']
+dic_team = {
+    '（大P）連続蒸留部門':'A',
+    '（大P）中味部門':'B',
+    '（大P）包装部門':'C',
+    '（大P）間接部門':'D',
+    '（梓P）中味部門':'E',
+    '（梓P）包装部門':'F'
+}
 
 def main():
     ty = today.year
@@ -31,8 +39,7 @@ def main():
     past_m = past_day.month
     past_d = past_day.day
     
-    team_list=('全てのチーム',
-        'A','B','C','D','E','F')
+    team_list=(['全てのチーム']+dic_team.keys())
 
     with st.sidebar:
         st.markdown('**集計条件を指定して下さい**')
@@ -125,7 +132,7 @@ def main():
         df_fb = df_fb.dropna(subset=['my_happy'])
 
         if selected_team != '全てのチーム':
-            df_fb = df_fb[df_fb['team_url']==selected_team]
+            df_fb = df_fb[df_fb['team_url']==dic_team[selected_team]]
         df_fb = df_fb[(df_fb['date'] >= from_day) & (df_fb['date'] <= to_day)]
 
         line = alt.Chart(df_fb).mark_line(
@@ -183,7 +190,7 @@ def main():
         st.caption('※水色の丸の大きさはスコアごとの人数を表しています')
 
         if selected_team != '全てのチーム':
-            df_group = df_group[df_group['team_url']==selected_team]
+            df_group = df_group[df_group['team_url']==dic_team[selected_team]]
         df_group = df_group[(df_group['date'] >= from_day) & (df_group['date'] <= to_day)]
 
         line_group = alt.Chart(df_group).mark_line(
@@ -235,7 +242,7 @@ def main():
         df_emo['date'] = day_list
 
         if selected_team != '全てのチーム':
-            df_emo = df_emo[df_emo['team_url']==selected_team]
+            df_emo = df_emo[df_emo['team_url']==dic_team[selected_team]]
         df_emo = df_emo[(df_emo['date'] >= from_day) & (df_emo['date'] <= to_day)]
 
         df_emo=pd.melt(
@@ -281,7 +288,7 @@ def main():
         df_gch['date'] = day_list
 
         if selected_team != '全てのチーム':
-            df_gch = df_gch[df_gch['team_url']==selected_team]
+            df_gch = df_gch[df_gch['team_url']==dic_team[selected_team]]
         df_gch = df_gch[(df_gch['date'] >= from_day) & (df_gch['date'] <= to_day)]
 
         r_time_gch = requests.get(url + '/get_gch_time')
@@ -332,7 +339,7 @@ def main():
         df_lang['date'] = day_list
 
         if selected_team != '全てのチーム':
-            df_lang = df_lang[df_lang['team_url']==selected_team]
+            df_lang = df_lang[df_lang['team_url']==dic_team[selected_team]]
         df_lang = df_lang[(df_lang['date'] >= from_day) & (df_lang['date'] <= to_day)]
         #write(df_lang)
 
@@ -386,7 +393,7 @@ def main():
         #st.write(day_list)
 
         if selected_team != '全てのチーム':
-            df_pos = df_pos[df_pos['team_url']==selected_team]
+            df_pos = df_pos[df_pos['team_url']==dic_team[selected_team]]
         df_pos = df_pos[(df_pos['date'] >= from_day) & (df_pos['date'] <= to_day)]
 
         df_pos=pd.melt(

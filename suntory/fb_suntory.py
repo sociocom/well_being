@@ -244,6 +244,7 @@ def main():
             day_list.append(days + timedelta(hours=-9))
         df_emo['date'] = day_list
 
+        df_emo = df_emo[df_emo['team_url'].isin(['E', 'F'])]
         if selected_team != '全てのチーム':
             df_emo = df_emo[df_emo['team_url']==dic_team[selected_team]]
         df_emo = df_emo[(df_emo['date'] >= from_day) & (df_emo['date'] <= to_day)]
@@ -290,6 +291,7 @@ def main():
             day_list.append(days + timedelta(hours=-9))
         df_gch['date'] = day_list
 
+        df_gch = df_gch[df_gch['team_url'].isin(['E', 'F'])]
         if selected_team != '全てのチーム':
             df_gch = df_gch[df_gch['team_url']==dic_team[selected_team]]
         df_gch = df_gch[(df_gch['date'] >= from_day) & (df_gch['date'] <= to_day)]

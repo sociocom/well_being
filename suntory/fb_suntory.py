@@ -29,6 +29,8 @@ dic_team = {
     '（梓P）包装部門':'F'
 }
 
+flipped_dic = dict(zip(dic_team.values(), dict_team.keys()))
+
 def main():
     ty = today.year
     tm = today.month
@@ -88,7 +90,7 @@ def main():
             var_name='Team',
             value_name='Count')
         df_acnt = df_acnt.astype({'Count': int})
-        df_acnt['Team'] = df_acnt['Team'].replace(dic_team)
+        df_acnt['Team'] = df_acnt['Team'].replace(flipped_dic)
 
         answers = alt.Chart(df_acnt).mark_bar(
             color = 'orange',size = 12

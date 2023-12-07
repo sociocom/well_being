@@ -15,7 +15,6 @@ import json
 import streamlit_authenticator as stauth
 import pytz
 
-mood=["幸せではない","やや幸せではない","ふつう","やや幸せ","幸せ"]
 happy_score = ['選択して下さい（0〜10点）',0,1,2,3,4,5,6,7,8,9,10]
 today = date.today()
 day_list=[]
@@ -33,8 +32,7 @@ def main():
     past_d = past_day.day
     
     team_list=('全てのチーム',
-        'A','B','C','D','E','F'
-        )
+        'A','B','C','D','E','F')
 
     with st.sidebar:
         st.markdown('**集計条件を指定して下さい**')

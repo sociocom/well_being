@@ -88,7 +88,7 @@ def main():
             var_name='Team',
             value_name='Count')
         df_acnt = df_acnt.astype({'Count': int})
-        df_acnt
+        df_acnt['Team'] = df_acnt['Team'].replace(dic_team)
 
         answers = alt.Chart(df_acnt).mark_bar(
             color = 'orange',size = 12

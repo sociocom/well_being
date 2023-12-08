@@ -260,7 +260,8 @@ def main():
         time_emo_dic = r_time_emo.json()
         time_emo = time_emo_dic['update']
         time_emo = datetime.strptime(time_emo, '%Y/%m/%d %H:%M')
-        time_emo = str(timezone(timedelta(hours=9)))
+        jst = timezone(timedelta(hours=9))
+        time_emo = time_emo.replace(tzinfo=timezone.utc).astimezone(jst)
 
         st.subheader('日記の感情スコア')
         st.text('データ更新日時　＞＞　'+ time_emo)

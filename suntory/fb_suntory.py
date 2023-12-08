@@ -67,7 +67,7 @@ def main():
     if run:
         #Answers
 
-        st.subheader('チームごとの回答数（1ユーザーは1日1カウントで集計）')                
+        st.subheader('チームごとの回答数（1ユーザーにつき1日1カウントで集計）')                
         st.caption('※指定した期間内の合計をカウント')
 
         acnt_fb = requests.get(url + '/get_anscnt')

@@ -301,11 +301,14 @@ def main():
 
         r_time_gch = requests.get(url + '/get_gch_time')
         time_gch = r_time_gch.json()['update']
+        time_gch = datetime.strptime(time_gch, '%Y/%m/%d %H:%M')
+        jst = timezone(timedelta(hours=9))
+        time_gch = time_gch.replace(tzinfo=timezone.utc).astimezone(jst)
 
         st.subheader('日記の「愚痴っぽさ」スコア')
         st.caption('緑色の線：チームの平均スコア／緑色の丸：チームの個別スコア')
         st.caption('※緑色の丸の大きさはスコアごとの人数を表しています')
-        st.text('データ更新日時　＞＞　'+ time_gch)
+        st.text('データ更新日時　＞＞　'+ str(time_gch)[0:-9])
         line_gch = alt.Chart(df_gch).mark_line(
             color='olive'
         ).encode(

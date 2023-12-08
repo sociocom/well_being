@@ -264,7 +264,7 @@ def main():
         time_emo = time_emo.replace(tzinfo=timezone.utc).astimezone(jst)
 
         st.subheader('日記の感情スコア')
-        st.text('データ更新日時　＞＞　'+ time_emo)
+        st.text('データ更新日時　＞＞　'+ str(time_emo))
         line_emo = alt.Chart(df_emo).mark_line(
         ).encode(
             x=alt.X('date:T',

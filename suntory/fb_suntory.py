@@ -259,6 +259,8 @@ def main():
         r_time_emo = requests.get(url + '/get_emo_time')
         time_emo_dic = r_time_emo.json()
         time_emo = time_emo_dic['update']
+        time_emo = datetime.strptime(time_emo, '%Y-%m-%d %H:%M:%S')
+        time_emo = str(timezone(timedelta(hours=9)))
 
         st.subheader('日記の感情スコア')
         st.text('データ更新日時　＞＞　'+ time_emo)

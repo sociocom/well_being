@@ -204,8 +204,8 @@ def main():
             ).encode(
                 x=alt.X('date:T',
                         axis=alt.Axis(format="%m/%d",labelFontSize=14, titleFontSize=18,title='日付'),
-                        scale=alt.Scale(domainMax={"year": 2022, "month": 9, "date": 20},
-                                        domainMin={"year": 2022, "month": 9, "date": 14})
+                        scale=alt.Scale(domainMax={"year": 2023, "month": 5, "date": 16},
+                                        domainMin={"year": 2023, "month": 5, "date": 9})
                         ),
                 y=alt.Y('mean(my_happy):Q',
                         axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'),

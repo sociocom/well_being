@@ -196,7 +196,7 @@ def main():
             w = 800
             h = 400
             
-            st.subheader('週間幸せスコア')                
+            st.subheader('週間Well-beingスコア')                
             st.caption('水色の線：チームの平均スコア／水色の丸：チームの個別スコア／青色の丸：あなたのスコア')
             st.caption('※水色の丸の大きさはスコアごとの人数を表しています')
             line = alt.Chart(df_fb).mark_line(
@@ -208,7 +208,7 @@ def main():
                                         domainMin={"year": 2022, "month": 9, "date": 14})
                         ),
                 y=alt.Y('mean(my_happy):Q',
-                        axis=alt.Axis(titleFontSize=18, title='幸せスコア'),
+                        axis=alt.Axis(titleFontSize=18, title='Well-beingスコア'),
                         scale=alt.Scale(domainMax=10,domainMin=0)
                        )
             ).properties(

@@ -8,4 +8,5 @@ streamlit_authenticator == 0.1.5
 mojimoji
 pytz
 folium
+streamlit_folium
 geopy

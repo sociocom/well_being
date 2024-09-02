@@ -16,7 +16,7 @@ def main():
     # 地図を作成
     m = folium.Map(location=[latitude, longitude], zoom_start=14)
     
-    df = pd.read_csv('line_chat_history.csv')
+    df = pd.read_csv('naoshima/line_chat_history.csv')
     marker_info = []
 
     for idx, row in df.iterrows():
